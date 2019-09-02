@@ -17,17 +17,19 @@ import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
 import com.hireslate.model.StreamMasterEntity;
 import com.hireslate.repository.CourseMasterRepository;
+import com.hireslate.repository.JobTypeMasterRepository;
+import com.hireslate.repository.SkillMasterRepository;
 import com.hireslate.repository.StreamMasterRepository;
 
 @Controller
 public class DispatcherController {
 
 	@Autowired
-	public SkillMasterControlller skillMasterController;
+	public SkillMasterRepository skillMasterController;
 	@Autowired
 	public JobMasterController jobMasterController;
 	@Autowired
-	public JobTypeMasterController jobTypeMasterController ;
+	public JobTypeMasterRepository jobTypeMasterController ;
 	
 	
 	@RequestMapping(value = "admin/dashboard", method = RequestMethod.GET)
@@ -37,7 +39,7 @@ public class DispatcherController {
 	
 	//skill-master table CRUD
 	
-	@RequestMapping(value = "admin/skill-master", method = RequestMethod.GET)
+	/*@RequestMapping(value = "admin/skill-master", method = RequestMethod.GET)
 	public String showSkillMaster(Model model) {
 		List<SkillMasterEntity> skill = skillMasterController.view();
 		model.addAttribute("skill",skill);
@@ -81,7 +83,7 @@ public class DispatcherController {
 		int skillId = Integer.parseInt(id);
 		skillMasterController.delete(skillId);
 		return "redirect:/admin/skill-master";
-	}
+	}*/
 	
 	//Job-Master table CRUD
 	
@@ -100,49 +102,6 @@ public class DispatcherController {
 	
 	//Job-Type-Master table CRUD
 	
-	@RequestMapping(value = "admin/job-type-master" , method = RequestMethod.GET)
-	public String showJobTypeMaster(Model model) {
-		List<JobTypeMasterEntity> jobType = jobTypeMasterController.view();
-	    model.addAttribute("jobType",jobType );
-		return "admin/job-type-master/view.jsp";
-	}
-	
-	@RequestMapping(value = "admin/job-type-master/create/form" , method = RequestMethod.GET)
-	public String showCreateJobTypeMasterFrom() {
-		return "admin/job-type-master/create.jsp";
-	}
-	
-	@RequestMapping(path="admin/job-type-master/create",method = RequestMethod.POST)
-	public String addJobType (@RequestParam("jobTypeName") String name ){
-		jobTypeMasterController.insert(name);
-		return "redirect:/admin/job-type-master";
-	}
-	
-	@RequestMapping(value  = "admin/job-type-master/edit/{id}", method = RequestMethod.GET)
-	public String updateJobTypeMasterForm(Model model,@PathVariable("id") String id) {
-		int skillId = Integer.parseInt(id);
-		JobTypeMasterEntity jobType = jobTypeMasterController.viewById(skillId);
-		model.addAttribute("jobTypeById", jobType);
-		return "admin/job-type-master/update.jsp";
 		
-	}
-	
-	@RequestMapping(value = "admin/job-type-master/update" , method = RequestMethod.POST)
-	public String updateJobTypeMaster(Model model , @RequestParam(name = "jobTypeName") String name , @RequestParam("jobTypeId") String id) {
-		int jobTypeId  = Integer.parseInt(id);
-		JobTypeMasterEntity jobType = new JobTypeMasterEntity();
-		jobType.setJobTypeId(jobTypeId);
-		jobType.setJobTypeName(name);
-		jobTypeMasterController.update(jobType);
-		return "redirect:/admin/job-type-master";
-	}
-
-	@RequestMapping(value="admin/job-type-master/delete/{id}",method=RequestMethod.GET)
-	public String deleteJobTypeMaster(Model model,@PathVariable("id") String id) {
-		int jobTypeId = Integer.parseInt(id);
-		jobTypeMasterController.delete(jobTypeId);
-		return "redirect:/admin/job-type-master";
-	}
-	
 	
 }

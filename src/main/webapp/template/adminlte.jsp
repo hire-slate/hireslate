@@ -129,6 +129,7 @@
          	<li><a href="/admin/job-type-master"><i class="fa fa-circle-o"></i>Job Type</a></li>
          	<li><a href="/admin/course-master"><i class="fa fa-circle-o"></i>Course</a></li>
          	<li><a href="/admin/stream-master"><i class="fa fa-circle-o"></i>Stream</a></li>
+         	
          
           </ul>
         </li>

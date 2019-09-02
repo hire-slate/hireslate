@@ -76,7 +76,7 @@
 	<!-- stream-master table -->
 
 	<definition name="admin/stream-master/view.jsp" extends="mytemplate">
-		<put-attribute name="content" value= "/admin/stream-master/view.jsp"/>
+		<put-attribute name="content" value= "/admin/stream-master/view.jsp"></put-attribute>
 	</definition>
 
 	<definition name="admin/stream-master/create.jsp" extends="mytemplate">
@@ -87,6 +87,5 @@
 		<put-attribute name="content" value= "/admin/stream-master/update.jsp"/>
 	</definition>
 	
-
 
 </tiles-definitions>	

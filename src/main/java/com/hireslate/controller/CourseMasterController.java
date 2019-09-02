@@ -28,7 +28,7 @@ public class CourseMasterController {
 	}
 
 	@RequestMapping(value="/create/form" , method = RequestMethod.GET)
-	public String showCreateCourseMasterFrom() {
+	public String showCreateCourseMasterForm() {
 		return "admin/course-master/create.jsp";
 	}
 	
@@ -62,7 +62,5 @@ public class CourseMasterController {
 		int courseId = Integer.parseInt(id);
 		courseMasterService.deleteCourseMaster(courseId);
 		return "redirect:/admin/course-master";
-		
-		
 	}
 }

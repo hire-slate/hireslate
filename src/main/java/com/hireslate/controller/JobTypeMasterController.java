@@ -1,72 +1,68 @@
 package com.hireslate.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hireslate.model.JobTypeMasterEntity;
+import com.hireslate.service.JobTypeMasterService;
 
-
-@Repository
+@Controller
+@RequestMapping(value = "admin/job-type-master" , method = RequestMethod.GET)
 public class JobTypeMasterController {
-
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
 	
+	@Autowired 
+	JobTypeMasterService jobTypeMasterService;
 	
-	
-	public JobTypeMasterController() {
-		super();
-	//	System.out.println("job type master created");
-	}
-
-	public List<JobTypeMasterEntity> view(){
-		String sql = "SELECT * FROM job_type_master";
-	
-		List<JobTypeMasterEntity> jobs = new ArrayList<JobTypeMasterEntity>();
-		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
-		System.out.println("hi");
-		for(Map<String,Object> row : rows) {
-			
-			JobTypeMasterEntity job = new JobTypeMasterEntity();
-			job.setJobTypeId((int)row.get("job_type_id"));
-			job.setJobTypeName((String)row.get("Job_Type_Name"));
-			jobs.add(job);
-			System.out.println(jobs);
-		}
-
-		return jobs;
+	@RequestMapping(value = "" , method = RequestMethod.GET)
+	public String showJobTypeMaster(Model model) {
+		List<JobTypeMasterEntity> jobType = jobTypeMasterService.viewJobTypeMaster();
+	    model.addAttribute("jobType",jobType );
+		return "admin/job-type-master/view.jsp";
 	}
 	
-	public void insert(String name) {
-		String sql = "insert into job_type_master (job_type_name) values ('"+name+"')";
-		jdbcTemplate.execute(sql);
+	@RequestMapping(value = "/create/form" , method = RequestMethod.GET)
+	public String showCreateJobTypeMasterForm() {
+		return "admin/job-type-master/create.jsp";
+	}
+	
+	@RequestMapping(path="/create",method = RequestMethod.POST)
+	public String addJobType (@RequestParam("jobTypeName") String name ){
+		jobTypeMasterService.insertJobTypeMaster(name);
+		return "redirect:/admin/job-type-master";
+	}
+	
+	@RequestMapping(value  = "/edit/{id}", method = RequestMethod.GET)
+	public String updateJobTypeMasterForm(Model model,@PathVariable("id") String id) {
+		int jobTypeId = Integer.parseInt(id);
+		JobTypeMasterEntity jobType = jobTypeMasterService.viewJobTypeMasterById(jobTypeId);
+		model.addAttribute("jobTypeById", jobType);
+		return "admin/job-type-master/update.jsp";
 		
 	}
 	
-	public JobTypeMasterEntity viewById(int id) {
-		String sql = "select * from job_type_master where job_type_id = "+ id;
-		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+	@RequestMapping(value = "/update" , method = RequestMethod.POST)
+	public String updateJobTypeMaster(Model model , @RequestParam(name = "jobTypeName") String name , @RequestParam("jobTypeId") String id) {
+		int jobTypeId  = Integer.parseInt(id);
 		JobTypeMasterEntity jobType = new JobTypeMasterEntity();
-		
-		jobType.setJobTypeId((int)row.get("job_type_id"));
-		jobType.setJobTypeName((String)row.get("job_type_name"));
-		return jobType;
-	}
-	
-	public void update(JobTypeMasterEntity jobType) {
-		String sql  = "update job_type_master set job_type_name =  '"+jobType.getJobTypeName()+"' where job_type_id = "+jobType.getJobTypeId();
-		jdbcTemplate.execute(sql);
+		jobType.setJobTypeId(jobTypeId);
+		jobType.setJobTypeName(name);
+		jobTypeMasterService.updateJobTypeMaster(jobType);
+		return "redirect:/admin/job-type-master";
 	}
 
-	public void delete(int id) {
-		String sql = "delete from job_type_master where job_type_id = "+id; 
-		jdbcTemplate.execute(sql);
+	@RequestMapping(value="admin/job-type-master/delete/{id}",method=RequestMethod.GET)
+	public String deleteJobTypeMaster(Model model,@PathVariable("id") String id) {
+		int jobTypeId = Integer.parseInt(id);
+		jobTypeMasterService.deleteJobTypeMaster(jobTypeId);
+		return "redirect:/admin/job-type-master";
 	}
+
 
 }
