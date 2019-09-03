@@ -23,35 +23,35 @@ public class SkillMasterRepository {
 		
 		for(Map<String,Object> row : rows) {
 			SkillMasterEntity skill = new SkillMasterEntity();
-			skill.setSkillId((int)row.get("skill_id"));
-			skill.setSkillName((String)row.get("skill_name"));
+			skill.setSkillId((int)row.get("Skill_Id"));
+			skill.setSkillName((String)row.get("Skill_Name"));
 			skills.add(skill);	
 		}
 		return skills;
 	}
 	
 	public void insert(String name) {
-		String sql = "insert into skill_master (skill_name) values ('"+name+"')";
+		String sql = "insert into skill_master (Skill_Name) values ('"+name+"')";
 		jdbcTemplate.execute(sql);
 		
 	}
 	
 	public void update(SkillMasterEntity skill) {
-		String sql = "update skill_master set skill_name = '"+skill.getSkillName()+"' where skill_id = "+skill.getSkillId()+";"; 
+		String sql = "update skill_master set Skill_Name = '"+skill.getSkillName()+"' where Skill_Id = "+skill.getSkillId()+";"; 
 		jdbcTemplate.execute(sql);
 	}
 	
 	public SkillMasterEntity viewById(int id) {
-		String sql = "select * from skill_master where skill_id = "+ id;
+		String sql = "select * from skill_master where Skill_Id = "+ id;
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 		SkillMasterEntity skill = new SkillMasterEntity();
-		skill.setSkillId((int)row.get("skill_id"));
-		skill.setSkillName((String)row.get("skill_name"));
+		skill.setSkillId((int)row.get("Skill_Id"));
+		skill.setSkillName((String)row.get("Skill_Name"));
 		return skill;
 	}
 	
 	public void delete(int id) {
-		String sql = "delete from skill_master where skill_id = "+id; 
+		String sql = "delete from skill_master where Skill_Id = "+id; 
 		jdbcTemplate.execute(sql);
 	}	
 }

@@ -30,6 +30,8 @@ public class UserEntity {
 		this.userPassword = userPassword;
 		this.userDateOfBirth = userDateOfBirth;
 	}
+	
+	public UserEntity() {}
 
 	public int getUserId() {
 		return userId;
