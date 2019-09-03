@@ -17,6 +17,7 @@ import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
 import com.hireslate.model.StreamMasterEntity;
 import com.hireslate.repository.CourseMasterRepository;
+import com.hireslate.repository.JobMasterRepository;
 import com.hireslate.repository.JobTypeMasterRepository;
 import com.hireslate.repository.SkillMasterRepository;
 import com.hireslate.repository.StreamMasterRepository;
@@ -27,7 +28,7 @@ public class DispatcherController {
 	@Autowired
 	public SkillMasterRepository skillMasterController;
 	@Autowired
-	public JobMasterController jobMasterController;
+	public JobMasterRepository jobMasterController;
 	@Autowired
 	public JobTypeMasterRepository jobTypeMasterController ;
 	

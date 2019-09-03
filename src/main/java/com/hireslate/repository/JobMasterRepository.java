@@ -1,4 +1,4 @@
-package com.hireslate.controller;
+package com.hireslate.repository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ import com.hireslate.model.JobTypeMasterEntity;
 
 
 @Repository
-public class JobMasterController {
+public class JobMasterRepository {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -37,9 +37,7 @@ public List<JobMasterEntity> view(){
 			job.setJobClosingDate((Date)row.get("job_closing_date"));
 			job.setJobTypeId((int)row.get("job_type_id"));
 			jobs.add(job);
-			
 		}
-		
 		return jobs;
 	}
 
