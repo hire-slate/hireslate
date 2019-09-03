@@ -22,8 +22,8 @@ public class SkillMasterController {
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String showSkillMaster(Model model) {
-		List<SkillMasterEntity> skillMasterEntity = skillMasterService.viewSkillMaster();
-		model.addAttribute("skillMasterEntity",skillMasterEntity);
+		List<SkillMasterEntity> skill = skillMasterService.viewSkillMaster();
+		model.addAttribute("skillMasterEntity",skill);
 		return "admin/skill-master/view.jsp";
 	}
 	
@@ -32,7 +32,7 @@ public class SkillMasterController {
 		return "admin/skill-master/create.jsp";
 	}
 	
-	@RequestMapping(value="/create",method=RequestMethod.GET)
+	@RequestMapping(value="/create",method=RequestMethod.POST)
 	public String addSkill(@RequestParam("skillName")String skillName) {
 		skillMasterService.insertSkillMaster(skillName);
 		return "redirect:/admin/skill-master";
