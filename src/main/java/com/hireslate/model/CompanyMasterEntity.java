@@ -1,12 +1,12 @@
 package com.hireslate.model;
 
-public class CompanyMaster {
+public class CompanyMasterEntity {
 
 	private int companyId,companyPincode;
 	private String companyName,companyWebsite,companyAddressLine,companyLandmark,companyGstin,companyPancard,companyPancardPhoto,companyLogo,companyDocument;
 	private String companyContact;
 	
-	public CompanyMaster(int companyId, int companyPincode, String companyName, String companyWebsite,
+	public CompanyMasterEntity(int companyId, int companyPincode, String companyName, String companyWebsite,
 			String companyAddressLine, String companyLandmark, String companyGstin, String companyPancard,
 			String companyPancardPhoto, String companyLogo, String companyDocument, String companyContact) {
 		super();
