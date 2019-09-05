@@ -39,18 +39,16 @@ public class SkillMasterController {
 	}
 	
 	@RequestMapping(value="/edit{id}",method=RequestMethod.GET)
-	public String updateSkillMasterForm(Model model,@PathVariable("id") String id ) {
-		int skillId = Integer.parseInt(id);	
-		SkillMasterEntity skillEntity = skillMasterService.viewSkillMasterById(skillId);
+	public String updateSkillMasterForm(Model model,@PathVariable("id") int id ) {
+		SkillMasterEntity skillEntity = skillMasterService.viewSkillMasterById(id);
 		model.addAttribute("skillById", skillEntity);
 		return "admin/skill-master/update.jsp";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public String updateSkillMaster(@RequestParam("skillName")String skillName ,@RequestParam("skillId")String id) {
-		int skillId  = Integer.parseInt(id);
+	public String updateSkillMaster(@RequestParam("skillName")String skillName ,@RequestParam("skillId")int id) {
 		SkillMasterEntity skillEntity = new SkillMasterEntity();
-		skillEntity.setSkillId(skillId);
+		skillEntity.setSkillId(id);
 		skillEntity.setSkillName(skillName);
 		skillMasterService.updateSkillMaster(skillEntity);
 		return "redirect:/admin/skill-master";

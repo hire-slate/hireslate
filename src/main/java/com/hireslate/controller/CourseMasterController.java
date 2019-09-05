@@ -55,7 +55,6 @@ public class CourseMasterController {
 		courseMasterService.updateCourseMaster(course);
 		return "redirect:/admin/course-master";
 	}
-	
 
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public String deleteStreamMaster(Model model,@PathVariable("id") String id) {
