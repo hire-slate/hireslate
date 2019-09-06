@@ -42,12 +42,16 @@ public List<JobMasterEntity> view(){
 	}
 
 	public void insert(JobMasterEntity job) {
-		String sql = "insert into job_master Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id values ('"+job.getJobTitle()+"','"+job.getJobSalary()+"','"+job.getJobDescription()+"','"+job.getJobBenefits()+"','"+job.getJobVacancy()+"','"+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"','"+job.getJobTypeId()+"')";
+		String sql = "insert into job_master Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id values ('"
+				+job.getJobTitle()+"',"+job.getJobSalary()+",'"+job.getJobDescription()+"','"+job.getJobBenefits()+"',"+job.getJobVacancy()+",'"
+				+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"',"+job.getJobTypeId()+")";
 		jdbcTemplate.execute(sql);
 	}
 	
 	public void update(JobMasterEntity job) {
-		String sql = "update job_master set Job_Title='"+job.getJobTitle()+"',Job_Salary='"+job.getJobSalary()+"',Job_Description='"+job.getJobDescription()+"',Job_Benefits='"+job.getJobBenefits()+"',Job_Vacancy='"+job.getJobVacancy()+"',Job_Opening_Date='"+job.getJobOpeningDate()+"',Job_Closing_date='"+job.getJobClosingDate()+"',Job_Type_Id='"+job.getJobTypeId()+"'";
+		String sql = "update job_master set Job_Title='"+job.getJobTitle()+"',Job_Salary="+job.getJobSalary()+",Job_Description='"
+				+job.getJobDescription()+"',Job_Benefits='"+job.getJobBenefits()+"',Job_Vacancy="+job.getJobVacancy()+",Job_Opening_Date='"
+				+job.getJobOpeningDate()+"',Job_Closing_date='"+job.getJobClosingDate()+"',Job_Type_Id="+job.getJobTypeId();
 		jdbcTemplate.execute(sql);
 	}
 	

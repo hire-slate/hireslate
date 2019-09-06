@@ -43,7 +43,8 @@ public class StreamMasterRepository {
 	}
 	
 	public void update(StreamMasterEntity stream) {
-		String sql = "update stream_master set stream_name = '"+stream.getStreamName()+"',course_id = "+stream.getCourseId()+" where stream_id = "+stream.getStreamId()+";"; 
+		String sql = "update stream_master set stream_name = '"+stream.getStreamName()+"',course_id = "+stream.getCourseId()+" where stream_id = "
+	+stream.getStreamId(); 
 		jdbcTemplate.execute(sql);
 	}
 	

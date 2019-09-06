@@ -1,11 +1,11 @@
 package com.hireslate.model;
 
-public class CandidateAttachment {
+public class CandidateAttachmentEntity {
 	
 	private String candidateAttachmentResume,candidateAttachmentCoverLetter,candidateAttachmentPhoto;
 	private int candidateAttachmentId,userId,candidateMasterId;
 	
-	public CandidateAttachment(String candidateAttachmentResume, String candidateAttachmentCoverLetter,
+	public CandidateAttachmentEntity(String candidateAttachmentResume, String candidateAttachmentCoverLetter,
 			String candidateAttachmentPhoto, int candidateAttachmentId, int userId, int candidateMasterId) {
 		super();
 		this.candidateAttachmentResume = candidateAttachmentResume;
