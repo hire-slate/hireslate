@@ -58,7 +58,7 @@ public class JobStagesRepository {
 	public void update(JobStagesEntity job) {
 		
 		String sql = "update job_stages set Stage_Name = '"+job.getStageName()+"', Stage_StartDate = '"+job.getStageStartDate()+"', Stage_EndDate='"+job.getStageEndDate()+"',"
-				+ "Job_Id = "+job.getJobId()+", Next_Stage = "+job.getNextStage();
+				+ "Job_Id = "+job.getJobId()+", Next_Stage = "+job.getNextStage()+"where job_stages_id="+job.getJobStageId();
 		jdbcTemplate.execute(sql);
 	}
 	
