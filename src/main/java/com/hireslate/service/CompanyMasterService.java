@@ -19,4 +19,5 @@ public class CompanyMasterService {
 	public void updateComapnyMaster(CompanyMasterEntity company) {
 		companyMasterRepository.update(company);
 	}
+	
 }
