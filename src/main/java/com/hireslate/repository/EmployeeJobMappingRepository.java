@@ -7,13 +7,14 @@ import org.springframework.stereotype.Repository;
 import com.hireslate.model.EmployeeJobMappingEntity;
 
 @Repository
-public class EmployeeJobMapppingRepository {
+public class EmployeeJobMappingRepository {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
 	public void insert(EmployeeJobMappingEntity employeeJobMappingEntity) {
-		String sql ="";
-		
+		String sql ="INSERT INTO `employee_job_mapping`(`Employee_Id`, `Job_Id`, `Employee_Role`) VALUES "
+				+ "("+employeeJobMappingEntity.getEmployeeId()+","+employeeJobMappingEntity.getJobId()+",'"+employeeJobMappingEntity.getEmployeeRole()+"')";
+		jdbcTemplate.execute(sql);
 	}
 }
