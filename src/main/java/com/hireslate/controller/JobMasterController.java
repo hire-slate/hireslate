@@ -1,17 +1,26 @@
 package com.hireslate.controller;
 
+import java.awt.PageAttributes.MediaType;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
@@ -79,9 +88,16 @@ public class JobMasterController {
 		
 	}
 	
-	@RequestMapping(value="/search" ,method=RequestMethod.GET)
-	public void searchJobs(Model model,@RequestParam String skill) {
+	@RequestMapping(value="/search" ,method=RequestMethod.POST ,produces={"application/json"})
+	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
+		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
+		String[] skillParameter = input.split("\"");
+		String skill = skillParameter[1];
+		
+		
 		List<String> jobs = jobMasterService.searchJobBySkill(skill);
-		model.addAttribute("jobs",jobs);
+		
+		
+		return new Gson().toJson(jobs);
 	}
 }
