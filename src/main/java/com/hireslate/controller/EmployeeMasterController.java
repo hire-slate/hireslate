@@ -37,6 +37,7 @@ public class EmployeeMasterController {
 	@RequestMapping(value="/create/form",method=RequestMethod.GET)
 	public String showCreateEmployeeMasterForm(Model model) {
 		List<UserEntity> users = userService.viewUser();
+		
 		model.addAttribute("users",users);
 		return "admin/employee-master/create.jsp";
 	}
@@ -49,6 +50,7 @@ public class EmployeeMasterController {
 		employeeMasterService.insertEmployeeMaster(employeeMasterEntity);
 		return "redirect:/admin/employee-master";
 	}
+	
 	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
 	public String deleteEmployeeMaster(Model model,@PathVariable("id") int id) {
 		employeeMasterService.deleteEmployeeMaster(id);

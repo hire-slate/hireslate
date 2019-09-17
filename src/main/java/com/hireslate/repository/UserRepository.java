@@ -57,7 +57,7 @@ public class UserRepository {
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {
 			UserEntity user = new UserEntity();
-			user.setUserId((int)row.get("userId"));
+			user.setUserId((int)row.get("User_Id"));
 			user.setUserFname((String)row.get("User_Fname"));
 			user.setUserLname((String)row.get("User_Lname"));
 			users.add(user);

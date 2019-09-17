@@ -106,6 +106,10 @@
 		<put-attribute name="content" value= "/admin/stream-master/update.jsp"/>
 	</definition>
 	
+	<!--  employee master -->
 
-
+<definition name="admin/employee-master/create.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/employee-master/create.jsp"/>
+	</definition>
+	
 </tiles-definitions>	
