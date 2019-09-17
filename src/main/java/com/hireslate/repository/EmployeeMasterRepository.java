@@ -53,7 +53,7 @@ public class EmployeeMasterRepository {
 	}
 	
 	public void delete(int id) {
-		String sql ="DELETE FROM `employee_master` WHERE Employee_Id="+id;
+		String sql ="DELETE FROM `employee_master` WHERE User_Id="+id;
 		jdbcTemplate.execute(sql);
 	}
 }

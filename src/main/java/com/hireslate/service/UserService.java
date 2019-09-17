@@ -49,4 +49,8 @@ public class UserService {
 	public List<UserEntity> viewUser(){
 		return userRepository.view();
 	}
+	
+	public List<UserEntity> viewUserNameEmployee(){
+		return userRepository.viewUserNameEmployee();
+	}
 }

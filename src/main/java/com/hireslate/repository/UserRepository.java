@@ -44,7 +44,6 @@ public class UserRepository {
 		return userId;
 	}
 	
-	
 	public Map<String,Object> getUserId(String username , String password) {
 		String sql = "select User_Id from user where User_UserName = '"+username+"' and User_Password = '"+password+"' ";
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
@@ -60,6 +59,20 @@ public class UserRepository {
 			user.setUserId((int)row.get("User_Id"));
 			user.setUserFname((String)row.get("User_Fname"));
 			user.setUserLname((String)row.get("User_Lname"));
+			users.add(user);
+		}
+		return users;
+	}
+	
+	public List<UserEntity> viewUserNameEmployee(){
+		String sql = "select User_Fname,User_Lname,user.User_Id from User RIGHT JOIN employee_master on user.User_Id = employee_master.User_Id ";
+		List<UserEntity> users = new ArrayList<UserEntity>();
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		for(Map<String,Object> row : rows) {
+			UserEntity user = new UserEntity();
+			user.setUserLname((String)row.get("User_Lname"));
+			user.setUserFname((String)row.get("User_Fname"));
+			user.setUserId((int)row.get("User_Id"));
 			users.add(user);
 		}
 		return users;

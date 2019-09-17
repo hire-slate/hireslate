@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserEntity {
 	
-	private int userId,userGender,userRole,userPincode;
+	private int userId,userGender,userRole,userPincode, employeeId;
 	private String userFname,userMname,userLname,userMobileNumber,userEmail,userAddressLine,userAddressLandmark,userCity,userState,userUserName,userPassword;
 	private Date userDateOfBirth;
 	
@@ -160,6 +160,4 @@ public class UserEntity {
 	public void setUserDateOfBirth(Date userDateOfBirth) {
 		this.userDateOfBirth = userDateOfBirth;
 	}
-	
-	
 }

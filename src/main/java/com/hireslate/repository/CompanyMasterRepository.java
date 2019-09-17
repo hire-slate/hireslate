@@ -1,5 +1,9 @@
 package com.hireslate.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -31,5 +35,18 @@ public class CompanyMasterRepository {
     public void delete(int id) {
     	String sql = "delete from company_master where Company_Id="+id;
     	jdbcTemplate.execute(sql);
+    }
+    
+    public List<CompanyMasterEntity> viewOnlyId(){
+    	String sql ="select Company_Id, Company_Name from company_master";
+    	List<CompanyMasterEntity> companies = new ArrayList<CompanyMasterEntity>();
+    	List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+    	for(Map<String, Object> row : rows) {
+    		CompanyMasterEntity company = new CompanyMasterEntity();
+    		company.setCompanyId((int)row.get("Company_Id"));
+    		company.setCompanyName((String)row.get("Company_Name"));
+    		companies.add(company);
+    	}
+    	return companies;
     }
 }

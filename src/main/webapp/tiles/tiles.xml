@@ -62,8 +62,6 @@
 		<put-attribute name="content" value="/admin/job-master/create.jsp"></put-attribute>	
 	</definition>
 	
-	
-	
 	<!-- job-type-master table -->
 
 	<definition name="admin/job-type-master/view.jsp" extends="mytemplate">
@@ -108,8 +106,12 @@
 	
 	<!--  employee master -->
 
-<definition name="admin/employee-master/create.jsp" extends="mytemplate">
+	<definition name="admin/employee-master/create.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/admin/employee-master/create.jsp"/>
+	</definition>
+	
+	<definition name="admin/employee-master/view.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/employee-master/view.jsp"/>
 	</definition>
 	
 </tiles-definitions>	

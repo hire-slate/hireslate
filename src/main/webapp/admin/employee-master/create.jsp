@@ -26,12 +26,11 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="Company_Id">Company ID</label> 
+									<label for="Company_Id">Company Name</label> 
 									<div class="form-group">
-									<label for="Company_Id">Job Type</label> 
-									<select class="form-control select2" name="Company_Id" id ="users" style="width: 100%;">
-										<c:forEach items="${users}" var="variable">
-											<option value="${variable.companyId}">${variable.companyId}</option>
+									<select class="form-control select2" name="Company_Id" id ="companyId" style="width: 100%;">
+										<c:forEach items="${companyId}" var="variable">
+											  <option value="${variable.companyId}">${variable.companyName}</option>  
 										</c:forEach>
 									</select>
 								</div>
@@ -66,6 +65,7 @@
 	$(document).ready(function() {
 		$('.select2').select2();
 		$("#users").select2();
+		$("#companyId").select2();
 	});
 </script>
 

@@ -3,6 +3,7 @@ package com.hireslate.model;
 public class EmployeeMasterEntity {
 
 	private int employeeId, companyId, userId;
+	private String userLname, userFname;
 
 	public EmployeeMasterEntity(int employeeId, int companyId, int userId) {
 		super();
@@ -37,5 +38,4 @@ public class EmployeeMasterEntity {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 }

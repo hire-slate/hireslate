@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hireslate.model.CompanyMasterEntity;
 import com.hireslate.model.EmployeeMasterEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CompanyMasterService;
@@ -31,14 +32,17 @@ public class EmployeeMasterController {
 	public String showEmployeeMaster(Model model) {
 		List<EmployeeMasterEntity> empList = employeeMasterService.viewEmployeeMaster();
 		model.addAttribute("empList",empList);
+		List<UserEntity> userName = userService.viewUserNameEmployee();
+		model.addAttribute("userName",userName);
 		return "admin/employee-master/view.jsp";
 	}
 	
 	@RequestMapping(value="/create/form",method=RequestMethod.GET)
 	public String showCreateEmployeeMasterForm(Model model) {
 		List<UserEntity> users = userService.viewUser();
-		
+		List<CompanyMasterEntity> companyId = companyMasterService.viewOnlyIdCompanyMaster(); 
 		model.addAttribute("users",users);
+		model.addAttribute("companyId", companyId);
 		return "admin/employee-master/create.jsp";
 	}
 	
