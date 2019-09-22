@@ -52,7 +52,8 @@ public List<JobMasterEntity> view(){
 	public void update(JobMasterEntity job) {
 		String sql = "update job_master set Job_Title='"+job.getJobTitle()+"',Job_Salary="+job.getJobSalary()+",Job_Description='"
 				+job.getJobDescription()+"',Job_Benefits='"+job.getJobBenefits()+"',Job_Vacancy="+job.getJobVacancy()+",Job_Opening_Date='"
-				+job.getJobOpeningDate()+"',Job_Closing_date='"+job.getJobClosingDate()+"',Job_Type_Id="+job.getJobTypeId();
+				+job.getJobOpeningDate()+"',Job_Closing_date='"+job.getJobClosingDate()+"',Job_Type_Id="+job.getJobTypeId()+
+				" where Job_Id ="+job.getJobId();
 		jdbcTemplate.execute(sql);
 	}
 	
@@ -67,6 +68,7 @@ public List<JobMasterEntity> view(){
 		JobMasterEntity job = new JobMasterEntity();
 		job.setJobId((int)row.get("Job_Id"));
 		job.setJobBenefits((String)row.get("Job_Benefits"));
+		job.setJobOpeningDate((Date)row.get("Job_Opening_Date"));
 		job.setJobClosingDate((Date)row.get("Job_Closing_Date"));
 		job.setJobDescription((String)row.get("Job_Description"));
 		job.setJobSalary((float)row.get("Job_Salary"));

@@ -62,6 +62,10 @@
 		<put-attribute name="content" value="/admin/job-master/create.jsp"></put-attribute>	
 	</definition>
 	
+	<definition name="admin/job-master/update.jsp" extends="mytemplate">
+		<put-attribute name="content" value="/admin/job-master/update.jsp"></put-attribute>	
+	</definition>
+	
 	<!-- job-type-master table -->
 
 	<definition name="admin/job-type-master/view.jsp" extends="mytemplate">

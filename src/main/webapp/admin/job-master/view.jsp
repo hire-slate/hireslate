@@ -72,7 +72,7 @@
 		$(document).ready(function(){
 			$("#jobTable").DataTable(
 					{
-					"scrollX":false
+					"scrollX":false,
 					"scrollY":true
 			});
 		});

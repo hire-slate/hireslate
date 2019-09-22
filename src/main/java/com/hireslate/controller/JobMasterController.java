@@ -86,21 +86,53 @@ public class JobMasterController {
 	@RequestMapping(value="/edit/{id}",method=RequestMethod.GET)
 	public String updateJobMasterForm(Model model, @PathVariable("id")int id) {
 		JobMasterEntity jobEntity = jobMasterService.viewJobMasterById(id);
-		model.addAttribute("jobEntity", jobEntity);
-		return "admin/job-master/update.jsp";
+		List<JobTypeMasterEntity> jobTypes = jobTypeMasterService.viewJobTypeMaster();
+		List<SkillMasterEntity> skills = skillMasterService.viewSkillMaster();
 		
+		model.addAttribute("jobType", jobTypes);
+		model.addAttribute("skill",skills);
+		model.addAttribute("jobEntity", jobEntity);
+		
+		return "admin/job-master/update.jsp";
 	}
+	
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String updateJob(Model model,@RequestParam("jobId")int jobId,@RequestParam("jobTitle")String jobTitle,
+			@RequestParam("jobSalary")float jobSalary,@RequestParam("jobDescription")String jobDescription,
+			@RequestParam("jobBenefits")String jobBenefits,@RequestParam("jobVacancy")int jobVacancy,
+			@RequestParam("jobOpeningDate")String jobOpeningDateString,@RequestParam("jobClosingDate")String jobClosingDateString,
+			@RequestParam("jobTypeId")int jobTypeId) {
+		
+		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
+		Date jobClosingDate = Date.valueOf(jobClosingDateString);
+		JobMasterEntity job = new JobMasterEntity();
+		job.setJobBenefits(jobBenefits);
+		job.setJobDescription(jobDescription);
+		job.setJobSalary(jobSalary);
+		job.setJobTitle(jobTitle);
+		job.setJobTypeId(jobTypeId);
+		job.setJobVacancy(jobVacancy);
+		job.setJobClosingDate(jobClosingDate);
+		job.setJobOpeningDate(jobOpeningDate);
+		job.setJobCompanyId(1);
+		job.setJobId(jobId);
+		jobMasterService.updateJobMaster(job);
+		return "redirect:/admin/job-master";
+	}
+	
+	@RequestMapping(value="/delete/{id}",method=RequestMethod.GET)
+	public String daleteJob(Model model,@PathVariable("id") int jobId) {
+		jobMasterService.deleteJobMaster(jobId);
+		return "redirect:/admin/job-master";
+	}
+	
 	
 	@RequestMapping(value="/search" ,method=RequestMethod.POST ,produces={"application/json"})
 	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		String[] skillParameter = input.split("\"");
 		String skill = skillParameter[1];
-		
-		
 		List<String> jobs = jobMasterService.searchJobBySkill(skill);
-		
-		
 		return new Gson().toJson(jobs);
 	}
 }
