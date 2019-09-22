@@ -40,7 +40,7 @@
                
                 <tbody>
 				<% int i = 0; %>                
-                <c:forEach items="${job}" var="variable">
+                <c:forEach items="${jobMaster}" var="variable">
                 <tr>
                     
                   <td><input type = "checkbox"></td>

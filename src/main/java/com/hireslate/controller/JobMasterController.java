@@ -1,8 +1,6 @@
 package com.hireslate.controller;
 
-import java.awt.PageAttributes.MediaType;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +26,7 @@ import com.hireslate.service.JobMasterService;
 import com.hireslate.service.JobSkillMappingService;
 import com.hireslate.service.JobTypeMasterService;
 import com.hireslate.service.SkillMasterService;
+import java.sql.Date;
 
 @Controller
 @RequestMapping(value="admin/job-master")
@@ -62,9 +61,12 @@ public class JobMasterController {
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	public String addJob(@RequestParam("jobTitle")String jobTitle,@RequestParam("jobSalary")float jobSalary,
 			@RequestParam("jobDescription")String jobDescription,@RequestParam("jobBenefits")String jobBenefits,
-			@RequestParam("jobVacancy")int jobVacancy,@RequestParam("jobOpeningDate")String jobOpeningDate,@RequestParam("jobClosingDate")String jobClosingDate,
-			@RequestParam("jobTypeId")int jobTypeId,@RequestParam("jobSkills") int[] skills){
+			@RequestParam("jobVacancy")int jobVacancy,@RequestParam("jobOpeningDate")String jobOpeningDateString,
+			@RequestParam("jobClosingDate")String jobClosingDateString,
+			@RequestParam("jobTypeId")int jobTypeId){
 		
+		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
+		Date jobClosingDate = Date.valueOf(jobClosingDateString);
 		JobMasterEntity job = new JobMasterEntity();
 		job.setJobBenefits(jobBenefits);
 		job.setJobDescription(jobDescription);
@@ -74,6 +76,7 @@ public class JobMasterController {
 		job.setJobVacancy(jobVacancy);
 		job.setJobClosingDate(jobClosingDate);
 		job.setJobOpeningDate(jobOpeningDate);
+		job.setJobCompanyId(1);
 		int jobId = jobMasterService.insertJobMasterAndGetID(job);
 		
 		

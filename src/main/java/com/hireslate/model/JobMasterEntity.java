@@ -9,16 +9,17 @@ public class JobMasterEntity {
 	private String jobDescription;
 	private String jobBenefits;
 	private int jobVacancy;
-	private String jobOpeningDate;
-	private String jobClosingDate;
+	private Date jobOpeningDate;
+	private Date jobClosingDate;
 	private int jobTypeId;
-	private float jobSalary;	
-	
+	private int jobCompanyId;
+	private float jobSalary;
+
 	public JobMasterEntity() {
 	}
 
 	public JobMasterEntity(int jobId, String jobTitle, String jobDescription, String jobBenefits, int jobVacancy,
-			String jobOpeningDate, String jobClosingDate, int jobTypeId, float jobSalary) {
+			Date jobOpeningDate, Date jobClosingDate, int jobTypeId,int jobCompanyId, float jobSalary) {
 		super();
 		this.jobId = jobId;
 		this.jobTitle = jobTitle;
@@ -28,11 +29,36 @@ public class JobMasterEntity {
 		this.jobOpeningDate = jobOpeningDate;
 		this.jobClosingDate = jobClosingDate;
 		this.jobTypeId = jobTypeId;
+		this.jobCompanyId = jobCompanyId;
 		this.jobSalary = jobSalary;
+	}
+
+	public int getJobCompanyId() {
+		return jobCompanyId;
+	}
+
+	public void setJobCompanyId(int jobCompanyId) {
+		this.jobCompanyId = jobCompanyId;
+	}
+
+	public void setJobOpeningDate(Date jobOpeningDate) {
+		this.jobOpeningDate = jobOpeningDate;
+	}
+
+	public void setJobClosingDate(Date jobClosingDate) {
+		this.jobClosingDate = jobClosingDate;
 	}
 
 	public int getJobId() {
 		return jobId;
+	}
+
+	public Date getJobOpeningDate() {
+		return jobOpeningDate;
+	}
+
+	public Date getJobClosingDate() {
+		return jobClosingDate;
 	}
 
 	public void setJobId(int jobId) {
@@ -67,27 +93,12 @@ public class JobMasterEntity {
 		return jobVacancy;
 	}
 
-	public String getJobOpeningDate() {
-		return jobOpeningDate;
-	}
 
-	public void setJobOpeningDate(String jobOpeningDate) {
-		this.jobOpeningDate = jobOpeningDate;
-	}
-
-	public String getJobClosingDate() {
-		return jobClosingDate;
-	}
-
-	public void setJobClosingDate(String jobClosingDate) {
-		this.jobClosingDate = jobClosingDate;
-	}
 
 	public void setJobVacancy(int jobVacancy) {
 		this.jobVacancy = jobVacancy;
 	}
 
-	
 	public int getJobTypeId() {
 		return jobTypeId;
 	}
@@ -104,5 +115,4 @@ public class JobMasterEntity {
 		this.jobSalary = jobSalary;
 	}
 
-		
 }

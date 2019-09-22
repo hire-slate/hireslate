@@ -9885,6 +9885,11 @@ textarea.form-control {
   -o-transition: opacity .2s ease-out, visibility 0s linear .2s;
   transition: opacity .2s ease-out, visibility 0s linear .2s;
   z-index: 1000; }
+  
+  
+#displayBlock{
+	display: block;
+}  
 
 #ftco-loader.fullscreen {
   padding: 0;

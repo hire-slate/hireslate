@@ -1,7 +1,7 @@
 package com.hireslate.repository;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,20 +33,21 @@ public List<JobMasterEntity> view(){
 			job.setJobDescription((String)row.get("job_description"));
 			job.setJobBenefits((String)row.get("job_benefits"));
 			job.setJobVacancy((int)row.get("job_vacancy"));
-			job.setJobOpeningDate((String)row.get("job_opening_date"));
-			job.setJobClosingDate((String)row.get("job_closing_date"));
+			job.setJobOpeningDate((Date)row.get("job_opening_date"));
+			job.setJobClosingDate((Date)row.get("job_closing_date"));
 			job.setJobTypeId((int)row.get("job_type_id"));
+			job.setJobSalary((float)row.get("job_salary"));
 			jobs.add(job);
 		}
 		return jobs;
 	}
 
 	public void insert(JobMasterEntity job) {
-		String sql = "insert into job_master (Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id) values ('"
+		String sql = "insert into job_master (Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id,Company_Id) values ('"
 				+job.getJobTitle()+"',"+job.getJobSalary()+",'"+job.getJobDescription()+"','"+job.getJobBenefits()+"',"+job.getJobVacancy()+",'"
-				+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"',"+job.getJobTypeId()+")";
+				+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"',"+job.getJobTypeId()+","+job.getJobCompanyId()+")";
 		jdbcTemplate.execute(sql);
-	}
+	}	
 	
 	public void update(JobMasterEntity job) {
 		String sql = "update job_master set Job_Title='"+job.getJobTitle()+"',Job_Salary="+job.getJobSalary()+",Job_Description='"
@@ -66,8 +67,7 @@ public List<JobMasterEntity> view(){
 		JobMasterEntity job = new JobMasterEntity();
 		job.setJobId((int)row.get("Job_Id"));
 		job.setJobBenefits((String)row.get("Job_Benefits"));
-		job.setJobClosingDate((String)row.get("Job_Closing_Date"));
-		job.setJobOpeningDate((String)row.get("Job_Opening_Date"));
+		job.setJobClosingDate((Date)row.get("Job_Closing_Date"));
 		job.setJobDescription((String)row.get("Job_Description"));
 		job.setJobSalary((float)row.get("Job_Salary"));
 		job.setJobTitle((String)row.get("Job_Title"));
@@ -77,9 +77,9 @@ public List<JobMasterEntity> view(){
 	}
     
     public int insertAndGetId(JobMasterEntity job) {
-		String sql = "insert into job_master (Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id) values ('"
+		String sql = "insert into job_master (Job_Title,Job_Salary,Job_Description,Job_Benefits,Job_Vacancy,Job_Opening_Date,Job_Closing_date,Job_Type_Id,Company_Id) values ('"
 				+job.getJobTitle()+"',"+job.getJobSalary()+",'"+job.getJobDescription()+"','"+job.getJobBenefits()+"',"+job.getJobVacancy()+",'"
-				+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"',"+job.getJobTypeId()+")";
+				+job.getJobOpeningDate()+"','"+job.getJobClosingDate()+"',"+job.getJobTypeId()+","+job.getJobCompanyId()+")";
 		jdbcTemplate.execute(sql);
 		String sql1 = "select job_id from job_master order by job_id desc limit 1";
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql1);
