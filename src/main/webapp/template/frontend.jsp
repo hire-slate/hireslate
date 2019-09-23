@@ -55,7 +55,7 @@
 	        <ul class="navbar-nav ml-auto">
 	      	    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="candidates.html" class="nav-link">Canditates</a></li>
+	          <li class="nav-item"><a href="candidates.html" class="nav-link">Candidates</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta mr-md-1"><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
@@ -66,6 +66,47 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+    <div id="login" class="w3-modal">
+	<span onclick="document.getElementById('login').style.display='none'"
+		class="w3-button w3-display-topright">&times;</span>
+
+	<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+
+		<form class="login100-form validate-form" method="Post" action ="/user/login">
+
+			<span class="login100-form-title p-b-33"> Account Login </span>
+
+			<div class="wrap-input100 validate-input"
+				data-validate="Valid email is required: ex@abc.xyz">
+				<input class="input100" type="text" name="username" placeholder="Email">
+				<span class="focus-input100-1"></span> <span
+					class="focus-input100-2"></span>
+			</div>
+
+			<div class="wrap-input100 rs1 validate-input"
+				data-validate="Password is required">
+				<input class="input100" type="password" name="password"
+					placeholder="Password"> <span class="focus-input100-1"></span>
+				<span class="focus-input100-2"></span>
+			</div>
+
+			<div class="container-login100-form-btn m-t-20">
+				<input class="login100-form-btn" name="loginBtn" type="submit"  value = "sign in">
+			</div>
+
+			<div class="text-center p-t-45 p-b-4">
+				<span class="txt1"> Forgot </span> <a href="#" class="txt2 hov1">
+					Username / Password? </a>
+			</div>
+			<div class="text-center">
+				<span class="txt1"> Create an account? </span> <a href="#"
+					class="txt2 hov1"> Sign up </a>
+			</div>
+		</form>
+	</div>
+</div>
+    
     
 		<tiles:insertAttribute name="frontendContent"></tiles:insertAttribute>  	
 
