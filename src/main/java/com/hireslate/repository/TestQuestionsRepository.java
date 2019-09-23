@@ -16,7 +16,7 @@ public class TestQuestionsRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public List<TestQuestionsEntity> view(int jobId, int skillId){
+	public List<TestQuestionsEntity> view(int jobId, int skillId) {
 		String sql = "select * from test_questions where Job_Id = "+jobId+" AND Skill_Id = "+skillId;
 		
 		List<TestQuestionsEntity> testQuestions = new ArrayList<TestQuestionsEntity>();

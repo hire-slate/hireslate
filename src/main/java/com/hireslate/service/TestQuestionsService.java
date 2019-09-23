@@ -14,8 +14,8 @@ public class TestQuestionsService {
 	@Autowired
 	TestQuestionsRepository testQuestionsRepository; 
 	
-	public List<TestQuestionsEntity> viewTestQuestions(){
-		return testQuestionsRepository.view();
+	public List<TestQuestionsEntity> viewTestQuestions(int jobId, int skillId){
+		return testQuestionsRepository.view(jobId,skillId);
 	}
 	
 	public TestQuestionsEntity viewByIdTestQuestions(int id) {
