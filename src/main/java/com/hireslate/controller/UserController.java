@@ -1,5 +1,7 @@
 package com.hireslate.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login" , method = RequestMethod.POST)
-	public String doUserLogin(Model model,@RequestParam("username") String username, @RequestParam("password") String password ) {
+	public String doUserLogin(Model model,@RequestParam("username") String username, @RequestParam("password") String password,HttpServletRequest request) {
 		String msg;
 		int loginResult = userService.doLogin(username, password);
 		if(loginResult != -1) {
+			request.getSession().setAttribute("userId", loginResult);
 			msg = "redirect:/user/homepage";  
 		}
 		else {

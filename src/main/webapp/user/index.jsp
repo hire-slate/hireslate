@@ -45,8 +45,7 @@
 															<div class="icon">
 																<span class="icon-briefcase"></span>
 															</div>
-															<input type="text" class="form-control"
-																placeholder="eg. Garphic. Web Developer">
+															<input type="text" class="form-control" placeholder="Garphic. Web Developer">
 														</div>
 													</div>
 												</div>
@@ -75,16 +74,14 @@
 															<div class="icon">
 																<span class="icon-map-marker"></span>
 															</div>
-															<input type="text" class="form-control"
-																placeholder="Location">
+															<input type="text" class="form-control" placeholder="Location">
 														</div>
 													</div>
 												</div>
 												<div class="col-md">
 													<div class="form-group">
 														<div class="form-field">
-															<button type="submit"
-																class="form-control btn btn-secondary">Search</button>
+															<button type="submit" class="form-control btn btn-secondary">Search</button>
 														</div>
 													</div>
 												</div>
@@ -214,7 +211,6 @@
 
 
 </section>
-
 
 
 

@@ -20,8 +20,8 @@
 			<div class="serchResult" id="serch">
 					
 			</div>
-			
-			<div class="col-md-12 ftco-animate" id="oneCompany">
+		   <div id="oneCompany">
+			<div class="col-md-12 ftco-animate" >
 					<div class="job-post-item py-4 d-block d-lg-flex align-items-center">
 						<div class="one-third mb-4 mb-md-0">
 							<div class="job-post-item-header d-flex align-items-center">
@@ -50,11 +50,11 @@
 									<span class="icon-heart"></span>
 								</a>
 							</div>
-							<a href="job-single.html" class="btn btn-primary py-2">Apply
-								Job</a>
+							<a href="#" class="btn btn-primary py-2">Apply Job</a>
 						</div>
 					</div>
 				</div>
+			</div>
 			
 	</section>
 
