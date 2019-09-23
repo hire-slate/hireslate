@@ -16,8 +16,8 @@ public class TestQuestionsRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public List<TestQuestionsEntity> view(){
-		String sql = "select * from test_questions";
+	public List<TestQuestionsEntity> view(int jobId, int skillId){
+		String sql = "select * from test_questions where Job_Id = "+jobId+" AND Skill_Id = "+skillId;
 		
 		List<TestQuestionsEntity> testQuestions = new ArrayList<TestQuestionsEntity>();
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
@@ -33,13 +33,12 @@ public class TestQuestionsRepository {
 			test.setTestAnswerOption4((String)row.get("Test_Answer_Option4"));
 			test.setTestRightAnswer((int)row.get("Test_Right_Answer"));
 			test.setTestImage((String)row.get("Test_Image"));
-			test.setJobTestId((int)row.get("Job_Test_Id"));
-			test.setSkillId((int)row.get("Skill_Id"));
 			testQuestions.add(test);
 		}
 		return testQuestions;
 	}
 	
+	// Dont know where to use Dx
 	public TestQuestionsEntity viewById(int id) {
 		String sql = "select * from test_questions where Test_Question_Id = "+id;
 		TestQuestionsEntity test = new TestQuestionsEntity();
