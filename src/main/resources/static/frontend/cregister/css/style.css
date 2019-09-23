@@ -466,6 +466,24 @@ body {
     padding: 13px 19px;
 }
 
+
+.boxBorder{
+		border: 1; 
+		border-style: solid; 
+		border-width: thin;
+        margin-bottom: 10px;
+}
+
+.question{
+	background-color: #D3D3D3; 
+	padding: 20px;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+}
+
+.answer{
+	padding-left: 20px
+}
 /* Responsive */
 @media screen and (max-width: 1199px) {
 	.form-v1-content {

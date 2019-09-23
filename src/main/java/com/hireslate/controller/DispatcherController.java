@@ -50,7 +50,7 @@ public class DispatcherController {
 	
 	@RequestMapping(value="test", method= RequestMethod.GET)
 	public String showTest() {
-		return "template/test.jsp";
+		return "user/test.jsp";
 	}
 	
 	//skill-master table CRUD
