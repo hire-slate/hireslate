@@ -48,11 +48,6 @@ public class DispatcherController {
 		return "admin/dashboard.jsp";
 	}
 	
-	@RequestMapping(value="test", method= RequestMethod.GET)
-	public String showTest() {
-		return "user/test.jsp";
-	}
-	
 	//skill-master table CRUD
 	
 //	@RequestMapping(value = "admin/skill-master", method = RequestMethod.GET)

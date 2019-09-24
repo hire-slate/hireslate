@@ -12,7 +12,6 @@
 
 	<definition name="mytemplate" template="/template/adminlte.jsp">
 		<put-attribute	name="content" value="" />
-	
 	</definition> 
 	
 	<definition name="admin/dashboard.jsp" extends="mytemplate">
@@ -120,6 +119,7 @@
 	
 	
 	<!--  test modules -->
+	
 	
 	
 </tiles-definitions>	

@@ -12,7 +12,7 @@ public class TestQuestionsEntity {
 			String testAnswerOption1, String testAnswerOption2, String testAnswerOption3, String testAnswerOption4,
 			String testImage) {
 		super();
-		this.testQuestionsId = testQuestionsId;
+		//this.testQuestionsId = testQuestionsId;
 		this.testRightAnswer = testRightAnswer;
 		this.jobTestId = jobTestId;
 		this.skillId = skillId;

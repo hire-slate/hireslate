@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -21,67 +25,42 @@
  	<!-- the code represent navbar -->
  	
 <div class="container">
+	<form action="">
+	<% int i = 0; %>
+	<c:forEach items="${testQuestions}" var="variable">
 	<div class="boxBorder">
         <div class="row">
 		<div class="col-md-12">
-		<p class="question">When a thread terminates its processing, into what state that thread enters?</p>
+		<p class="question"><%= ++i %>.&nbsp;${variable.testQuestion}</p>
 		</div>
 		
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
+			<p class="answer">A. <input type="radio" name="question"+i value="1">${variable.testAnswerOption1}</p>
 		</div>	
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
+			<p class="answer">A. <input type="radio" name="question"+i value="2">${variable.testAnswerOption2}</p>
 		</div>	
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
+			<p class="answer">A. <input type="radio" name="question"+i value="3">${variable.testAnswerOption3}</p>
 		</div>	
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
+			<p class="answer">A. <input type="radio" name="question"+i value="4">${variable.testAnswerOption4}</p>
 		</div>	
 	</div>
 </div>
-
-	<div class="boxBorder">
-        <div class="row">
-		<div class="col-md-12">
-		<p class="question">When a thread terminates its processing, into what state that thread enters?</p>
-		</div>
-		
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
-		</div>	
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
-		</div>	
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
-		</div>	
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<p class="answer">A. <input type="radio" name="quest1"> Dead State</p>
-		</div>	
-	</div>
-    
-
-
+ </c:forEach>
+ <input type="submit" name="testSubmit" value="submit"/>
+ </form>
 </div>
-</div>
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
