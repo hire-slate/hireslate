@@ -4,7 +4,7 @@
  
     <section class="content-header" >
         <h1>
-     		Course Master 
+     		Course Master
        </h1>
       </section>
 

@@ -41,8 +41,6 @@ public class DispatcherController {
 		return "user/userhomepage.jsp";
 	}
 	
-	
-	
 	@RequestMapping(value = "admin/dashboard", method = RequestMethod.GET)
 	public String showDashboard() {
 		return "admin/dashboard.jsp";
