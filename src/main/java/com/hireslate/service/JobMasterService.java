@@ -41,3 +41,4 @@ public class JobMasterService {
 		return jobMasterRepository.jobSearch(skill);
 	}
 }
+	
