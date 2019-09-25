@@ -78,8 +78,8 @@
 	          <li class="nav-item"><a href="candidates.html" class="nav-link">Candidates</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta mr-md-1" class="sessionToggle"><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
-	          <li class="nav-item cta cta-colored" class="sessionToggle"><a href="/user/register" class="nav-link">Register</a></li>
+	          <li class="nav-item cta mr-md-1 sessionToggle" ><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
+	          <li class="nav-item cta cta-colored sessionToggle" class=""><a href="/user/register" class="nav-link">Register</a></li>
 				
 	        </ul>
 	      </div>
@@ -87,19 +87,19 @@
 	  </nav>
     <!-- END nav -->
     
-    <% if(session==null){%>
-    		<script>
+   <!--    
+    		<sscript>
 					$(document).ready(function(){
 						$(".sessionToggle").show();
 					});
     		</script>
-    <%}else{%>
+    
     	<script>
 			$(document).ready(function(){
 				$(".sessionToggle").hide();
 		});
 		</script>
-    <%}%>
+      --> 
    
     <div id="login" class="w3-modal">
 	<span onclick="document.getElementById('login').style.display='none'"
