@@ -1,6 +1,7 @@
 package com.hireslate.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,12 @@ public class UserController {
 			msg = "redirect:/user/index";
 		}
 		return msg;
+	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String doUserLogout(HttpServletRequest request,HttpServletResponse response) {
+		request.getSession().invalidate();
+		return "redirect:/user/index";
 	}
 
 }

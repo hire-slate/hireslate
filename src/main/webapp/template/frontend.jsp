@@ -66,7 +66,16 @@
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta mr-md-1 sessionToggle"><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
 	          <li class="nav-item cta cta-colored sessionToggle"><a href="/user/register" class="nav-link">Register</a></li>
-			  <li class="nav-item cta mr-md-1 sessionLogout"><i class="fa fa-user-circle"></i></li>
+			  <li class="nav-item cta mr-md-1 sessionLogout dropdown">
+			  <img class="dropdown-toggle" data-toggle="dropdown" src="${pageContext.request.contextPath}/resources/frontend/images/users.png">
+			  
+    				<ul class="dropdown-menu">
+    					<li><a href="#">parttime</a></li>
+    					<li><a href="#">fulltime</a></li>
+    					<li><a href="/user/logout">Logout</a></li>
+     				</ul>
+			  
+			  </li>
 	          		
 	        </ul>
 	      </div>
