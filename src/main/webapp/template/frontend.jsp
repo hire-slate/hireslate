@@ -34,30 +34,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/frontend/css/mainLogin.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/frontend/css/utilLogin.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/frontend/css/animsition.min.css">
-    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- registration template css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/frontend/cregister/css/opensans-font.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/frontend/cregister/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 	<!-- Main Style Css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/frontend/cregister/css/style.css"/>
       
-  
   	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/popper.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/bootstrap.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.easing.1.3.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.stellar.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/aos.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.animateNumber.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/scrollax.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/google-map.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/main.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/animsition.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/mainLogin.js"></script>
+  
+ 		
  
   
   
@@ -73,34 +59,36 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	      	    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>      	 
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="candidates.html" class="nav-link">Candidates</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta mr-md-1 sessionToggle" ><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
-	          <li class="nav-item cta cta-colored sessionToggle" class=""><a href="/user/register" class="nav-link">Register</a></li>
-				
+	          <li class="nav-item cta mr-md-1 sessionToggle"><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
+	          <li class="nav-item cta cta-colored sessionToggle"><a href="/user/register" class="nav-link">Register</a></li>
+			  <li class="nav-item cta mr-md-1 sessionLogout"><i class="fa fa-user-circle"></i></li>
+	          		
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
     
-   <!--    
-    		<sscript>
-					$(document).ready(function(){
-						$(".sessionToggle").show();
-					});
-    		</script>
+    <%if(session.getAttribute("userId")!=null){%>
+    	<script type="text/javascript">
+			$('.sessionToggle').hide();
+			$('.sessionLogout').show();
+    	</script>
+    <%System.out.println("for if"+session.getAttribute("userId"));}
+    else{%>
+    	<script type="text/javascript">
+			$('.sessionToggle').show();
+			$('.sessionLogout').hide();
+    	</script>
+    	
+    <%System.out.println(session.getAttribute("userId"));} %>
     
-    	<script>
-			$(document).ready(function(){
-				$(".sessionToggle").hide();
-		});
-		</script>
-      --> 
-   
+  
     <div id="login" class="w3-modal">
 	<span onclick="document.getElementById('login').style.display='none'"
 		class="w3-button w3-display-topright">&times;</span>
@@ -212,6 +200,20 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-  
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/popper.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.easing.1.3.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.waypoints.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.stellar.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/owl.carousel.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.magnific-popup.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/aos.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.animateNumber.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/scrollax.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/google-map.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/animsition.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/frontend/js/mainLogin.js"></script>
   </body>
 </html>
