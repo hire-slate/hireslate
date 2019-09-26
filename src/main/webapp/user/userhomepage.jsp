@@ -75,23 +75,19 @@
 			success : function(result) {
 
 				for (i in result) {
-//					console.log(result[i]);
-					document.getElementById("jobName").innerHTML = result[i];
-					//var y = document.getElementById("jobName").innerHTML;
-					//console.log(y);
-					
-					var x = document.getElementById("oneCompany").innerHTML;
-					//console.log(x);
-					
+					console.log(result[i]);
+					var x = $("#oneCompany").clone();
+					x.removeAttr("id");
+					x.addClass("oneCompany");
+					x.find("#jobName").html(result[i]);
 						$(".serchResult").append(x);
-				
+					
 				}
-				
+				$(".oneCompany").show();	
 			},
 			
 			error : function(response) {
-				//	alert(response);
-				$("#amit").html(response);
+				$("#jobName").html(response);
 			}	
 		
 		});

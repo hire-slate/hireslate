@@ -131,7 +131,13 @@ public class JobMasterController {
 	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		String[] skillParameter = input.split("\"");
-		String skill = skillParameter[1];
+		String skill;
+		try {
+		    skill = skillParameter[1];
+		}
+		catch(ArrayIndexOutOfBoundsException e) {
+			skill="";
+		}
 		List<String> jobs = jobMasterService.searchJobBySkill(skill);
 		return new Gson().toJson(jobs);
 	}

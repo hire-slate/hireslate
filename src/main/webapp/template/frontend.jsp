@@ -88,14 +88,14 @@
 			$('.sessionToggle').hide();
 			$('.sessionLogout').show();
     	</script>
-    <%System.out.println("for if"+session.getAttribute("userId"));}
+    <%}
     else{%>
     	<script type="text/javascript">
 			$('.sessionToggle').show();
 			$('.sessionLogout').hide();
     	</script>
     	
-    <%System.out.println(session.getAttribute("userId"));} %>
+    <%} %>
     
   
     <div id="login" class="w3-modal">
@@ -131,7 +131,7 @@
 					Username / Password? </a>
 			</div>
 			<div class="text-center">
-				<span class="txt1"> Create an account? </span> <a href="#"
+				<span class="txt1"> Create an account? </span> <a href="/user/register"
 					class="txt2 hov1"> Sign up </a>
 			</div>
 		</form>
