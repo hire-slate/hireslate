@@ -28,17 +28,12 @@
 				  <th style="width: 10px"><i class="fa fa-trash-o"></i></th>
                   <th style="width: 100px">Sr No.</th>
                   <th>Course Name</th>
-				  
                 </tr>
                 </thead>
-               
-               
-               
                 <tbody>
 				<% int i = 0; %>                
                 <c:forEach items="${course}" var="variable">
-                <tr>
-                    
+                <tr>                    
                   <td><input type = "checkbox"></td>
                   <td><span ><a href="/admin/course-master/edit/${variable.courseId}"><i class="fa fa-edit"></a></i></span></td>
                   <td><span ><a href="/admin/course-master/delete/${variable.courseId}"><i class="fa fa-trash-o"></i></span></td>
@@ -62,6 +57,6 @@
     
     <script>
 		$(document).ready(function(){
-			$("#courseTable").DataTable();
+		$("#courseTable").DataTable();
 		});
     </script>

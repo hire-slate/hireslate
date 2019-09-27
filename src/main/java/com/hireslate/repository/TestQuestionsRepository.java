@@ -25,7 +25,7 @@ public class TestQuestionsRepository {
 		for(Map<String,Object> row : rows) {
 			TestQuestionsEntity test = new TestQuestionsEntity();
 			
-			test.setJobTestId((int)row.get("Test_Question_Id"));
+			test.setTestQuestionsId((int)row.get("Test_Question_Id"));
 			test.setTestQuestion((String)row.get("Test_Question"));
 			test.setTestAnswerOption1((String)row.get("Test_Answer_Option1"));
 			test.setTestAnswerOption2((String)row.get("Test_Answer_Option2"));

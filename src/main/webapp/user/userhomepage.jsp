@@ -3,22 +3,17 @@
 
 <div class="hero-wrap js-fullheight">
 	<div class="overlay"></div>
-
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row">
 				<form name="form">
-
 					<div class="col-md-12">
 						<input type="text" placeholder="Search.." name="input"
 							onkeyup="callJobs()">
 					</div>
 				</form>
-
 			</div>
-
 			<div class="serchResult" id="serch">
-					
 			</div>
 		   <div id="oneCompany">
 			<div class="col-md-12 ftco-animate" >
@@ -55,11 +50,8 @@
 					</div>
 				</div>
 			</div>
-			
 	</section>
-
 </div>
-				
 <script>
 	function callJobs() {
 		var skill = document.form.input.value;
@@ -89,11 +81,9 @@
 			error : function(response) {
 				$("#jobName").html(response);
 			}	
-		
 		});
 		document.getElementById("serch").innerHTML = "";
 	}
-
 </script>
 
 
