@@ -1,8 +1,6 @@
 package com.hireslate.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,12 +41,8 @@ public class CandidateMasterController {
 		UserEntity user = new UserEntity();
 		CandidateMasterEntity candidate = new CandidateMasterEntity();
 		
-		Date dob = new Date();
-		try {
-			dob = new SimpleDateFormat("dd/MM/yyyy").parse(bdate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		Date userBirthDate = Date.valueOf(bdate);
+		
 
 		user.setUserFname(fname);
 		user.setUserMname(mname);
@@ -62,7 +56,7 @@ public class CandidateMasterController {
 		user.setUserCity(city);
 		user.setUserState(state);
 		user.setUserPincode(pincode);
-		user.setUserDateOfBirth(dob);
+		user.setUserDateOfBirth(userBirthDate);
 		user.setUserRole(1);
 		user.setUserUserName(email);
 	

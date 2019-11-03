@@ -228,12 +228,7 @@
 									</fieldset>
 								</div>
 							</div>
-							<div class="form-row">
-								<div class="form-holder form-holder-2">
-										<input type="submit" class="form-control"  name="submit" >
-								</div>
-							</div>
-						</div>
+													</div>
 					</section>
 				</div>
 			</form>
@@ -256,7 +251,7 @@
 		labels : {
 			previous : 'Back Step',
 			next : '<i class="zmdi zmdi-arrow-right"></i>',
-			finish : '<i class="zmdi zmdi-check"></i>',
+			finish : '<button type="submit"><i class="zmdi zmdi-check"></i></button>',
 			current : ''
 		},
 	});

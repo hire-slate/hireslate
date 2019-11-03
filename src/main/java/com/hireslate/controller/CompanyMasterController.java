@@ -36,6 +36,7 @@ public class CompanyMasterController {
 		company.setCompanyWebsite(companyWebsite);
 		company.setCompanyPancard(companyPancard);
 		company.setCompanyAddressLine(companyAddress);
+		company.setCompanyPincode(Integer.parseInt(companyPincode));
 		company.setCompanyLandmark(companyLandmark);
 		company.setCompanyGstin(companyGST);
 		company.setCompanyCity(companyCity);
