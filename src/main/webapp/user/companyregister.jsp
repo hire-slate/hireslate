@@ -17,7 +17,7 @@
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Company Name</legend>
+											<legend>Name</legend>
 											<input type="text" class="form-control" id="first-name" name="companyName" placeholder="Company Name" required>
 										</fieldset>
 									</div>
@@ -25,7 +25,7 @@
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Company Website</legend>
+											<legend>Website</legend>
 											<input type="text" class="form-control" id="last-name" name="companyWebsite" placeholder="Company Website Link" required>
 										</fieldset>
 									</div>
@@ -33,8 +33,32 @@
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>Company Contact</legend>
+											<legend>Contact No</legend>
 											<input type="text" name="companyContact" id="cpassword" class="form-control" placeholder="Company Contact" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Username</legend>
+											<input type="text" name="companyUsername" id="cpassword" class="form-control" placeholder="Company Contact" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Password</legend>
+											<input type="text" name="companyPassword" id="cpassword" class="form-control" placeholder="Company Contact" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Confirm Password</legend>
+											<input type="text" name="companyCPassword" id="cpassword" class="form-control" placeholder="Company Contact" required>
 										</fieldset>
 									</div>
 								</div>
@@ -73,7 +97,7 @@
 								<div class = "form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset>
-											<legend>state</legend>
+											<legend>State</legend>
 											<input type="text" class="form-control" id="state" name="companyState" placeholder="State" required>
 										</fieldset>
 									</div>

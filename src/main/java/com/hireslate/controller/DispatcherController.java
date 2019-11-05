@@ -3,6 +3,8 @@ package com.hireslate.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -42,8 +44,15 @@ public class DispatcherController {
 	}
 	
 	@RequestMapping(value = "admin/dashboard", method = RequestMethod.GET)
-	public String showDashboard() {
-		return "admin/dashboard.jsp";
+	public String showDashboard(HttpServletRequest request) {
+		String msg;
+		if(request.getSession().getAttribute("companyName")==null) {
+			msg = "redirect:/user/company/login";
+		}
+		else {
+			msg = "admin/dashboard.jsp";
+		}
+		return msg;
 	}
 	
 	//skill-master table CRUD

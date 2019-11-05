@@ -18,6 +18,11 @@
 		<put-attribute name="content" value= "/admin/dashboard.jsp"/>
 	</definition>
 	
+	<definition name="admin/login.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/login.jsp"/>
+	</definition>
+	
+	
 	<definition name="user/index.jsp" extends = "frontend">
 		<put-attribute name="frontendContent" value="/user/index.jsp"></put-attribute>
 	</definition>
