@@ -38,7 +38,6 @@ public class CompanyMasterService {
 	public String doCompanyLogin(String username, String password, HttpServletRequest request) {
 		
 		String msg,companyName;
-		if(username != null && password != null) {
 			companyName = companyMasterRepository.getCompanyId(username, password).getCompanyName();
 			if(companyName != null) {
 				request.getSession().setAttribute("companyName", companyName);
@@ -47,14 +46,12 @@ public class CompanyMasterService {
 			else {
 				msg = "redirect:/user/company/login";
 			}
-		}
-		else {
-			 msg = "redirect:/user/company/login";
-		}
+		
+		
 		return msg;
 	}
 	
-	public void updateComapnyMaster(CompanyMasterEntity company) {
+	public void updateComapanyMaster(CompanyMasterEntity company) {
 	}
 	
 	public List<CompanyMasterEntity> viewOnlyIdCompanyMaster(){

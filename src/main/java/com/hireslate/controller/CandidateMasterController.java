@@ -71,7 +71,7 @@ public class CandidateMasterController {
 		candidate.setCandidateLinkedIn(linkedIn);
 		candidate.setCandidateGithub(github);
 		candidateMasterService.insertCandidateMaster(candidate);
-		System.out.println("value insetred");
+		System.out.println("value inserted");
 		return "redirect:/user/register";
 		
 	}
