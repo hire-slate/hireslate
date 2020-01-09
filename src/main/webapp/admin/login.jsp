@@ -1,6 +1,5 @@
 <section class= "content">
 
-
 <div class="login-box">
   <div class="login-logo">
     <b>LOGIN</b>
@@ -34,19 +33,15 @@
       </div>
     </form>
 
-   
-
     <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <a href="companyregister" class="text-center">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
 
-
 </section>
-
 
 <script>
   $(function () {

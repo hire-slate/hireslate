@@ -16,11 +16,9 @@ import com.hireslate.service.CompanyMasterService;
 @RequestMapping("/user/company")
 public class CompanyMasterController {
 	
-	
 	@Autowired
 	CompanyMasterService companyMasterService;
 	
-
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
 	public String showCandidateRegisterForm() {
 		return "user/companyregister.jsp";
@@ -73,5 +71,10 @@ public class CompanyMasterController {
 	public String doLogout(HttpServletRequest request) {
 		String msg = companyMasterService.doCompanyLogout(request);
 		return msg;
+	}
+	
+	@RequestMapping(value = "/companyregister", method = RequestMethod.GET )
+	public String showCompanyRegisterPage(Model model){
+		return "user/companyregister.jsp";
 	}
 }

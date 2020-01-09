@@ -52,7 +52,7 @@
 			</div>
 	</section>
 </div>
-<script>
+<script>	
 	function callJobs() {
 		var skill = document.form.input.value;
 		console.log(skill);
@@ -72,18 +72,15 @@
 					x.removeAttr("id");
 					x.addClass("oneCompany");
 					x.find("#jobName").html(result[i]);
-						$(".serchResult").append(x);
-					
+					$(".serchResult").append(x);
 				}
 				$(".oneCompany").show();	
 			},
 			
 			error : function(response) {
 				$("#jobName").html(response);
-			}	
+			}
 		});
 		document.getElementById("serch").innerHTML = "";
 	}
 </script>
-
-

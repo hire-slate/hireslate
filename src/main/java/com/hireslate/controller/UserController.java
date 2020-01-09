@@ -19,7 +19,6 @@ public class UserController {
 	@Autowired 
 	UserService  userService;
 	
-	
 	@RequestMapping(value = "/index" , method = RequestMethod.GET)
 	public String showIndex() {
 		return "user/index.jsp";

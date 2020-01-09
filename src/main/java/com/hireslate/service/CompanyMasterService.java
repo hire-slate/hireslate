@@ -47,7 +47,6 @@ public class CompanyMasterService {
 				msg = "redirect:/user/company/login";
 			}
 		
-		
 		return msg;
 	}
 	
