@@ -2,6 +2,8 @@ package com.hireslate.repository;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -98,5 +100,23 @@ public List<JobMasterEntity> view(){
     	}
     	return jobs;
     }
+
+	public List<List> jobSearchByCompany(String companyId) {
+		String sql = "SELECT job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId+" AND\r\n" + 
+				"job_master.Job_Closing_date > CURRENT_DATE() ";
+		
+		List<String> jobObject = new ArrayList<String>();
+		List<List> jobs = new ArrayList<List>();
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		for(Map<String, Object> row : rows) {
+			jobObject.add((String)row.get("Job_Title"));
+			jobObject.add((String)row.get("Job_Type_Name"));
+			jobObject.add(String.valueOf(row.get("Job_Vacancy")));
+			jobObject.add(df.format(row.get("Job_Closing_Date")));
+			jobs.add(jobObject);
+		}
+		return jobs;
+	}
 	
 }

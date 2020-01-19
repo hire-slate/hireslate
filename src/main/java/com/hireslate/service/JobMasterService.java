@@ -40,5 +40,9 @@ public class JobMasterService {
 	public List<String> searchJobBySkill(String skill){
 		return jobMasterRepository.jobSearch(skill);
 	}
+	
+	public List<List> searchJobByCompany(String companyId){
+		return jobMasterRepository.jobSearchByCompany(companyId);
+	}
 }
 	

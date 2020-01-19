@@ -38,9 +38,10 @@ public class CompanyMasterService {
 	public String doCompanyLogin(String username, String password, HttpServletRequest request) {
 		
 		String msg,companyName;
-			companyName = companyMasterRepository.getCompanyId(username, password).getCompanyName();
-			if(companyName != null) {
-				request.getSession().setAttribute("companyName", companyName);
+		CompanyMasterEntity company = companyMasterRepository.getCompanyId(username, password);
+			if(company != null) {
+				request.getSession().setAttribute("companyId", company.getCompanyId());
+				request.getSession().setAttribute("companyName", company.getCompanyName());
 				msg = "redirect:/admin/dashboard";
 			}
 			else {

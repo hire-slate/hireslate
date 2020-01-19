@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
@@ -138,5 +139,20 @@ public class JobMasterController {
 		}
 		List<String> jobs = jobMasterService.searchJobBySkill(skill);
 		return new Gson().toJson(jobs);
+	}
+	
+	@RequestMapping(value="/searchByCompany", method=RequestMethod.POST,produces= {"application/json"})
+	public @ResponseBody String searchJobsByCompany(Model model,HttpServletRequest request,HttpServletResponse response,@RequestBody String input) {
+		
+		List<List> jobs = jobMasterService.searchJobByCompany(input);
+		JsonArray jobResult = new JsonArray();
+		JsonArray jobsResult = new JsonArray();
+		for(List<String> job : jobs) {
+			for(String jobObject : job) {
+				jobResult.add(jobObject);
+			}
+			jobsResult.add(jobResult);
+		}
+		return new Gson().toJson(jobsResult);
 	}
 }

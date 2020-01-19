@@ -74,8 +74,8 @@ public class CompanyMasterRepository {
 	   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 	   System.out.println(row.get("Company_Name"));
 	   if(row.size() != 0) {
-	   company.setCompanyId((int)row.get("Company_Id"));
-	   company.setCompanyName((String)row.get("Company_Name"));
+		   	company.setCompanyId((int)row.get("Company_Id"));
+		   	company.setCompanyName((String)row.get("Company_Name"));
 	   }
 	   return company;
    }

@@ -67,7 +67,7 @@
 			success : function(result) {
 
 				for (i in result) {
-					console.log(result[i]);
+					//console.log(result[i]);
 					var x = $("#oneCompany").clone();
 					x.removeAttr("id");
 					x.addClass("oneCompany");
