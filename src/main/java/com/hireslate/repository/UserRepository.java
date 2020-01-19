@@ -66,6 +66,8 @@ public class UserRepository {
 	
 	public List<UserEntity> viewUserNameEmployee(){
 		String sql = "select User_Fname,User_Lname,user.User_Id from User RIGHT JOIN employee_master on user.User_Id = employee_master.User_Id ";
+		//String sql = "SELECT jm.Job_Name, cm.Company_Name from skill_master s, job_skill_mapping jsm, job_master jm, company_master "
+				//+ "cm where js.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = cm.Company_Id AND s.Skill_Id = "+skillname+;
 		List<UserEntity> users = new ArrayList<UserEntity>();
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {

@@ -195,7 +195,6 @@
     <strong>Copyright &copy; 2019 <a href="localhost:8080/admin/dashboard">Hireslate</a>.</strong> All rights
     reserved.
   </footer>
-
   <!-- Control Sidebar -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
@@ -203,13 +202,5 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
-
-<script>
- 
-</script>
-
-
-           
 </body>
 </html>

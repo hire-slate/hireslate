@@ -92,14 +92,18 @@ public List<JobMasterEntity> view(){
 	}
     
     public List<String> jobSearch(String skill){
-    	String sql = "SELECT job_master.Job_Title FROM job_master WHERE job_master.Job_Id IN(SELECT job_skill_mapping.Job_Id FROM job_skill_mapping WHERE job_skill_mapping.Skill_Id IN (SELECT skill_master.Skill_Id FROM skill_master WHERE skill_master.Skill_Name like '"+skill+"%'))";
+    	//String sql = "SELECT job_master.Job_Title FROM job_master WHERE job_master.Job_Id IN(SELECT job_skill_mapping.Job_Id FROM job_skill_mapping WHERE job_skill_mapping.Skill_Id IN (SELECT skill_master.Skill_Id FROM skill_master WHERE skill_master.Skill_Name like '"+skill+"%'))";
+    	String sql= "SELECT jm.Job_Name, cm.Company_Name from skill_master s, job_skill_mapping jsm, job_master jm, company_master cm "
+    			+ "where js.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = cm.Company_Id AND s.Skill_Id = (SELECT s.Skill_Id FROM skill_master WHERE s.Skill_Name like '"+skill+"%')";
     	List<String> jobs = new ArrayList<String>();
     	List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
     	for(Map<String,Object> row : rows) {
     		jobs.add((String)row.get("Job_Title"));
+    		jobs.add((String)row.get("Company_Name"));
     	}
     	return jobs;
     }
+
 
 	public List<List> jobSearchByCompany(String companyId) {
 		String sql = "SELECT job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId+" AND\r\n" + 
@@ -117,6 +121,6 @@ public List<JobMasterEntity> view(){
 			jobs.add(jobObject);
 		}
 		return jobs;
-	}
-	
+	}	
 }
+
