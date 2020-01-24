@@ -52,9 +52,9 @@ $(document).ready(function(){
 					}
 						
 		});
-		$(".hid").hide();
+		//$(".hid").hide();
 		
-		$(".sho").css('display','flex');
+	$(".sho").css('display','flex');
 	})
 	
 </script>

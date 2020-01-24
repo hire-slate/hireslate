@@ -44,5 +44,11 @@ public class JobMasterService {
 	public List<List> searchJobByCompany(String companyId){
 		return jobMasterRepository.jobSearchByCompany(companyId);
 	}
+	
+	public long totalJobs() {
+		long totalJobs = jobMasterRepository.totalJobs();
+		totalJobs=totalJobs/5;
+		return totalJobs*5;
+	}
 }
 	

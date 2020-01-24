@@ -14,7 +14,7 @@
 				class="one-forth d-flex align-items-center ftco-animate js-fullheight">
 				<div class="text mt-5">
 					<p class="mb-4 mt-5 pt-5">
-						We have <span class="number" data-number="200000">0</span> great
+						We have <span class="number" data-number="${totalJobs}">${totalJobs}</span>+ great
 						job offers you deserve!
 					</p>
 					<h1 class="mb-5">Largest Job Site In The World</h1>

@@ -29,10 +29,10 @@
 							</div>
 							<div class="job-post-item-body d-block d-md-flex">
 								<div class="mr-3">
-									<span class="icon-layers"></span> <a href="#">Facebook, Inc.</a>
+									<span class="icon-layers"></span> <a href="#" id="companyName"></a>
 								</div>
 								<div>
-									<span class="icon-my_location"></span> <span>Western City, UK</span>
+									<span class="icon-my_location"></span> <span id="cityName"></span>
 								</div>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 			</div>
 	</section>
 </div>
-<script>	
+<script>
 	function callJobs() {
 		var skill = document.form.input.value;
 		console.log(skill);
@@ -66,17 +66,20 @@
 			dataType : "json",
 			success : function(result) {
 
-				for (i in result) {
+				for (i=0; i<result.length;i++) {
 					//console.log(result[i]);
 					var x = $("#oneCompany").clone();
 					x.removeAttr("id");
 					x.addClass("oneCompany");
 					x.find("#jobName").html(result[i]);
+					i++;
+					x.find("#companyName").html(result[i]);
+					i++;
+					x.find("#cityName").html(result[i]);
 					$(".serchResult").append(x);
 				}
-				$(".oneCompany").show();	
+				$(".oneCompany").show();
 			},
-			
 			error : function(response) {
 				$("#jobName").html(response);
 			}

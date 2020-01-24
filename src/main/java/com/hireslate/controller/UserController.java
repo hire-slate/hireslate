@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hireslate.service.JobMasterService;
 import com.hireslate.service.UserService;
 
 @Controller
@@ -18,9 +19,12 @@ public class UserController {
 	
 	@Autowired 
 	UserService  userService;
+	@Autowired
+	JobMasterService jobMasterService;
 	
 	@RequestMapping(value = "/index" , method = RequestMethod.GET)
-	public String showIndex() {
+	public String showIndex(HttpServletRequest request) {
+		request.setAttribute("totalJobs",jobMasterService.totalJobs());
 		return "user/index.jsp";
 	}
 	

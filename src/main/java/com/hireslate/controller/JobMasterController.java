@@ -40,7 +40,6 @@ public class JobMasterController {
 	@Autowired
 	JobSkillMappingService jobSkillMappingService;
 	
-	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String showJobMaster(Model model) {
 		List<JobMasterEntity> jobMaster = jobMasterService.viewJobMaster();

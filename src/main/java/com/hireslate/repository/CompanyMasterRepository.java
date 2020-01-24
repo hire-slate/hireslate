@@ -69,7 +69,7 @@ public class CompanyMasterRepository {
 	   CompanyMasterEntity company = new CompanyMasterEntity();
 	   System.out.println(username);
 	   System.out.println(password);
-	   String sql = "select Company_Id,Company_Name from company_master where Company_Website = '"+username+"' and Company_Password ='"+password+"'"; 
+	   String sql = "select Company_Id,Company_Name from company_master where Company_Website = '"+username+"' and Company_Password ='"+password+"'";
 	   System.out.println(sql);
 	   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 	   System.out.println(row.get("Company_Name"));
