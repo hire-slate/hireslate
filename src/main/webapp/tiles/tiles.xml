@@ -126,5 +126,9 @@
 	<!--  test modules -->
 	
 	
+	<!--  job stages -->
+	<definition name="job-stages/steps.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/job-stages/steps.jsp"/>
+	</definition>
 	
 </tiles-definitions>	
