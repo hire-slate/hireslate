@@ -53,14 +53,13 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	      	    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	      	  <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="candidates.html" class="nav-link">Canditates</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Applied History</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta mr-md-1"><a onclick="document.getElementById('login').style.display='block'" class="nav-link">Login</a></li>
 	          <li class="nav-item cta cta-colored"><a href="/user/register" class="nav-link">Register</a></li>
-
 	        </ul>
 	      </div>
 	    </div>

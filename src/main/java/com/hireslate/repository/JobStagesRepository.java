@@ -15,7 +15,7 @@ import com.hireslate.model.JobStagesEntity;
 public class JobStagesRepository {
 
 	@Autowired
-	JdbcTemplate jdbcTemplate; 
+	JdbcTemplate jdbcTemplate;
 	
 	public List<JobStagesEntity> view(){
 		

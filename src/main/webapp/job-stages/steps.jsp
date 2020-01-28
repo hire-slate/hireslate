@@ -326,13 +326,7 @@
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
-
-
 	<script>
-		
 	</script>
-
-
-
 </body>
 </html>

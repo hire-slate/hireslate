@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <div class="hero-wrap js-fullheight">
 	<div class="overlay"></div>
 	<section class="ftco-section bg-light">
@@ -13,7 +12,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="serchResult" id="serch">
+			<div style="overflow:scroll !important" class="serchResult" id="serch">
 			</div>
 		   <div id="oneCompany">
 			<div class="col-md-12 ftco-animate" >

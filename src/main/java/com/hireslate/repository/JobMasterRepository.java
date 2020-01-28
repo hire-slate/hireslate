@@ -125,11 +125,9 @@ public List<JobMasterEntity> view(){
 	}	
 	
 	public long totalJobs() {
-		String sql ="select COUNT(Job_Id) from job_master";
-		
+		String sql ="select COUNT(Job_Id) from job_master";		
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 		long totalJobs = (long)row.get("COUNT(Job_Id)");
 		return totalJobs;
 	}
 }
-
