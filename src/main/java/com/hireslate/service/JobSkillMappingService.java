@@ -15,8 +15,15 @@ public class JobSkillMappingService{
 	@Autowired
 	JobSkillMappingRepository jobSkillMappingRepository;
 	
-	public void insertJobSkillMapping(JobSkillMappingEntity jobSkillMappingEntity) {
-		jobSkillMappingRepository.insert(jobSkillMappingEntity);
+	public void insertJobSkillMapping(int jobId,int[] jobSkills) {
+		JobSkillMappingEntity jobSkillMappingEntity; 
+		for(int skill: jobSkills) {
+			jobSkillMappingEntity = new JobSkillMappingEntity();
+			jobSkillMappingEntity.setJobId(jobId);
+			jobSkillMappingEntity.setSkillId(skill);
+			jobSkillMappingRepository.insert(jobSkillMappingEntity);
+		}
+		
 	}
 	
 	public List<Map<String,Object>> searchJobBySKill(){

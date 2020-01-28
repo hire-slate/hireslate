@@ -62,7 +62,8 @@ public class JobMasterController {
 			@RequestParam("jobDescription")String jobDescription,@RequestParam("jobBenefits")String jobBenefits,
 			@RequestParam("jobVacancy")int jobVacancy,@RequestParam("jobOpeningDate")String jobOpeningDateString,
 			@RequestParam("jobClosingDate")String jobClosingDateString,
-			@RequestParam("jobTypeId")int jobTypeId,HttpServletRequest request){
+			@RequestParam("jobTypeId")int jobTypeId,
+			@RequestParam("jobSkills")int[] jobSkills,HttpServletRequest request){
 		
 		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
 		Date jobClosingDate = Date.valueOf(jobClosingDateString);
@@ -78,7 +79,8 @@ public class JobMasterController {
 		job.setJobOpeningDate(jobOpeningDate);
 		job.setJobCompanyId((int)session.getAttribute("companyId"));
 		int jobId = jobMasterService.insertJobMasterAndGetID(job);
-		
+		jobSkillMappingService.insertJobSkillMapping(jobId, jobSkills);
+	
 		
 		return "redirect:/admin/job-master";
 	}

@@ -34,7 +34,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="skillName">Job Type</label> 
-									<select class="form-control select2" name="jobTypeId" style="width: 100%;">
+									<select class="form-control select2" id="jobTypeId" name="jobTypeId" style="width: 100%;">
 										<c:forEach items="${jobType}" var="variable">
 											<option value="${variable.jobTypeId}">${variable.jobTypeName}</option>
 										</c:forEach>
@@ -141,6 +141,9 @@
 <script>
 	$(document).ready(function() {
 		$('.select2').select2();
+		$("#jobTypeId option").filter(function(){
+			return ($(this).val().equals(${jobEntity.jobTypeId}))
+		}).prop('selected',true);
 	});
 
 	
