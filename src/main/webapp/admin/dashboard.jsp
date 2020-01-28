@@ -32,6 +32,7 @@
 
 var companyId = $("#companyId").val();
 //$(".sho").show();
+//$(".hid").hide();
 $(document).ready(function(){
 		$.ajax({
 			type : 'POST',
@@ -42,8 +43,8 @@ $(document).ready(function(){
 			success: function(result){
 						var arr = $.parseJSON(result);
 						var x = $(".box").clone();
-						x.removeClass("hid");
-						x.addClass("sho");
+						//x.removeClass("hid");
+						//x.addClass("sho");
 						x.find(".jobTitle").append(arr[0][0]);
 						x.find(".jobType").html(arr[0][1]);
 						x.find(".jobClosingDate").html(arr[0][2]);
@@ -52,9 +53,8 @@ $(document).ready(function(){
 					}
 						
 		});
-		//$(".hid").hide();
 		
-	$(".sho").css('display','flex');
+		//$(".hid:second").css('display','flex');
 	})
 	
 </script>

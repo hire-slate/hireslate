@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,10 +62,11 @@ public class JobMasterController {
 			@RequestParam("jobDescription")String jobDescription,@RequestParam("jobBenefits")String jobBenefits,
 			@RequestParam("jobVacancy")int jobVacancy,@RequestParam("jobOpeningDate")String jobOpeningDateString,
 			@RequestParam("jobClosingDate")String jobClosingDateString,
-			@RequestParam("jobTypeId")int jobTypeId){
+			@RequestParam("jobTypeId")int jobTypeId,HttpServletRequest request){
 		
 		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
 		Date jobClosingDate = Date.valueOf(jobClosingDateString);
+		HttpSession session = request.getSession();
 		JobMasterEntity job = new JobMasterEntity();
 		job.setJobBenefits(jobBenefits);
 		job.setJobDescription(jobDescription);
@@ -74,7 +76,7 @@ public class JobMasterController {
 		job.setJobVacancy(jobVacancy);
 		job.setJobClosingDate(jobClosingDate);
 		job.setJobOpeningDate(jobOpeningDate);
-		job.setJobCompanyId(1);
+		job.setJobCompanyId((int)session.getAttribute("companyId"));
 		int jobId = jobMasterService.insertJobMasterAndGetID(job);
 		
 		
@@ -112,7 +114,6 @@ public class JobMasterController {
 		job.setJobVacancy(jobVacancy);
 		job.setJobClosingDate(jobClosingDate);
 		job.setJobOpeningDate(jobOpeningDate);
-		job.setJobCompanyId(1);
 		job.setJobId(jobId);
 		jobMasterService.updateJobMaster(job);
 		return "redirect:/admin/job-master";
