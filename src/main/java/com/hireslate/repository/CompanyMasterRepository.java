@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -67,15 +68,14 @@ public class CompanyMasterRepository {
     
    public CompanyMasterEntity getCompanyId(String username, String password) {
 	   CompanyMasterEntity company = new CompanyMasterEntity();
-	   System.out.println(username);
-	   System.out.println(password);
 	   String sql = "select Company_Id,Company_Name from company_master where Company_Website = '"+username+"' and Company_Password ='"+password+"'";
-	   System.out.println(sql);
-	   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
-	   System.out.println(row.get("Company_Name"));
-	   if(row.size() != 0) {
-		   	company.setCompanyId((int)row.get("Company_Id"));
-		   	company.setCompanyName((String)row.get("Company_Name"));
+	   try{
+		   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+		   company.setCompanyId((int)row.get("Company_Id"));
+		   company.setCompanyName((String)row.get("Company_Name"));
+	   }
+	   catch(EmptyResultDataAccessException e) {
+		   company = null;
 	   }
 	   return company;
    }

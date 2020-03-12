@@ -64,6 +64,7 @@ public class CompanyMasterController {
 	public String doLogin(@RequestParam("companyUsername") String username,@RequestParam("companyPassword") String password,HttpServletRequest request) {
 		String msg;
 		msg = companyMasterService.doCompanyLogin(username,password,request);
+		System.out.println(msg);
 		return msg;
 	}
 	
