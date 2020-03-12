@@ -41,6 +41,7 @@ $(document).ready(function(){
 			dataType: 'text',
 			contentType : 'application/json; charset=utf-8',
 			success: function(result){
+						//console.log(result);
 						var arr = $.parseJSON(result);
 						var x = $(".box").clone();
 						//x.removeClass("hid");

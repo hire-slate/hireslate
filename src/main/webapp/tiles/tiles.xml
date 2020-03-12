@@ -14,14 +14,17 @@
 		<put-attribute	name="content" value="" />
 	</definition> 
 	
+	<definition name="empty" template="/template/empty.jsp">
+		<put-attribute name = "emptyContent" value = ""/>
+	</definition>
+	
 	<definition name="admin/dashboard.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/admin/dashboard.jsp"/>
 	</definition>
 	
-	<definition name="admin/login.jsp" extends="mytemplate">
-		<put-attribute name="content" value= "/admin/login.jsp"/>
+	<definition name="admin/login.jsp" extends="empty">
+		<put-attribute name="emptyContent" value= "/admin/login.jsp"/>
 	</definition>
-	
 	
 	<definition name="user/index.jsp" extends = "frontend">
 		<put-attribute name="frontendContent" value="/user/index.jsp"></put-attribute>

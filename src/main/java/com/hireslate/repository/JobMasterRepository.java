@@ -102,13 +102,12 @@ public List<JobMasterEntity> view(){
     		jobs.add((String)row.get("Job_Title"));
     		jobs.add((String)row.get("Company_Name"));
     		jobs.add((String)row.get("Company_City"));
-    	}
+       	}
     	return jobs;
     }
 
 	public List<List> jobSearchByCompany(String companyId) {
-		String sql = "SELECT job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId+" AND\r\n" + 
-				"job_master.Job_Closing_date > CURRENT_DATE() ";
+		String sql = "SELECT job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId;
 		
 		List<String> jobObject = new ArrayList<String>();
 		List<List> jobs = new ArrayList<List>();

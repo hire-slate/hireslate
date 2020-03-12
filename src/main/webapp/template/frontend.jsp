@@ -42,12 +42,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/frontend/cregister/css/style.css"/>
       
   	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.min.js"></script>
-  
- 		
- 
-  
-  
-  </head>
+   </head>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -209,20 +204,21 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/popper.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/bootstrap.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.easing.1.3.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.stellar.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.magnific-popup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/aos.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.animateNumber.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/scrollax.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/google-map.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/main.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/animsition.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/frontend/js/mainLogin.js"></script>
   </body>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery-migrate-3.0.1.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/popper.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/bootstrap.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.easing.1.3.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.waypoints.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.stellar.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/owl.carousel.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.magnific-popup.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/aos.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/jquery.animateNumber.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/scrollax.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/google-map.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/main.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/animsition.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/resources/frontend/js/mainLogin.js"></script>
+  
 </html>
