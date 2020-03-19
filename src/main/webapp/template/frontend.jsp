@@ -54,7 +54,7 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>      	 
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home1</a></li>      	 
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="candidates.html" class="nav-link">Candidates</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
@@ -172,7 +172,7 @@
                 <li><a href="#" class="py-2 d-block">Register</a></li>
                 <li><a href="#" class="py-2 d-block">Post Your Skills</a></li>
                 <li><a href="#" class="py-2 d-block">Job Search</a></li>
-                <li><a href="#" class="py-2 d-block">Emploer Search</a></li>
+                <li><a href="#" class="py-2 d-block">Employer Search</a></li>
               </ul>
             </div>
           </div>

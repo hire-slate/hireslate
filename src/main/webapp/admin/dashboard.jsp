@@ -52,7 +52,6 @@ $(document).ready(function(){
 						x.find(".jobVacancy").html(arr[0][3]);
 						$(".content").append(x);
 					}
-						
 		});
 		
 		//$(".hid:second").css('display','flex');

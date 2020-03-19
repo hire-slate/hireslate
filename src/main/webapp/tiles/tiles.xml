@@ -130,7 +130,7 @@
 	
 	
 	<!--  job stages -->
-	<definition name="job-stages/steps.jsp" extends="mytemplate">
+	<definition name="job-stages/steps.jsp" extends="empty">
 		<put-attribute name="content" value= "/admin/job-stages/steps.jsp"/>
 	</definition>
 	
