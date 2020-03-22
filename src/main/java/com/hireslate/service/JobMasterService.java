@@ -1,6 +1,7 @@
 package com.hireslate.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,10 +42,13 @@ public class JobMasterService {
 		return jobMasterRepository.jobSearch(skill);
 	}
 	
-	public List<List> searchJobByCompany(String companyId){
+//	public List<List> searchJobByCompany(String companyId){
+//		return jobMasterRepository.jobSearchByCompany(companyId);
+//	}
+	
+	public List<Map<String,Object>> searchJobByCompany(String companyId){
 		return jobMasterRepository.jobSearchByCompany(companyId);
 	}
-	
 	public long totalJobs() {
 		long totalJobs = jobMasterRepository.totalJobs();
 		totalJobs=totalJobs/5;

@@ -13,7 +13,7 @@ public class JobCandidateMappingRepository {
 	JdbcTemplate jdbcTemplate;
 	
 	public void insert(JobCandidateMappingEntity jobCandidateMappingEntity) {
-		String sql = "INSERT INTO `job_candidate_mapping`(`Job_Id`, `User_Id`, `Job_Current_Stage`, `Job_Current_Salary`, "
+	String sql = "INSERT INTO `job_candidate_mapping`(`Job_Id`, `User_Id`, `Job_Current_Stage`, `Job_Current_Salary`, "
 				+ "`Job_Expected_Salary`, `Job_Change_Reason`) VALUES ("+jobCandidateMappingEntity.getJobId()+","+jobCandidateMappingEntity.getUserId()+","
 						+jobCandidateMappingEntity.getJobCurrentStage()+","+jobCandidateMappingEntity.getJobCurrentSalary()+","+jobCandidateMappingEntity.getJobExpectedSalary()+
 						",'"+jobCandidateMappingEntity.getJobChangeReason()+"')";

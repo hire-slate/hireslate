@@ -2,6 +2,7 @@ package com.hireslate.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
@@ -146,15 +150,26 @@ public class JobMasterController {
 	@RequestMapping(value="/searchByCompany", method=RequestMethod.POST,produces= {"application/json"})
 	public @ResponseBody String searchJobsByCompany(Model model,HttpServletRequest request,HttpServletResponse response,@RequestBody String input) {
 		
-		List<List> jobs = jobMasterService.searchJobByCompany(input);
-		JsonArray jobResult = new JsonArray();
-		JsonArray jobsResult = new JsonArray();
-		for(List<String> job : jobs) {
-			for(String jobObject : job) {
-				jobResult.add(jobObject);
-			}
-			jobsResult.add(jobResult);
+		//List<List> jobs = job.MasterService.searchJobByCompany(input);
+		List<Map<String,Object>> jobs = jobMasterService.searchJobByCompany(input);
+//		JsonArray jobResult = new JsonArray();
+//		JsonArray jobsResult = new JsonArray();
+//		for(List<String> job : jobs) {
+//			for(String jobObject : job) {
+//				jobResult.add(jobObject);
+//			}
+//			jobsResult.add(jobResult);
+//		}
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = null;
+		try {
+			json = objectMapper.writeValueAsString(jobs);
+		} catch (JsonProcessingException e) {
+			
+			e.printStackTrace();
 		}
-		return new Gson().toJson(jobsResult);
+		
+		return json;
 	}
 }

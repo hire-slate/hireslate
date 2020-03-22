@@ -1,38 +1,60 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <section class="content">
-
-	<input type= "hidden" id="companyId" value="${sessionScope.companyId}"/> 
-<div class="box hid" >
-		<div class="box-body" >
-		
-				<div class="row">
-						<div class= "col-md-12 jobTitle">
-    					</div>
-				</div>
-				<div class="row">
-						<div class="col-md-12 jobType">
-						</div>
-				</div>
-				<div class="row">
-						<div class= "col-md-12 jobClosingDate">
-						</div>
-				</div>
-				<div class="row">
-						<div class="col-md-12 jobVacancy">
-						</div>
-				</div>
-		</div>
-	</div>
-	
 </section>
+	<input type= "hidden" id="companyId" value="${sessionScope.companyId}"/> 
+	
+	   <div class="col-md-6 hid" style="display: none">
+          <div class="box box-default collapsed-box">
+            <div class="box-header with-border">
+              	<h2 class="box-title"></h2>
+				
+              <div class="box-tools pull-right" style ="padding: 10px">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             
+				<div class="row">
+					
+						<div class="col-md-3">
+							<div class="box-title" style="padding-left: 10px"><b>Job Type: </b></div>
+						</div>
+						<div class="col-md-9 jobType">
+						</div>
+				</div>
+				<div class="row">
+						<div class= "col-md-3">
+							<div class="box-title" style="padding-left: 10px"><b>Closing Date: </b></div>
+						</div>
+						<div class= "col-md-9 jobClosingDate">
+							
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-md-3">
+							<div class="box-title" style="padding-left: 10px"><b>Vacancy: </b></div>
+						</div>
+						<div class="col-md-9 jobVacancy">
+						
+						</div>
+				</div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
 
 
 <script>
 
 var companyId = $("#companyId").val();
-//$(".sho").show();
-//$(".hid").hide();
+var today = new Date();
+console.log(today);
 $(document).ready(function(){
 		$.ajax({
 			type : 'POST',
@@ -41,20 +63,23 @@ $(document).ready(function(){
 			dataType: 'text',
 			contentType : 'application/json; charset=utf-8',
 			success: function(result){
-						//console.log(result);
 						var arr = $.parseJSON(result);
-						var x = $(".box").clone();
-						//x.removeClass("hid");
-						//x.addClass("sho");
-						x.find(".jobTitle").append(arr[0][0]);
-						x.find(".jobType").html(arr[0][1]);
-						x.find(".jobClosingDate").html(arr[0][2]);
-						x.find(".jobVacancy").html(arr[0][3]);
-						$(".content").append(x);
+					
+						for(y in arr){
+							var x = $(".hid").clone();
+							x.removeClass("hid");
+							x.css("display","flex");
+							x.find("h2.box-title").css("padding","10px")
+							x.find("h2.box-title").append(arr[y]["Job_Title"]);
+							x.find(".jobType").append(arr[y]["Job_Type_Name"]);
+							var date = new Date(arr[y]["Job_Closing_date"]);
+							closingDays = Math.floor((date - today)/(60*24*60*1000));
+							x.find(".jobClosingDate").append(date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear());
+							x.find(".jobVacancy").append(arr[y]["Job_Vacancy"]);
+							$(".content").append(x);
+						}
 					}
 		});
-		
-		//$(".hid:second").css('display','flex');
 	})
 	
 </script>
