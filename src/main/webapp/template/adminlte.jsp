@@ -16,7 +16,7 @@
 	href="${pageContext.request.contextPath}/resources/dist/css/skins/jquery.dataTables.min.css">
 
 <!-- Bootstrap 3.3.7 -->
-<link rel="stylesheet"
+ <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
 

@@ -1,60 +1,60 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<section class="content">
-</section>
-	<input type= "hidden" id="companyId" value="${sessionScope.companyId}"/> 
-	
-	   <div class="col-md-6 hid" style="display: none">
-          <div class="box box-default collapsed-box">
-            <div class="box-header with-border">
-              	<h2 class="box-title"></h2>
+<section class="content"></section>
+<input type="hidden" id="companyId" value="${sessionScope.companyId}" />
+
+<div class="col-md-6 hid" style="display: none">
+	<div class="box box-default collapsed-box">
+		<div class="box-header with-border">
+			<h2 class="box-title"></h2>
+
+			<div class="box-tools pull-right" style="padding: 10px">
+				<button type="button" class="btn btn-box-tool" data-toggle="collapse" data-parent=".collapsed-box">
+					<i class="fa fa-plus"></i>
+				</button>
 				
-              <div class="box-tools pull-right" style ="padding: 10px">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-             
-				<div class="row">
-					
-						<div class="col-md-3">
-							<div class="box-title" style="padding-left: 10px"><b>Job Type: </b></div>
-						</div>
-						<div class="col-md-9 jobType">
-						</div>
+			</div>
+		</div>
+		<div class="collapse">
+		<div class="box-body">
+
+			<div class="row">
+
+				<div class="col-md-3">
+					<div class="box-title" style="padding-left: 10px">
+						<b>Job Type: </b>
+					</div>
 				</div>
-				<div class="row">
-						<div class= "col-md-3">
-							<div class="box-title" style="padding-left: 10px"><b>Closing Date: </b></div>
-						</div>
-						<div class= "col-md-9 jobClosingDate">
-							
-						</div>
+				<div class="col-md-9 jobType"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="box-title" style="padding-left: 10px">
+						<b>Closing Date: </b>
+					</div>
 				</div>
-				<div class="row">
-						<div class="col-md-3">
-							<div class="box-title" style="padding-left: 10px"><b>Vacancy: </b></div>
-						</div>
-						<div class="col-md-9 jobVacancy">
-						
-						</div>
+				<div class="col-md-9 jobClosingDate"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="box-title" style="padding-left: 10px">
+						<b>Vacancy: </b>
+					</div>
 				</div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
+				<div class="col-md-9 jobVacancy"></div>
+			</div>
+		</div>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
 
 
 
 <script>
-
 var companyId = $("#companyId").val();
 var today = new Date();
-console.log(today);
 $(document).ready(function(){
 		$.ajax({
 			type : 'POST',
@@ -76,10 +76,14 @@ $(document).ready(function(){
 							closingDays = Math.floor((date - today)/(60*24*60*1000));
 							x.find(".jobClosingDate").append(date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear());
 							x.find(".jobVacancy").append(arr[y]["Job_Vacancy"]);
+							x.find(".collapse").attr("id","boxData"+y+"");
+							x.find(".btn-box-tool").attr("href","#boxData"+y+"");
 							$(".content").append(x);
 						}
 					}
 		});
+
+				
 	})
 	
 </script>
