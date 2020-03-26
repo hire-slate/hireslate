@@ -304,9 +304,6 @@
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 
-			<header class="header">
-  <h1 class="header__title">Multi Steps Form Animations</h1>
-</header>
 <div class="content">
   <div class="content__inner">
     <div class="container">
