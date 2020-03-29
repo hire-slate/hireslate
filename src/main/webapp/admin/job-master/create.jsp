@@ -26,9 +26,8 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="skillName">Job Title</label> <input type="text"
-										class="form-control" name="jobTitle"
-										placeholder="Enter Job Name">
+									<label for="skillName">Job Title</label>
+									 <input type="text" class="form-control" name="jobTitle" placeholder="Enter Job Name">
 								</div>
 							</div>
 
@@ -129,7 +128,7 @@
 						</div>
 
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Create</button>
+							<button type="submit" class="btn btn-primary">Create Steps</button>
 							<button type="button" class="btn btn-danger">Cancel</button>
 						</div>
 					</div>

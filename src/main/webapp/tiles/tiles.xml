@@ -134,4 +134,7 @@
 		<put-attribute name="content" value= "/admin/job-stages/steps.jsp"/>
 	</definition>
 	
+	<definition name="admin/job-stages/create.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/job-stages/create.jsp"/>
+	</definition>
 </tiles-definitions>	

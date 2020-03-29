@@ -19,4 +19,9 @@ public class JobStagesController{
 		//model.addAttribute("jobMaster",jobMaster);
 		return "/job-stages/steps.jsp";
 	}
+	
+	@RequestMapping(value="/create/form",method=RequestMethod.GET)
+	public String showCreateJobMasterForm(Model model) {
+		return "admin/job-stages/create.jsp";
+	}
 }
