@@ -86,7 +86,7 @@ public class JobMasterController {
 		jobSkillMappingService.insertJobSkillMapping(jobId, jobSkills);
 	
 		
-		return "redirect:/admin/job-master";
+		return "redirect:/admin/job-steps/create/form/"+jobId;
 	}
 	
 	@RequestMapping(value="/edit/{id}",method=RequestMethod.GET)
@@ -99,7 +99,7 @@ public class JobMasterController {
 		model.addAttribute("skill",skills);
 		model.addAttribute("jobEntity", jobEntity);
 		
-		return "admin/job-master/update.jsp";
+		return "admin/job-master/update.jsp"; 
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)

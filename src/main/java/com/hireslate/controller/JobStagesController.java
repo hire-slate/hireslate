@@ -1,27 +1,65 @@
 package com.hireslate.controller;
 
+import java.sql.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.hireslate.model.JobMasterEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.hireslate.model.JobStagesEntity;
+import com.hireslate.service.JobStagesService;
 
 @Controller
 @RequestMapping(value="admin/job-steps")
+
 public class JobStagesController{
+	
+	@Autowired
+	JobStagesService jobStagesService;
+
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String showJobStages(Model model) {
-		//List<JobMasterEntity> jobMaster = jobMasterService.viewJobMaster();
-		//model.addAttribute("jobMaster",jobMaster);
 		return "/job-stages/steps.jsp";
 	}
 	
-	@RequestMapping(value="/create/form",method=RequestMethod.GET)
-	public String showCreateJobMasterForm(Model model) {
+	@RequestMapping(value="/create/form/{id}",method=RequestMethod.GET)
+	public String showCreateJobStepForm(Model model,@PathVariable("id")int id) {
+		model.addAttribute("jobId",id);
+		List<JobStagesEntity> jobStages = jobStagesService.viewJobStages(id);
+		model.addAttribute("jobStages",jobStages);
 		return "admin/job-stages/create.jsp";
+	}
+	
+	@RequestMapping(value="create/{id}",method=RequestMethod.POST)
+	public String createJobStep(Model model,@PathVariable("id")int id,@RequestParam( "submit")String submit,@RequestParam("jobStepName")String jobStageName,
+			@RequestParam("jobStepDates")Object jobStageDateRange) {
+		String msg = "";
+		JobStagesEntity jobStagesEntity = new JobStagesEntity();
+		
+		if(submit.equals("save")) {
+			String jobStageDate = (String)jobStageDateRange;
+			String[] jobStageDates = jobStageDate.split(" - ");
+			Date jobStageOpening	= Date.valueOf(jobStageDates[0]);
+			Date jobStageClosing	= Date.valueOf(jobStageDates[1]);
+			jobStagesEntity.setJobId(id);
+			jobStagesEntity.setStageName(jobStageName);
+			jobStagesEntity.setStageStartDate(jobStageOpening);
+			jobStagesEntity.setStageEndDate(jobStageClosing);
+			jobStagesService.insertJobStages(jobStagesEntity);
+			model.addAttribute("jobId",id);
+			List<JobStagesEntity> jobStages = jobStagesService.viewJobStages(id);
+			model.addAttribute("jobStages",jobStages);
+			msg = "admin/job-stages/create.jsp";
+		}
+		else {
+			
+			msg = "redirect:/admin/dashboard"; 
+		}
+		return msg;
 	}
 }

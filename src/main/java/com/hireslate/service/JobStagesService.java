@@ -14,8 +14,8 @@ public class JobStagesService {
 	@Autowired
 	JobStagesRepository jobStagesRepository;
 	
-	public List<JobStagesEntity> viewJobStages(){
-		return jobStagesRepository.view();
+	public List<JobStagesEntity> viewJobStages(int jobId){
+		return jobStagesRepository.viewByJobId(jobId);
 	}
 	
 	public JobStagesEntity viewByIdJobStages(int id) {

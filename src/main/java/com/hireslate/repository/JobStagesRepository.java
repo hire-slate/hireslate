@@ -35,10 +35,27 @@ public class JobStagesRepository {
 		return jobStages;
 	}
 	
+	public List<JobStagesEntity> viewByJobId(int jobId){
+		String sql = "SELECT * FROM `job_stages` WHERE `job_stages`.`Job_Id` = "+jobId+" ORDER BY job_stages.Stage_StartDate";
+		List <JobStagesEntity> jobStages = new ArrayList<JobStagesEntity>();
+		List<Map<String,Object>> stages = jdbcTemplate.queryForList(sql);
+		
+		for(Map<String,Object> stage : stages) {
+			JobStagesEntity jobStage = new JobStagesEntity();
+			jobStage.setStageName((String)stage.get("Stage_Name"));
+			jobStage.setStageStartDate((Date)stage.get("Stage_StartDate"));
+			jobStage.setStageEndDate((Date)stage.get("Stage_EndDate"));
+			jobStage.setJobId((int)stage.get("Job_Id"));
+			//jobStage.setNextStage((int)stage.get("Next_Stage"));
+			jobStages.add(jobStage);
+		}
+		return jobStages;
+	}
+	
 	public void insert(JobStagesEntity jobStage) {
 		
-		String sql = "insert into INSERT INTO `job_stages`(`Stage_Name`, `Stage_StartDate`, `Stage_EndDate`, `Job_Id`, "
-				+ "`Next_Stage`) VALUES ('"+jobStage.getStageName()+"','"+jobStage.getStageStartDate()+"','"+jobStage.getStageEndDate()+"',"+jobStage.getJobId()
+		String sql = "INSERT INTO `job_stages` (`Stage_Name`, `Stage_StartDate`, `Stage_EndDate`, `Job_Id`) "+
+		"VALUES ('"+jobStage.getStageName()+"','"+jobStage.getStageStartDate()+"','"+jobStage.getStageEndDate()+"',"+jobStage.getJobId()
 				+")";
 		jdbcTemplate.execute(sql);
 	}
