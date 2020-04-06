@@ -12,6 +12,7 @@
 	<groupId>com.hireslate</groupId>
 	<artifactId>hireslate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>hireslate</name>
 	<description>final project</description>
 
@@ -87,6 +88,11 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>3.0.8</version>
 		</dependency>
+		<dependency>
+        <groupId>org.apache.tiles</groupId>
+        <artifactId>tiles-extras</artifactId>
+        <version>3.0.5</version>
+    </dependency>
 
 		<dependency>
 			<groupId>org.scala-lang</groupId>
@@ -104,6 +110,12 @@
 			<artifactId>spring-session-jdbc</artifactId>
 		</dependency>
 		
+		<dependency> 
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-tomcat</artifactId>         
+   <scope>provided</scope> 
+ </dependency>
+		
 		
 	</dependencies>
 
@@ -114,6 +126,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>hireslate</finalName>
 	</build>
 
 </project>
