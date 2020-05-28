@@ -1,8 +1,11 @@
 package com.hireslate.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,16 @@ import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CandidateMasterService;
 import com.hireslate.service.UserService;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 
 @Controller
 @RequestMapping(value="/user")
@@ -22,6 +35,14 @@ public class CandidateMasterController {
 	UserService userService;
 	@Autowired
 	CandidateMasterService candidateMasterService;
+	@Value("$aws.accessToken")
+	private String accessToken;
+	@Value("$aws.secretKey")
+	private String secretKey;
+	@Value("$aws.bucket")
+	private String bucket;
+	@Value("$aws.url")
+	private String awsUrl;
 	
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
 	public String showCandidateRegisterForm() {
@@ -72,6 +93,23 @@ public class CandidateMasterController {
 		candidate.setCandidateGithub(github);
 		candidateMasterService.insertCandidateMaster(candidate);
 		System.out.println("value inserted");
+		
+		AWSCredentials credentials = new BasicAWSCredentials(accessToken,secretKey);
+		
+		AmazonS3 s3client = AmazonS3ClientBuilder
+				  .standard()
+				  .withCredentials(new AWSStaticCredentialsProvider(credentials))
+				  .withRegion(Regions.AP_SOUTH_1)
+				  .build();
+		
+		String folderName = ""+userId;
+		//CommonService.createFolder(bucket, folderName, s3client,"/");
+		ObjectMetadata metadata = new ObjectMetadata();
+		metadata.setContentLength(0);
+		InputStream emptyContent = new ByteArrayInputStream(new byte[0]);
+		PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, folderName, emptyContent,metadata);
+		s3client.putObject(putObjectRequest);
+		
 		return "redirect:/user/register";
 		
 	}
