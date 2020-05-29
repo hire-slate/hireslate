@@ -111,8 +111,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
-	public String editProfile() {
+	public String editProfile(HttpServletRequest request,HttpServletResponse response) {
 		return "/user/editprofile.jsp";
+	}
+	
+	@RequestMapping(value="/updatebasic", method=RequestMethod.POST)
+	public String updateBasic(HttpServletRequest request,HttpServletResponse response) {
+		return "";
 	}
 	
 	@RequestMapping(value="/uploadresume", method=RequestMethod.POST)
@@ -121,7 +126,7 @@ public class UserController {
 		
 		 if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-	            return "redirect:uploadStatus";
+	            return "";
 	        }
 		
 		String userId = (String) request.getSession().getAttribute("userId");

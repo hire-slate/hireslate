@@ -137,10 +137,9 @@
 	
 	<!--  test modules -->
 	
-	
 	<!--  job stages -->
 	<definition name="job-stages/steps.jsp" extends="empty">
-		<put-attribute name="content" value= "/admin/job-stages/steps.jsp"/>
+		<put-attribute name="emptyContent" value= "/admin/job-stages/steps.jsp"/>
 	</definition>
 	
 	<definition name="admin/job-stages/create.jsp" extends="mytemplate">
@@ -151,5 +150,5 @@
 	<definition name="user/editprofile.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/user/editprofile.jsp"/>
 	</definition>
-	
-</tiles-definitions>	
+
+</tiles-definitions>
