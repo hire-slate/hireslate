@@ -110,6 +110,11 @@ public class UserController {
 		return "";
 	}
 	
+	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
+	public String editProfile() {
+		return "/user/editprofile.jsp";
+	}
+	
 	@RequestMapping(value="/uploadresume", method=RequestMethod.POST)
 	public String uploadResume(@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes, HttpServletRequest request,HttpServletResponse response) {

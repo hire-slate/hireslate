@@ -146,4 +146,10 @@
 	<definition name="admin/job-stages/create.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/admin/job-stages/create.jsp"/>
 	</definition>
+	
+	<!-- edit profile -->
+	<definition name="user/editprofile.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/user/editprofile.jsp"/>
+	</definition>
+	
 </tiles-definitions>	
