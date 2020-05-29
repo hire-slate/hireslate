@@ -33,17 +33,14 @@ public class UserService {
 	
 	}
 	
-	public int doLogin(String username, String password) {
-		
-		int result;
-		try {
-		Map<String,Object> row = userRepository.getUserId(username, password);
-		result = (int)row.get("User_Id");
+	public UserEntity doLogin(String username, String password) {
+	
+		UserEntity user = new UserEntity();
+		user = userRepository.getUser(username, password);
+		if(user.getUserId() == 0) {
+			user = null;
 		}
-		catch(Exception e) {
-		result = -1;
-		}
-		return result;
+		return user;
 	}
 	
 	public List<UserEntity> viewUser(){

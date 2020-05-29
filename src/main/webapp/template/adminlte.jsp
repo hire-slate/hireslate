@@ -155,7 +155,8 @@
 
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+ <body class="hold-transition skin-blue sidebar-mini">
+
 	<div class="wrapper">
 
 		<header class="main-header">
@@ -270,11 +271,8 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header">MAIN NAVIGATION</li>
-					<li class="active treeview"><a href="#"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span> <span
-							class="pull-right-container"> <i
-								class="fa fa-angle-left pull-right"></i>
-						</span>
+					<li><a href="/admin/dashboard"> 
+					<i class="fa fa-dashboard"></i> <span>Dashboard</span> 
 					</a></li>
 
 					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>

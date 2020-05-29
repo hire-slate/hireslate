@@ -44,10 +44,16 @@ public class UserRepository {
 		return userId;
 	}
 	
-	public Map<String,Object> getUserId(String username , String password) {
-		String sql = "select User_Id from user where User_UserName = '"+username+"' and User_Password = '"+password+"' ";
-		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
-		return row;
+	public UserEntity getUser(String username , String password) {
+		String sql = "select User_Id,User_Fname,User_Lname from user where User_UserName = '"+username+"' and User_Password = '"+password+"' ";
+		UserEntity user = new UserEntity(); 
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		for(Map<String,Object> row : rows) {
+			user.setUserId((int)row.get("User_Id"));
+			user.setUserFname((String)row.get("User_Fname"));
+			user.setUserLname((String)row.get("User_Lname"));
+		}
+		return user;
 	}
 	
 	public List<UserEntity> view(){

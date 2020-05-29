@@ -18,6 +18,15 @@
 		<put-attribute name = "emptyContent" value = ""/>
 	</definition>
 	
+	<definition name="adminfrontend" template="/template/adminfrontend.jsp">
+		<put-attribute name = "adminfrontendcontent" value = ""/>
+	</definition>
+	
+	<!-- try to implement admin theme with front end feature -->
+	<definition name="user/tryforfrontadminlte.jsp" extends="adminfrontend">
+		<put-attribute name="adminfrontendcontent" value="/user/tryforfrontadminlte.jsp"/>
+	</definition>
+	
 	<definition name="admin/dashboard.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/admin/dashboard.jsp"/>
 	</definition>

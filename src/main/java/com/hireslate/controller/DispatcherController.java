@@ -56,6 +56,12 @@ public class DispatcherController {
 		return msg;
 	}
 	
+	@RequestMapping(value = "user/tryfrontend",method = RequestMethod.GET)
+	public String tryMethod(Model model) {
+		
+		return "user/tryforfrontadminlte.jsp";
+	}
+	
 	//skill-master table CRUD
 	
 //	@RequestMapping(value = "admin/skill-master", method = RequestMethod.GET)

@@ -22,9 +22,31 @@ public class JobMasterRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 		
-public List<JobMasterEntity> view(){
+	public List<JobMasterEntity> view(){
 		
 		String sql = "select * from job_master";
+		List<JobMasterEntity> jobs = new ArrayList<JobMasterEntity>();
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		for(Map<String,Object> row : rows) {
+			
+			JobMasterEntity job = new JobMasterEntity();
+			job.setJobId((int)row.get("job_id"));
+			job.setJobTitle((String)row.get("job_title"));
+			job.setJobDescription((String)row.get("job_description"));
+			job.setJobBenefits((String)row.get("job_benefits"));
+			job.setJobVacancy((int)row.get("job_vacancy"));
+			job.setJobOpeningDate((Date)row.get("job_opening_date"));
+			job.setJobClosingDate((Date)row.get("job_closing_date"));
+			job.setJobTypeId((int)row.get("job_type_id"));
+			job.setJobSalary((float)row.get("job_salary"));
+			jobs.add(job);
+		}
+		return jobs;
+	}
+	
+	public List<JobMasterEntity> viewOpenJobs(){
+		
+		String sql = "SELECT * from job_master WHERE job_master.Job_Closing_date > CURRENT_DATE()";
 		List<JobMasterEntity> jobs = new ArrayList<JobMasterEntity>();
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {
@@ -93,9 +115,17 @@ public List<JobMasterEntity> view(){
     
     public List<String> jobSearch(String skill){
     	//String sql = "SELECT job_master.Job_Title FROM job_master WHERE job_master.Job_Id IN(SELECT job_skill_mapping.Job_Id FROM job_skill_mapping WHERE job_skill_mapping.Skill_Id IN (SELECT skill_master.Skill_Id FROM skill_master WHERE skill_master.Skill_Name like '"+skill+"%'))";
-    	String sql= "SELECT jm.Job_Title, cm.Company_Name, cm.Company_City from skill_master s, job_skill_mapping jsm, job_master jm, "
-    			+ "company_master cm where jsm.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = "
-    			+ "cm.Company_Id AND s.Skill_Id IN (SELECT s.Skill_Id FROM skill_master WHERE s.Skill_Name like '"+skill+"%')";
+    	//String sql= "SELECT jm.Job_Title, cm.Company_Name, cm.Company_City from skill_master s, job_skill_mapping jsm, job_master jm, "
+    	//		+ "company_master cm where jsm.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = "
+    	//		+ "cm.Company_Id AND s.Skill_Id IN (SELECT s.Skill_Id FROM skill_master WHERE s.Skill_Name like '"+skill+"%')";
+    	
+    	String sql = "SELECT DISTINCT job_master.Job_Title, company_master.Company_Name, company_master.Company_City " + 
+    				 "from job_master, skill_master, job_skill_mapping, company_master " + 
+    				 "WHERE job_master.Job_Id = job_skill_mapping.Job_Id and job_skill_mapping.Skill_Id = skill_master.Skill_Id "+
+    				 "and job_master.Company_Id = company_master.Company_Id and skill_master.Skill_Name LIKE '%"+skill+"%'";
+    				//+ "AND job_master.Job_Closing_date > CURRENT_DATE()";
+    	
+    	
     	List<String> jobs = new ArrayList<String>();
     	List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
     	for(Map<String,Object> row : rows) {
@@ -135,6 +165,7 @@ public List<JobMasterEntity> view(){
 		return jobs;
     	
     }
+    
 	public long totalJobs() {
 		String sql ="select COUNT(Job_Id) from job_master";		
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
