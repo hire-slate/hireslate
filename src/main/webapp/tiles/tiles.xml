@@ -12,7 +12,7 @@
 
 	<definition name="mytemplate" template="/template/adminlte.jsp">
 		<put-attribute	name="content" value="" />
-	</definition> 
+	</definition>
 	
 	<definition name="empty" template="/template/empty.jsp">
 		<put-attribute name = "emptyContent" value = ""/>

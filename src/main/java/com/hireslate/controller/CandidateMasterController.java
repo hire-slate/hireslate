@@ -64,7 +64,6 @@ public class CandidateMasterController {
 		
 		Date userBirthDate = Date.valueOf(bdate);
 		
-
 		user.setUserFname(fname);
 		user.setUserMname(mname);
 		user.setUserLname(lname);
@@ -113,7 +112,4 @@ public class CandidateMasterController {
 		return "redirect:/user/register";
 		
 	}
-
-	
-	
 }
