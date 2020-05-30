@@ -27,6 +27,12 @@
 		<put-attribute name="adminfrontendcontent" value="/user/tryforfrontadminlte.jsp"/>
 	</definition>
 	
+	<definition name="user/editprofile.jsp" extends="adminfrontend">
+		<put-attribute name="adminfrontendcontent" value= "/user/editprofile.jsp"/>
+	</definition>
+	
+	
+	
 	<definition name="admin/dashboard.jsp" extends="mytemplate">
 		<put-attribute name="content" value= "/admin/dashboard.jsp"/>
 	</definition>
@@ -147,8 +153,5 @@
 	</definition>
 	
 	<!-- edit profile -->
-	<definition name="user/editprofile.jsp" extends="mytemplate">
-		<put-attribute name="content" value= "/user/editprofile.jsp"/>
-	</definition>
-
+	
 </tiles-definitions>

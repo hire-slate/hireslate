@@ -18,9 +18,8 @@
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
-								<input type="hidden" name="userId" value=""> <label
-									for="firstName">First Name</label> <input type="text"
-									class="form-control" name="firstName" value="">
+								<input type="hidden" name="userId" value=""> 
+								<label for="firstName">First Name</label> <input type="text" class="form-control" name="firstName" value="">
 							</div>
 						</div>
 
