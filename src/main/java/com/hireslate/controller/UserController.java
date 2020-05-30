@@ -56,10 +56,6 @@ public class UserController {
 		return "user/index.jsp";
 	}
 	
-	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
-	public String editProfile(Model model,HttpServletRequest request,HttpServletResponse response) {
-		return "user/editprofile.jsp";
-	}
 	
 	@RequestMapping(value = "/login" , method = RequestMethod.POST)
 	public String doUserLogin(Model model,@RequestParam("username") String username, @RequestParam("password") String password,HttpServletRequest request) {
@@ -115,7 +111,10 @@ public class UserController {
 		return "";
 	}
 	
-	
+	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
+	public String editProfile(HttpServletRequest request,HttpServletResponse response) {
+		return "user/editprofile.jsp";
+	}
 	
 	@RequestMapping(value="/updatebasic", method=RequestMethod.POST)
 	public String updateBasic(HttpServletRequest request,HttpServletResponse response) {

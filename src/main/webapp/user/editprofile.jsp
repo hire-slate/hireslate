@@ -26,33 +26,33 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="middleName">Middle Name</label> <input type="text"
-									class="form-control" name="middleName" value="">
+									class="form-control" id="middleName" value="">
 							</div>
 						</div>
 
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="lastName">Last Name</label> <input type="text"
-									class="form-control" name="lastName" value="">
+									class="form-control" id="lastName" value="">
 							</div>
 						</div>
 						
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="username">Username</label> 
-								<input type="text" class="form-control" name="username" value="">
+								<input type="text" class="form-control" id="username" value="">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="password">Password</label> 
-								<input type="password" class="form-control" name="password" value="">
+								<input type="password" class="form-control" id="password" value="">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="cpassword">Confirm Password</label> 
-								<input type="password" class="form-control" name="cpassword" value="">
+								<input type="password" class="form-control" id="cpassword" value="">
 							</div>
 						</div>
 						
@@ -63,26 +63,26 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="email">Email Address</label> 
-								<input type="email" class="form-control" name="email" value="">
+								<input type="email" class="form-control" id="email" value="">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="mobile">Mobile Number</label> 
-								<input type="number" class="form-control" name="mobile" value="">
+								<input type="number" class="form-control" id="mobile" value="">
 							</div>
 						</div>
 						
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="">Address Line</label> 
-								<input type="text" class="form-control" name="addressLine" value="">
+								<label for="addressLine">Address Line</label> 
+								<input type="text" class="form-control" id="addressLine" value="">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="">AddressLandmark</label> 
-								<input type="text" class="form-control" name="AddressLandmark" value="">
+								<label for="addressLandmark">Address Landmark</label> 
+								<input type="text" class="form-control" id="addressLandmark" value="">
 							</div>
 						</div>
 						
@@ -95,14 +95,15 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="State">State</label> 
-								<input type="text" class="form-control" name="state" value="">
+								<input type="text" class="form-control" id="state" value="">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="city">Pincode</label> 
-								<input type="number" class="form-control" name="pincode" value="">
+								<input type="number" class="form-control" id="pincode" value="">
 							</div>
+						
 						</div>
 						<!-- /.box-body -->
 						<div class="form-group">
@@ -111,16 +112,18 @@
 						</div>
 					</div>
 				</form>
+				</div>
 				
+				<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Educational Details</h3>
 				</div>
 				<form role="form" action="" method="post">
-				
+				<div class="box-body">
 					<div class="col-md-6">
 							<div class="form-group">
 								<label for="institute">Institute</label> 
-								<input type="number" class="form-control" id="institute" value="">
+								<input type="text" class="form-control" id="institute" value="">
 							</div>
 					</div>
 					<div class="col-md-6">
@@ -141,22 +144,21 @@
 								<input type="number" class="form-control" id="eyear" value="">
 							</div>
 					</div>
-					
-						
-				
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Update</button>
 					<button type="button" class="btn btn-danger">Cancel</button>
 				</div>
+				</div>
 				</form>
-				
-				
-				
-				
+				</div>
+							
+				<div class="col-md-6">			
+				<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Update resume</h3>
 				</div>
 				<form role="form" action="" method="post" enctype="multipart/form-data">
+				<div class="box-body">
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for="resume">Upload Resume</label>
@@ -166,12 +168,18 @@
 					<button type="submit" class="btn btn-primary">Update</button>
 					<button type="button" class="btn btn-danger">Cancel</button>
 				</div>
+				</div>
 				</form>
+				</div>
+				</div>
 				
+				<div class="col-md-6">
+				<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Profile Photo</h3>
 				</div>
 				<form role="form" action="" method="post" enctype="multipart/form-data">
+				<div class="box-body">
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for="photo">Upload Photo</label>
@@ -181,8 +189,10 @@
 					<button type="submit" class="btn btn-primary">Update</button>
 					<button type="button" class="btn btn-danger">Cancel</button>
 				</div>
+				</div>
 				</form>
+				</div>
+				</div>
 			</div>
 		</div>
-	</div>
 </section>
