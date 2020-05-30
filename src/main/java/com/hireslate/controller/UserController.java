@@ -112,7 +112,7 @@ public class UserController {
 	
 	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
 	public String editProfile(HttpServletRequest request,HttpServletResponse response) {
-		return "/user/editprofile.jsp";
+		return "user/editprofile.jsp";
 	}
 	
 	@RequestMapping(value="/updatebasic", method=RequestMethod.POST)
