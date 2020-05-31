@@ -31,6 +31,9 @@
 		<put-attribute name="adminfrontendcontent" value= "/user/editprofile.jsp"/>
 	</definition>
 	
+	<definition name="user/jobDescription.jsp" extends="adminfrontend">
+		<put-attribute name="adminfrontendcontent" value= "/user/jobDescription.jsp"/>
+	</definition>
 	
 	
 	<definition name="admin/dashboard.jsp" extends="mytemplate">
