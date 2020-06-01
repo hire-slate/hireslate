@@ -228,7 +228,7 @@
 									</fieldset>
 								</div>
 							</div>
-													</div>
+						</div>
 					</section>
 				</div>
 			</form>

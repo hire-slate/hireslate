@@ -24,7 +24,7 @@ public class JobStagesController{
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String showJobStages(Model model) {
-		return "/job-stages/steps.jsp";
+		return "admin/job-stages/steps.jsp";
 	}
 	
 	@RequestMapping(value="/create/form/{id}",method=RequestMethod.GET)

@@ -19,4 +19,8 @@ public class CandidateMasterService {
 	public void updateCandidateMaster(CandidateMasterEntity candidateMasterEntity) {
 		candidateMasterRepository.update(candidateMasterEntity);
 	}
+	
+	public CandidateMasterEntity getCandidate(int userId) {
+		return candidateMasterRepository.getCandidate(userId);
+	}
 }

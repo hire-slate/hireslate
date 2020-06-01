@@ -27,8 +27,9 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-
+import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.UserEntity;
+import com.hireslate.service.CandidateMasterService;
 import com.hireslate.service.JobMasterService;
 import com.hireslate.service.UserService;
 
@@ -40,14 +41,16 @@ public class UserController {
 	UserService  userService;
 	@Autowired
 	JobMasterService jobMasterService;
+	@Autowired
+	CandidateMasterService cms;
 	
-	@Value("$aws.accessToken")
+	@Value("${aws.accessToken}")
 	private String accessToken;
-	@Value("$aws.secretKey")
+	@Value("${aws.secretKey}")
 	private String secretKey;
-	@Value("$aws.bucket")
+	@Value("${aws.bucket}")
 	private String bucket;
-	@Value("$aws.url")
+	@Value("${aws.url}")
 	private String awsUrl;
 	
 	@RequestMapping(value = "/index" , method = RequestMethod.GET)
@@ -88,7 +91,7 @@ public class UserController {
 		
 		 if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-	            return "redirect:uploadStatus";
+	            return "";
 	        }
 		
 		String userId = (String) request.getSession().getAttribute("userId");
@@ -108,17 +111,39 @@ public class UserController {
 							.withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(Exception e){}
 		
-		return "";
+		return "redirect:/user/index";
 	}
 	
 	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
 	public String editProfile(HttpServletRequest request,HttpServletResponse response) {
+		UserEntity userEntity = userService.viewUser((int)request.getSession().getAttribute("userId"));
+		CandidateMasterEntity cme = cms.getCandidate((int)request.getSession().getAttribute("userId"));
+		
+		request.getSession().setAttribute("firstName", userEntity.getUserFname());
+		request.getSession().setAttribute("middleName", userEntity.getUserMname());
+		request.getSession().setAttribute("lastName", userEntity.getUserLname());
+		request.getSession().setAttribute("mobileNumber", userEntity.getUserMobileNumber());
+		request.getSession().setAttribute("email", userEntity.getUserEmail());
+		request.getSession().setAttribute("addressLine", userEntity.getUserAddressLine());
+		request.getSession().setAttribute("addressLandmark", userEntity.getUserAddressLandmark());
+		request.getSession().setAttribute("city", userEntity.getUserCity());
+		request.getSession().setAttribute("state", userEntity.getUserState());
+		request.getSession().setAttribute("pincode", userEntity.getUserPincode());
+		request.getSession().setAttribute("username", userEntity.getUserUserName());
+		
+		request.getSession().setAttribute("institute", cme.getCandidateInstitute());
+		request.getSession().setAttribute("university", cme.getCandidateUniversity());
+		request.getSession().setAttribute("startYear", cme.getCandidateCourseStartYear());
+		request.getSession().setAttribute("endYear", cme.getCandidateCourseEndYear());
+		
 		return "user/editprofile.jsp";
 	}
 	
 	@RequestMapping(value="/updatebasic", method=RequestMethod.POST)
-	public String updateBasic(HttpServletRequest request,HttpServletResponse response) {
-		return "";
+	public String updateBasic(HttpServletRequest request,HttpServletResponse response ) {
+		
+		
+		return "redirect:/user/index";
 	}
 	
 	@RequestMapping(value="/uploadresume", method=RequestMethod.POST)
@@ -147,6 +172,18 @@ public class UserController {
 							.withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(Exception e){}
 		
-		return "";
+		return "redirect:/user/index";
+	}
+	
+	@RequestMapping(value="/updateeducation", method=RequestMethod.POST)
+	public String updateEducation() {
+		
+		return "redirect:/user/index";
+	}
+	
+	@RequestMapping(value="/updatecontact", method=RequestMethod.POST)
+	public String updateContact() {
+		
+		return "redirect:/user/index";
 	}
 }

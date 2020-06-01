@@ -3,6 +3,14 @@ package com.hireslate.controller;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,13 +43,13 @@ public class CandidateMasterController {
 	UserService userService;
 	@Autowired
 	CandidateMasterService candidateMasterService;
-	@Value("$aws.accessToken")
+	@Value("${aws.accessToken}")
 	private String accessToken;
-	@Value("$aws.secretKey")
+	@Value("${aws.secretKey}")
 	private String secretKey;
-	@Value("$aws.bucket")
+	@Value("${aws.bucket}")
 	private String bucket;
-	@Value("$aws.url")
+	@Value("${aws.url}")
 	private String awsUrl;
 	
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
@@ -91,7 +99,7 @@ public class CandidateMasterController {
 		candidate.setCandidateLinkedIn(linkedIn);
 		candidate.setCandidateGithub(github);
 		candidateMasterService.insertCandidateMaster(candidate);
-		System.out.println("value inserted");
+		//System.out.println("value inserted");
 		
 		AWSCredentials credentials = new BasicAWSCredentials(accessToken,secretKey);
 		
@@ -101,7 +109,7 @@ public class CandidateMasterController {
 				  .withRegion(Regions.AP_SOUTH_1)
 				  .build();
 		
-		String folderName = ""+userId;
+		String folderName = ""+userId+"/";
 		//CommonService.createFolder(bucket, folderName, s3client,"/");
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(0);
@@ -109,7 +117,30 @@ public class CandidateMasterController {
 		PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, folderName, emptyContent,metadata);
 		s3client.putObject(putObjectRequest);
 		
-		return "redirect:/user/register";
+		try {
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		   
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		protected PasswordAuthentication getPasswordAuthentication() {
+		return new PasswordAuthentication("hireslate@gmail.com", "hesoyamtrojan@123");
+		      }
+		   });
+		   Message msg = new MimeMessage(session);
+		   msg.setFrom(new InternetAddress("hireslate@gmail.com", false));
+
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getUserEmail()));
+		   msg.setSubject("WELCOME TO HIRESLATE");
+		   String message = "Welcome "+user.getUserFname()+"to Hireslate. We Hope you find a perfect job for your career.";
+		   msg.setContent(message, "text/html");
+		   msg.setSentDate(new java.util.Date());
+		   Transport.send(msg);
+		}catch(Exception e){
+		}
+		return "redirect:/user/index";
 		
 	}
 }

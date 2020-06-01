@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/send")
 public class EmailController {
 
+	@Value("${aws.accessToken}")
+	private String accessToken;
+	@Value("${aws.secretKey}")
+	private String secretKey;
+	@Value("${aws.bucket}")
+	private String bucket1;
+	@Value("${aws.url}")
+	private String awsUrl;
+	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String sendMail() throws AddressException, MessagingException, IOException {
 		
@@ -40,12 +50,17 @@ public class EmailController {
 		   Message msg = new MimeMessage(session);
 		   msg.setFrom(new InternetAddress("hireslate@gmail.com", false));
 
-		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("shreyaspalan004@gmail.com"));
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("17ce010@charusat.edu.in"));
 		   msg.setSubject("TEST SUBJECT");
 		   msg.setContent("Wassup again broooooo", "text/html");
 		   msg.setSentDate(new Date());
 
 		   Transport.send(msg);  
 		   return "mail sent";
-	}	
+	}
+	
+	@RequestMapping(value="/aws",method=RequestMethod.GET)
+	public String testaws() {
+		return bucket1;
+	}
 }

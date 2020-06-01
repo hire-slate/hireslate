@@ -5,11 +5,6 @@ public class CandidateMasterEntity {
 	private String candidateInstitute, candidateCourseStartYear, candidateCourseEndYear, candidateLinkedIn, candidateGithub,candidateUniversity;
 	private int candidateMasterId, userId, courseId, streamId;
 
-	
-	
-	
-	
-
 
 	public CandidateMasterEntity(String candidateInstitute, String candidateCourseStartYear,
 			String candidateCourseEndYear, String candidateLinkedIn, String candidateGithub, String candidateUniversity,
