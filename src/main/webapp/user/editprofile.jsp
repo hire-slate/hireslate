@@ -12,7 +12,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Basic Details</h3>
 				</div>
-				<form role="form" action="user/updatebasic" method="post">
+				<form role="form" action="/user/updatebasic" method="post">
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
@@ -36,19 +36,19 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="username">Username</label> 
-								<input type="text" class="form-control" name="username" value="${userName}">
+								<input type="text" class="form-control" name="userName" value="${userName}" required="required">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="password">Password</label> 
-								<input type="password" class="form-control" name="password">
+								<input type="password" class="form-control" name="password" required="required">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="cpassword">Confirm Password</label> 
-								<input type="password" class="form-control" name="cpassword">
+								<input type="password" class="form-control" name="cPassword" required="required">
 							</div>
 						</div>
 						<div class="form-group">

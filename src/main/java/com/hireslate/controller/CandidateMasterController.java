@@ -94,8 +94,8 @@ public class CandidateMasterController {
 		candidate.setCandidateUniversity(university);
 		candidate.setCourseId(courseId);
 		candidate.setStreamId(streamId);
-		candidate.setCandidateCourseStartYear(startYear);
-		candidate.setCandidateCourseEndYear(endYear);
+		candidate.setCandidateCourseStartYear(Integer.parseInt(startYear));
+		candidate.setCandidateCourseEndYear(Integer.parseInt(endYear));
 		candidate.setCandidateLinkedIn(linkedIn);
 		candidate.setCandidateGithub(github);
 		candidateMasterService.insertCandidateMaster(candidate);

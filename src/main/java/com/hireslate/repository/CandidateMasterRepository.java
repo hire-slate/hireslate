@@ -29,15 +29,16 @@ public class CandidateMasterRepository {
 	}
 	
 	public CandidateMasterEntity getCandidate(int userId) {
-		String sql = "select * from candidate_master where User_Id="+userId;
+		String sql = "select * from candidate_master where "
+				+ "User_Id="+userId;
 		CandidateMasterEntity cme = new CandidateMasterEntity();
 		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 		
 		cme.setCandidateMasterId((int)row.get("Candidate_Master_Id"));
 		cme.setCandidateInstitute((String)row.get("Candidate_Institute"));
 		cme.setCandidateUniversity((String)row.get("Candidate_University"));
-		cme.setCandidateCourseStartYear((String)row.get("Candidate_Course_StartYear"));
-		cme.setCandidateCourseEndYear((String)row.get("Candidate_Course_EndYear"));
+		cme.setCandidateCourseStartYear((int)row.get("Candidate_Course_StartYear"));
+		cme.setCandidateCourseEndYear((int)row.get("Candidate_Course_EndYear"));
 		return cme;
 	}
 	
