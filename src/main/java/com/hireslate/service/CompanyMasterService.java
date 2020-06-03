@@ -58,4 +58,8 @@ public class CompanyMasterService {
 		return companyMasterRepository.viewOnlyId();
 	}
 	
+	public int getLastCompanyId() {
+		return companyMasterRepository.getLastId();
+	}
+	
 }

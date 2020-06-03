@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,9 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hireslate.model.JobMasterEntity;
+import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.UserEntity;
+import com.hireslate.service.CandidateMasterService;
 import com.hireslate.service.JobMasterService;
 import com.hireslate.service.UserService;
 
@@ -42,15 +45,19 @@ public class UserController {
 	UserService  userService;
 	@Autowired
 	JobMasterService jobMasterService;
+	@Autowired
+	CandidateMasterService cms;
 	
-	@Value("$aws.accessToken")
+	@Value("${aws.accessToken}")
 	private String accessToken;
-	@Value("$aws.secretKey")
+	@Value("${aws.secretKey}")
 	private String secretKey;
-	@Value("$aws.bucket")
+	@Value("${aws.bucket}")
 	private String bucket;
-	@Value("$aws.url")
+	@Value("${aws.url}")
 	private String awsUrl;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	@RequestMapping(value = "/index" , method = RequestMethod.GET)
 	public String showIndex(HttpServletRequest request) {
@@ -90,7 +97,7 @@ public class UserController {
 		
 		 if (file.isEmpty()) {
 	            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-	            return "redirect:uploadStatus";
+	            return "";
 	        }
 		
 		String userId = (String) request.getSession().getAttribute("userId");
@@ -110,17 +117,42 @@ public class UserController {
 							.withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(Exception e){}
 		
-		return "";
+		return "redirect:/user/index";
 	}
 	
 	@RequestMapping(value="/editprofile", method=RequestMethod.GET)
 	public String editProfile(HttpServletRequest request,HttpServletResponse response) {
+		UserEntity userEntity = userService.viewUser((int)request.getSession().getAttribute("userId"));
+		CandidateMasterEntity cme = cms.getCandidate((int)request.getSession().getAttribute("userId"));
+		
+		request.getSession().setAttribute("firstName", userEntity.getUserFname());
+		request.getSession().setAttribute("middleName", userEntity.getUserMname());
+		request.getSession().setAttribute("lastName", userEntity.getUserLname());
+		request.getSession().setAttribute("mobileNumber", userEntity.getUserMobileNumber());
+		request.getSession().setAttribute("email", userEntity.getUserEmail());
+		request.getSession().setAttribute("addressLine", userEntity.getUserAddressLine());
+		request.getSession().setAttribute("addressLandmark", userEntity.getUserAddressLandmark());
+		request.getSession().setAttribute("city", userEntity.getUserCity());
+		request.getSession().setAttribute("state", userEntity.getUserState());
+		request.getSession().setAttribute("pincode", userEntity.getUserPincode());
+		request.getSession().setAttribute("username", userEntity.getUserUserName());
+		
+		request.getSession().setAttribute("institute", cme.getCandidateInstitute());
+		request.getSession().setAttribute("university", cme.getCandidateUniversity());
+		request.getSession().setAttribute("startYear", cme.getCandidateCourseStartYear());
+		request.getSession().setAttribute("endYear", cme.getCandidateCourseEndYear());
+		
 		return "user/editprofile.jsp";
 	}
 	
 	@RequestMapping(value="/updatebasic", method=RequestMethod.POST)
-	public String updateBasic(HttpServletRequest request,HttpServletResponse response) {
-		return "";
+	public String updateBasic(HttpServletRequest request,HttpServletResponse response, @RequestParam String firstName,@RequestParam String middleName
+			,@RequestParam String lastName,@RequestParam String userName,@RequestParam String password,@RequestParam String cPassword) {
+		
+		String sql = "update user set User_Fname='"+firstName+"',User_Mname='"+middleName+"',User_Lname='"+lastName+"',User_UserName='"+userName+"',User_Password='"+cPassword+"' where User_Id="+request.getSession().getAttribute("userId");
+		jdbcTemplate.execute(sql);
+		
+		return "redirect:/user/editprofile";
 	}
 	
 	@RequestMapping(value="/uploadresume", method=RequestMethod.POST)
@@ -149,7 +181,31 @@ public class UserController {
 							.withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(Exception e){}
 		
-		return "";
+		return "redirect:/user/index";
+	}
+	
+	@RequestMapping(value="/user/updateeducation", method=RequestMethod.POST)
+	public String updateEducation(HttpServletRequest request, @RequestParam String institute,@RequestParam String syear,@RequestParam String university
+			,@RequestParam String eyear) {
+		
+		int start = Integer.parseInt(syear);
+		int end = Integer.parseInt(eyear);
+		
+		String sql ="update candidate_master set Candidate_Institute='"+institute+"',Candidate_Course_StartYear="+start+",Candidate_Course_EndYear="+
+		end+",Candidate_University='"+university+"' where User_Id="+request.getSession().getAttribute("userId");
+		jdbcTemplate.execute(sql);
+		return "redirect:/user/editprofile";
+	}
+	
+	@RequestMapping(value="/user/updatecontact", method=RequestMethod.POST)
+	public String updateContact(@RequestParam String email,@RequestParam String mobile,@RequestParam String addressLine,
+			@RequestParam String addressLandmark, @RequestParam String city,@RequestParam String state, @RequestParam String pincode,HttpServletRequest request) {
+		
+		int pin = Integer.parseInt(pincode);
+		String sql = "update user set User_Email='"+email+"', User_MobileNumber='"+mobile+"', User_AddressLine='"+addressLine+"',User_AddressLandmark='"+addressLandmark+"',User_City='"+city
+				+ "',User_State='"+state+"',User_PinCode="+pin+" where User_Id="+request.getSession().getAttribute("userId");
+		jdbcTemplate.execute(sql);
+		return "redirect:/user/editprofile";
 	}
 	
 	@RequestMapping(value = "/jobDescription/{id}",method = RequestMethod.GET)

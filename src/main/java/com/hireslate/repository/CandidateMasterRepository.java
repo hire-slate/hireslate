@@ -1,5 +1,7 @@
 package com.hireslate.repository;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,20 @@ public class CandidateMasterRepository {
 	public void update(CandidateMasterEntity candidate) {
 		String sql = "update candidate_master set Candidate_Institute='"+candidate.getCandidateInstitute()+"', Candidate_Course_StartYear='"+candidate.getCandidateCourseStartYear()+"',Candidate_Course_EndYear='"+candidate.getCandidateCourseEndYear()+"',Course_Id='"+candidate.getCourseId()+"',Stream_Id='"+candidate.getStreamId()+"',Candidate_LinkedIn='"+candidate.getCandidateLinkedIn()+"',Candidate_Github='"+candidate.getCandidateGithub()+"' where Candidate_Id="+candidate.getCandidateMasterId()+"'";
 		jdbcTemplate.execute(sql);
+	}
+	
+	public CandidateMasterEntity getCandidate(int userId) {
+		String sql = "select * from candidate_master where "
+				+ "User_Id="+userId;
+		CandidateMasterEntity cme = new CandidateMasterEntity();
+		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+		
+		cme.setCandidateMasterId((int)row.get("Candidate_Master_Id"));
+		cme.setCandidateInstitute((String)row.get("Candidate_Institute"));
+		cme.setCandidateUniversity((String)row.get("Candidate_University"));
+		cme.setCandidateCourseStartYear((int)row.get("Candidate_Course_StartYear"));
+		cme.setCandidateCourseEndYear((int)row.get("Candidate_Course_EndYear"));
+		return cme;
 	}
 	
 	public void delete() {}

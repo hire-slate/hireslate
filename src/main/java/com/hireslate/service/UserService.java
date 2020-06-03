@@ -50,4 +50,8 @@ public class UserService {
 	public List<UserEntity> viewUserNameEmployee(){
 		return userRepository.viewUserNameEmployee();
 	}
+	
+	public UserEntity viewUser(int userId) {
+		return userRepository.getUser(userId);
+	}
 }

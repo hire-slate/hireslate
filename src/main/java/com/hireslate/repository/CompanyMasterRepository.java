@@ -68,7 +68,7 @@ public class CompanyMasterRepository {
     
    public CompanyMasterEntity getCompanyId(String username, String password) {
 	   CompanyMasterEntity company = new CompanyMasterEntity();
-	   String sql = "select Company_Id,Company_Name from company_master where Company_Website = '"+username+"' and Company_Password ='"+password+"'";
+	   String sql = "select Company_Id,Company_Name from company_master where Company_Username = '"+username+"' and Company_Password ='"+password+"'";
 	   try{
 		   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
 		   company.setCompanyId((int)row.get("Company_Id"));
@@ -78,5 +78,12 @@ public class CompanyMasterRepository {
 		   company = null;
 	   }
 	   return company;
+   }
+   
+   public int getLastId() {
+	   String sql1 = "select Company_Id from company_master order by Company_Id desc limit 1";
+		Map<String,Object> row = jdbcTemplate.queryForMap(sql1);
+		int companyId = (int)row.get("Company_Id");
+		return companyId;
    }
 }

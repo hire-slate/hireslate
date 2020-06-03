@@ -2,17 +2,12 @@ package com.hireslate.model;
 
 public class CandidateMasterEntity {
 
-	private String candidateInstitute, candidateCourseStartYear, candidateCourseEndYear, candidateLinkedIn, candidateGithub,candidateUniversity;
-	private int candidateMasterId, userId, courseId, streamId;
-
-	
-	
-	
-	
+	private String candidateInstitute, candidateLinkedIn, candidateGithub,candidateUniversity;
+	private int candidateMasterId, userId, courseId, streamId, candidateCourseStartYear, candidateCourseEndYear;
 
 
-	public CandidateMasterEntity(String candidateInstitute, String candidateCourseStartYear,
-			String candidateCourseEndYear, String candidateLinkedIn, String candidateGithub, String candidateUniversity,
+	public CandidateMasterEntity(String candidateInstitute, int candidateCourseStartYear,
+			int candidateCourseEndYear, String candidateLinkedIn, String candidateGithub, String candidateUniversity,
 			int candidateMasterId, int userId, int courseId, int streamId) {
 		super();
 		this.candidateInstitute = candidateInstitute;
@@ -68,19 +63,19 @@ public class CandidateMasterEntity {
 		this.candidateInstitute = candidateInstitute;
 	}
 
-	public String getCandidateCourseStartYear() {
+	public int getCandidateCourseStartYear() {
 		return candidateCourseStartYear;
 	}
 
-	public void setCandidateCourseStartYear(String candidateCourseStartYear) {
+	public void setCandidateCourseStartYear(int candidateCourseStartYear) {
 		this.candidateCourseStartYear = candidateCourseStartYear;
 	}
 
-	public String getCandidateCourseEndYear() {
+	public int getCandidateCourseEndYear() {
 		return candidateCourseEndYear;
 	}
 
-	public void setCandidateCourseEndYear(String candidateCourseEndYear) {
+	public void setCandidateCourseEndYear(int candidateCourseEndYear) {
 		this.candidateCourseEndYear = candidateCourseEndYear;
 	}
 

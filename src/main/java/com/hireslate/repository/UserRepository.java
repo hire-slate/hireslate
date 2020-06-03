@@ -85,5 +85,24 @@ public class UserRepository {
 		}
 		return users;
 	}
+	
+	public UserEntity getUser(int userId) {
+		String sql = "select * from user where User_Id="+userId;
+		UserEntity userEntity = new UserEntity();
+		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+		userEntity.setUserId(userId);
+		userEntity.setUserAddressLandmark((String)row.get("User_AddressLandmark"));
+		userEntity.setUserFname((String)row.get("User_Fname"));
+		userEntity.setUserMname((String)row.get("User_Mname"));
+		userEntity.setUserLname((String)row.get("User_Lname"));
+		userEntity.setUserMobileNumber((String)row.get("User_MobileNumber"));
+		userEntity.setUserEmail((String)row.get("User_Email"));
+		userEntity.setUserAddressLine((String)row.get("User_AddressLine"));
+		userEntity.setUserCity((String)row.get("User_City"));
+		userEntity.setUserState((String)row.get("User_State"));
+		userEntity.setUserPincode((int)row.get("User_PinCode"));
+		userEntity.setUserUserName((String)row.get("User_UserName"));
+		return userEntity;
+	}
 }
 	
