@@ -2,6 +2,7 @@ package com.hireslate.controller;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CandidateMasterService;
@@ -202,5 +205,13 @@ public class UserController {
 				+ "',User_State='"+state+"',User_PinCode="+pin+" where User_Id="+request.getSession().getAttribute("userId");
 		jdbcTemplate.execute(sql);
 		return "redirect:/user/editprofile";
+	}
+	
+	@RequestMapping(value = "/jobDescription/{id}",method = RequestMethod.GET)
+	public String jobDescription(Model model,@PathVariable("id")int jobId) {
+		
+		Map<String, Object> jobDescription = jobMasterService.viewJobDescription(jobId);
+		model.addAttribute("jobEntity", jobDescription);
+		return "user/jobDescription.jsp";
 	}
 }
