@@ -141,6 +141,5 @@ public class CandidateMasterController {
 		}catch(Exception e){
 		}
 		return "redirect:/user/index";
-		
 	}
 }

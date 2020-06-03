@@ -157,4 +157,8 @@
 	
 	<!-- edit profile -->
 	
+	<definition name="admin/companyedit.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/companyedit.jsp"/>
+	</definition>
+	
 </tiles-definitions>

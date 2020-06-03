@@ -81,7 +81,6 @@ public class UserController {
 	}
 	
 	
-	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String doUserLogout(HttpServletRequest request,HttpServletResponse response) {
 		request.getSession().invalidate();

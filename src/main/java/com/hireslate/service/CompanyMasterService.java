@@ -37,7 +37,7 @@ public class CompanyMasterService {
 	
 	public String doCompanyLogin(String username, String password, HttpServletRequest request) {
 		
-		String msg,companyName;
+		String msg;
 		CompanyMasterEntity company = companyMasterRepository.getCompanyId(username, password);
 			if(company != null) {
 				request.getSession().setAttribute("companyId", company.getCompanyId());
@@ -62,4 +62,7 @@ public class CompanyMasterService {
 		return companyMasterRepository.getLastId();
 	}
 	
+	public CompanyMasterEntity getCompany(int companyId) {
+		return companyMasterRepository.getCompany(companyId);
+	}
 }
