@@ -113,13 +113,25 @@ public class JobMasterRepository {
 		return jobId;
 	}
     
+    public Map<String, Object> viewDescription(int jobId) {
+    	String sql =	 "SELECT job_master.Job_Id, job_master.Job_Title, job_master.Job_Salary, job_master.Job_Description, job_master.Job_Benefits, "
+    					+ "job_master.Job_Vacancy, company_master.Company_Name, company_master.Company_City, job_type_master.Job_Type_Name "
+    					+ "FROM job_master, company_master, job_type_master WHERE " 
+    					+ "job_master.Job_Type_Id = job_type_master.Job_Type_Id "
+    					+ "AND job_master.Company_Id = company_master.Company_Id "
+    					+ "AND job_master.Job_Id = "+jobId;
+    	
+    	Map<String, Object> jobDescription = jdbcTemplate.queryForMap(sql);
+    	return jobDescription;
+    }
+    
     public List<String> jobSearch(String skill){
     	//String sql = "SELECT job_master.Job_Title FROM job_master WHERE job_master.Job_Id IN(SELECT job_skill_mapping.Job_Id FROM job_skill_mapping WHERE job_skill_mapping.Skill_Id IN (SELECT skill_master.Skill_Id FROM skill_master WHERE skill_master.Skill_Name like '"+skill+"%'))";
     	//String sql= "SELECT jm.Job_Title, cm.Company_Name, cm.Company_City from skill_master s, job_skill_mapping jsm, job_master jm, "
     	//		+ "company_master cm where jsm.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = "
     	//		+ "cm.Company_Id AND s.Skill_Id IN (SELECT s.Skill_Id FROM skill_master WHERE s.Skill_Name like '"+skill+"%')";
     	
-    	String sql = "SELECT DISTINCT job_master.Job_Title, company_master.Company_Name, company_master.Company_City, job_type_master.Job_Type_Name " + 
+    	String sql = "SELECT DISTINCT job_master.Job_Id,job_master.Job_Title, company_master.Company_Name, company_master.Company_City, job_type_master.Job_Type_Name " + 
     				 "from job_master, skill_master, job_skill_mapping, company_master,job_type_master " + 
     				 "WHERE job_master.Job_Id = job_skill_mapping.Job_Id and job_skill_mapping.Skill_Id = skill_master.Skill_Id "+
     				 "and job_master.Company_Id = company_master.Company_Id and job_master.Job_Type_Id = job_type_master.Job_Type_Id "+
@@ -130,6 +142,7 @@ public class JobMasterRepository {
     	List<String> jobs = new ArrayList<String>();
     	List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
     	for(Map<String,Object> row : rows) {
+    		jobs.add((String.valueOf((int)row.get("Job_Id")))); 
     		jobs.add((String)row.get("Job_Title"));
     		jobs.add((String)row.get("Company_Name"));
     		jobs.add((String)row.get("Company_City"));

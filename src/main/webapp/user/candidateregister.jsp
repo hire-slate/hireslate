@@ -1,7 +1,7 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form class="form-register" action="/user/register/new" method="post">
+			<form class="form-register" action="/user/register/new" method="post" id="userForm">
 				<div id="form-total">
 					<h2>
 						<p class="step-icon">
@@ -228,7 +228,7 @@
 									</fieldset>
 								</div>
 							</div>
-													</div>
+						</div>
 					</section>
 				</div>
 			</form>
@@ -251,9 +251,13 @@
 		labels : {
 			previous : 'Back Step',
 			next : '<i class="zmdi zmdi-arrow-right"></i>',
-			finish : '<button type="submit"><i class="zmdi zmdi-check"></i></button>',
+			finish : '<i class="zmdi zmdi-check"></i>',
 			current : ''
 		},
+
+		onFinished : function(event, currentIndex){
+			$("#userForm").submit();	
+		}
 	});
 </script>
 

@@ -1,56 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <section class="content">
 	
 	<div class="row">
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-10">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-primary">
-					 
-					 <div class="box-header with-border">
-            		 	<div class="user-block">
-					 		<span class="username">Front End Development</span>
-            		 		<span class="description">Perfect solutions</span>
-            		 		<ul style="list-style-type: none" >
-            		 			<li style="float: left" ><span style="margin-left: 0px; margin-right: 10px" class="description">PARTTIME</span></li>
-            		 			<li style="float: left" ><span style="margin-left: 0px; margin-right: 10px" class="description"><i class="fa fa-fw fa-map-marker"></i>Ahmedabad</span></li>
-            		 			<li style="float: left" ><span style="margin-left: 0px; margin-right: 10px" class="description"><i class="fa fa-fw fa-rupee"></i>20,000</span></li>
-            		 		</ul>
-            		 	</div>
-            		 </div>
-            		 
-            		 <div class="box-body">
-            		 		
-            		 	<div class="box-header with-border">
-        	    		 	<p><strong>Responsibilities and Duties:</strong></p>
-		       		 	</div>
-						<ul>
-							<li>List the essential duties required to carry out this job.</li>
-							<li>List them in order of importance.</li>
-							<li>Use complete sentences.</li>
-							<li>Start sentences with verbs.</li>
-							<li>Use the present tense.</li>
-							<li>Use gender-neutral language.</li>
-						</ul>
-						<div class="box-header with-border">
-							<p><strong>Qualifications:</strong></p>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
+					 	<div class="box-header with-border">
+            		 		<div class="row" style="padding-left: 10px">
+	            		 	 	<div class="col-md-8">
+							 		<p style="font-size: 20px"><strong>${jobEntity["Job_Title"]}</strong></p>
+	            		 			<p>${jobEntity["Company_Name"]}</p>
+	            		 			<ul style="list-style-type: none; padding: unset;">
+							 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="companyName">${jobEntity["Job_Type_Name"]}</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName">${jobEntity["Job_Vacancy"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName">${jobEntity["Job_Salary"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="cityName"><i class="fa fa-fw fa-map-marker"></i> ${jobEntity["Company_City"] }</li>
+		            		 			<li class="spacer" style="clear: both"></li>
+	            		 			</ul>
+	            		 			
+	            		 		</div>
+ 								<div class="col-md-3">
+									<button class="btn btn-success" style="margin-top: 15px; margin-left:10px; float: right">Apply For Job</button>
+								</div>
+            		 		</div>
+						</div>            		 
+     					<div class="row">
+	     	       		 	<div class="box-body">
+	            		 		<div class="box-header with-border">
+	        	    		 		<p><strong>Responsibilities and Duties:</strong></p>
+			       		 		</div>
+								<div style="margin-left: 10px">
+									${jobEntity["Job_Description"]}	
+								</div>	
+								<div class="box-header with-border">
+									<p><strong>Qualifications:</strong></p>
+								</div>
+								<div style="margin-left: 10px">
+									${jobEntity["Job_Benefits"]}
+								</div>
+							</div>
 						</div>
-						<ul>
-							<li>Education level.</li>
-							<li>Experience.</li>
-							<li>Specific skills.</li>
-							<li>Personal characteristics.</li>
-							<li>Certifications.</li>
-							<li>Licenses.</li>
-							<li>Physical abilities.</li>
-						</ul>
-         			</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		 	
 		</div>
 	</div>
 </section> 

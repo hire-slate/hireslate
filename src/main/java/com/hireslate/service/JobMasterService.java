@@ -42,6 +42,9 @@ public class JobMasterService {
 		return jobMasterRepository.jobSearch(skill);
 	}
 	
+	public Map<String, Object> viewJobDescription(int jobId){
+		return jobMasterRepository.viewDescription(jobId);
+	}
 //	public List<List> searchJobByCompany(String companyId){
 //		return jobMasterRepository.jobSearchByCompany(companyId);
 //	}

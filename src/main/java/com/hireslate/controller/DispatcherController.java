@@ -62,11 +62,6 @@ public class DispatcherController {
 		return "user/tryforfrontadminlte.jsp";
 	}
 	
-	@RequestMapping(value = "user/jobDescription",method = RequestMethod.GET)
-	public String jobDescription(Model model) {
-		
-		return "user/jobDescription.jsp";
-	}
 	
 	//skill-master table CRUD
 	

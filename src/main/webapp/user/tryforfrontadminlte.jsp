@@ -23,21 +23,24 @@
 		<div class="col-md-8 col-sm-6 col-xs-12">
 
 			<div class="box" style="">
-				<div class="row" style="position: relative">
-					<!-- 	
-		        	<div class="co-md-2">
-		        		<img src="${pageContext.request.contextPath}/resources/dist/img/Logo-Design1.jpg"/>
+				<div class="row" style="position: relative; padding: 10px;">
+					 	
+		        	<div class="col-md-2">
+		        		<img src="${pageContext.request.contextPath}/resources/dist/img/Logo-Design1.jpg" style="height: 70px;"/>
 					</div>
-					 -->
-					<div class="col-md-8" style="margin-left: 10px">
-						<label id="jobName" style="font-size: larger"></label> <span
-							class="info-box-text" id="companyName"></span> <span
-							class="info-box-text" id="cityName"></span> <span
-							class="info-box-text" id="jobTypeName"></span>
-					</div>
-					<div class="col-md-3" style="margin: auto; height: 100%; border: solid" >
-						<button class="btn btn-primary" style="">Apply Job</button>
-					
+					 
+					<div class="col-md-7" style="padding-left: 10px">
+							<label id="jobName" style="font-size: 20px; margin-bottom: 10px"></label> 
+					 		<ul style="list-style-type: none; padding: unset;">
+					 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="companyName"></li>
+            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"></li>
+            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="cityName"><i class="fa fa-fw fa-map-marker"></i></li>
+            		 			<li class="spacer" style="clear: both"></li>
+            		 		</ul>
+            		</div>
+					<div class="col-md-3">
+						<button class="btn btn-success" style="margin-top: 15px; margin-left:10px; float: right">Apply</button>
+						<a id="link"><button class="btn btn-submit" style="margin-top: 15px;  float: right"><i class="fa fa-eye"></i></button></a>
 					</div>
 					
 				</div>
@@ -45,7 +48,7 @@
 		</div>
 	</div>
 	<script>
-		$("#oneCompany").hide();
+		$("#oneCompany").hide(); 
 		callJobs();
 		function callJobs() {
 			var skill = document.form.input.value;
@@ -64,13 +67,15 @@
 						var x = $("#oneCompany").clone();
 						x.removeAttr("id");
 						x.addClass("oneCompany");
+						x.find("#link").attr("href","/user/jobDescription/"+result[i]);
+						i++;
 						x.find("#jobName").html(result[i]);
 						i++;
 						x.find("#companyName").html(result[i]);
 						i++;
-						x.find("#cityName").html(result[i]);
+						x.find("#cityName").append(result[i]);
 						i++;
-						x.find("#jobTypeName").html(result[i]);
+						x.find("#jobTypeName").append(result[i]);
 						$(".searchresult").append(x);
 					}
 					$(".oneCompany").show();
