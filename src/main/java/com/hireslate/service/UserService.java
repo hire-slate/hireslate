@@ -40,6 +40,7 @@ public class UserService {
 		if(user.getUserId() == 0) {
 			user = null;
 		}
+		
 		return user;
 	}
 	

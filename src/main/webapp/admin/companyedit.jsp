@@ -130,12 +130,12 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Logo</h3>
 				</div>
-				<form role="form" action="/user/company/update-company-logo" method="post" enctype="multipart/form-data">
+				<form role="form" action="/user/company/update-logo" method="post" enctype="multipart/form-data">
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="logo">Upload Logo</label>
-								<input type="file" name="resume" />
+								<input type="file" name="logo" />
 							</div>
 						</div>
 						<div class="form-group">

@@ -22,7 +22,6 @@
 		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="cityName"><i class="fa fa-fw fa-map-marker"></i> ${jobEntity["Company_City"] }</li>
 		            		 			<li class="spacer" style="clear: both"></li>
 	            		 			</ul>
-	            		 			
 	            		 		</div>
  								<div class="col-md-3">
 									<button class="btn btn-success" style="margin-top: 15px; margin-left:10px; float: right">Apply For Job</button>

@@ -96,6 +96,7 @@ public class UserController {
 			request.getSession().setAttribute("userId", user.getUserId());
 			request.getSession().setAttribute("userfname", user.getUserFname());
 			request.getSession().setAttribute("userlname", user.getUserLname());
+			request.getSession().setAttribute("imgurl", "https://hireslate.s3.ap-south-1.amazonaws.com/"+user.getUserId()+"/photo.png");
 			msg = "redirect:/user/tryfrontend";  
 		}
 		else {
