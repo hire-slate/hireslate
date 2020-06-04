@@ -1,7 +1,7 @@
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
-			<form class="form-register" action="/user/register/new" method="post" id="userForm">
+			<form class="form-register" action="/user/register/new" method="post" id="userForm" enctype="multipart/form-data">
 				<div id="form-total">
 					<h2>
 						<p class="step-icon">
@@ -225,6 +225,39 @@
 										<legend>Github</legend>
 										<input type="text" class="form-control" id="github"
 											name="candidateGithub" placeholder="Github">
+									</fieldset>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+					<h2>
+						<p class="step-icon">
+							<span>03</span>
+						</p>
+						<span class="step-text">Upload Documents</span>
+					</h2>
+					<section>
+						<div class="inner">
+							<div class="wizard-header">
+								<h3 class="heading">Upload Documents</h3>
+								<p>Please Upload the required documents.</p>
+							</div>
+							<div class="form-row">
+								<div class="form-holder form-holder-2">
+									<fieldset>
+										<legend>Photo</legend>
+										<input type="file" class="form-control" name="photo" required>
+										<p>Upload PNG of square 544px only </p>
+									</fieldset>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-holder form-holder-2">
+									<fieldset>
+										<legend>Resume</legend>
+										<input type="file" class="form-control" name="resume" required>
+										<p>Upload PDF only</p>
 									</fieldset>
 								</div>
 							</div>

@@ -45,7 +45,7 @@ public class UserRepository {
 	}
 	
 	public UserEntity getUser(String username , String password) {
-		String sql = "select User_Id,User_Fname,User_Lname from user where User_UserName = '"+username+"' and User_Password = '"+password+"' ";
+		String sql = "select User_Id,User_Fname,User_Lname from user where User_Email = '"+username+"' and User_Password = '"+password+"' ";
 		UserEntity user = new UserEntity(); 
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {
@@ -103,6 +103,12 @@ public class UserRepository {
 		userEntity.setUserPincode((int)row.get("User_PinCode"));
 		userEntity.setUserUserName((String)row.get("User_UserName"));
 		return userEntity;
+	}
+	
+	public String getEmail(int userId) {
+		String sql = "select User_Email from user where User_Id="+userId;
+		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+		return (String)row.get("User_Email");
 	}
 }
 	

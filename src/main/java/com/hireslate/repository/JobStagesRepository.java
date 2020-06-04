@@ -1,5 +1,8 @@
 package com.hireslate.repository;
 
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,5 +85,25 @@ public class JobStagesRepository {
 	public void delete(int id) {
 		String sql = "delete from job_stages where Job_Stage_id = "+id;
 		jdbcTemplate.execute(sql);
+	}
+	
+	public String getStages(int jobId) { 
+		String sql = "select * from job_stages where Job_Id="+jobId;
+		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
+		int count=1;
+		StringBuffer interview =new StringBuffer();
+		for(Map<String,Object> row : rows) {
+			interview.append("Stage "+count+": ");
+			interview.append((String)row.get("Stage_Name"));
+			Timestamp startTime = (Timestamp)row.get("Stage_StartDate");
+			Timestamp endTime = (Timestamp)row.get("Stage_EndDate");
+			String startDate = new SimpleDateFormat("dd/MMM").format(startTime);
+			String endDate = new SimpleDateFormat("dd/MMM").format(endTime);
+			interview.append(" Start Date: "+startDate+" End Date: "+endDate);
+			interview.append("<br/>");
+			count++;
+		}
+		String steps = ""+interview;
+		return steps;
 	}
 }

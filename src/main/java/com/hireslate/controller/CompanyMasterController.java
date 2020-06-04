@@ -180,10 +180,10 @@ public class CompanyMasterController {
 		try {
 			//byte[] bytes = file.getBytes();
 			//String path = file.getOriginalFilename();
-	        //Path path = java.nio.file.Paths.get(file.getOriginalFilename());
-			s3client.putObject(
-					new PutObjectRequest(bucket, "company/"+companyId+"/logo.png", new File(file.getOriginalFilename()))
-							.withCannedAcl(CannedAccessControlList.PublicRead));
+	        //Path path = java.nio.file.Paths.get(file.getOriginalFilename());			
+			InputStream is= file.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, "company/"+companyId+"/logo.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+		
 		}catch(Exception e){}
 		return "redirect:/user/company/edit-companyprofile";
 	}
@@ -203,9 +203,10 @@ public class CompanyMasterController {
 			//byte[] bytes = file.getBytes();
 			//String path = file.getOriginalFilename();
 	        //Path path = java.nio.file.Paths.get(file.getOriginalFilename());
-			s3client.putObject(
-					new PutObjectRequest(bucket, "company/"+companyId+"/pancard.png", new File(file.getOriginalFilename()))
-							.withCannedAcl(CannedAccessControlList.PublicRead));
+			
+			InputStream is= file.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, "company/"+companyId+"/pancard.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+		
 		}catch(Exception e){}
 		return "redirect:/user/company/edit-companyprofile";
 	}

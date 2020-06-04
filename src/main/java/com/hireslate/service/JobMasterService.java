@@ -57,5 +57,9 @@ public class JobMasterService {
 		totalJobs=totalJobs/5;
 		return totalJobs*5;
 	}
+	
+	public String getJobTitle(int jobId) {
+		return jobMasterRepository.getJobTitle(jobId);
+	}
 }
 	

@@ -54,4 +54,8 @@ public class UserService {
 	public UserEntity viewUser(int userId) {
 		return userRepository.getUser(userId);
 	}
+	
+	public String getUserEmail(int userId) {
+		return userRepository.getEmail(userId);
+	}
 }

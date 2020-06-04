@@ -33,4 +33,7 @@ public class JobStagesService {
 	public void deleteJobStages(int id) {
 		jobStagesRepository.delete(id);
 	}
+	public String getInterviewSteps(int jobId) {
+		return jobStagesRepository.getStages(jobId);
+	}
 }

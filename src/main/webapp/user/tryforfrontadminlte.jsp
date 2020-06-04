@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="searchresult" id="search"></div>
-	<form id="oneCompany" method="Post" action="/user/job-apply" onsubmit="showMessage()">
+	<form id="oneCompany" method="Post" action="/user/job-apply">
 		
 		<input type="hidden" id="userId" name="userId" value="<%=session.getAttribute("userId") %>"/>
 		<input type="hidden" name="jobId" id="jobId"/>

@@ -1,6 +1,7 @@
 package com.hireslate.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.Properties;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.UserEntity;
@@ -34,6 +36,7 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.google.common.io.Files;
 
 @Controller
 @RequestMapping(value="/user")
@@ -64,7 +67,7 @@ public class CandidateMasterController {
 			@RequestParam("userState") String state,@RequestParam("userBDate") String bdate,@RequestParam("userPincode") int pincode,@RequestParam("candidateInstitute") String institute,
 			@RequestParam("candidateUniversity") String university,@RequestParam("candidateCourse") int courseId,@RequestParam("candidateStream") int streamId,
 			@RequestParam("candidateStartYear") String startYear,@RequestParam("candidateEndYear") String endYear,@RequestParam("candidatelinkedIn") String linkedIn,
-			@RequestParam("candidateGithub") String github) {
+			@RequestParam("candidateGithub") String github, @RequestParam("photo") MultipartFile photo, @RequestParam("resume") MultipartFile resume) {
 	
 		
 		UserEntity user = new UserEntity();
@@ -117,7 +120,20 @@ public class CandidateMasterController {
 		PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, folderName, emptyContent,metadata);
 		s3client.putObject(putObjectRequest);
 		
+		String photoExtension = Files.getFileExtension(photo.getOriginalFilename());
 		try {
+		if(photoExtension.equals("PNG")|| photoExtension.equals("png")) {
+			InputStream is= photo.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, userId+"/photo.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+		}
+		
+		String resumeExtension = Files.getFileExtension(resume.getOriginalFilename());
+		
+		if(resumeExtension.equals("pdf")|| resumeExtension.equals("PDF")) {
+			InputStream is= resume.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, userId+"/resume.pdf",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+		
+		}
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -134,7 +150,7 @@ public class CandidateMasterController {
 
 		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getUserEmail()));
 		   msg.setSubject("WELCOME TO HIRESLATE");
-		   String message = "Welcome "+user.getUserFname()+"to Hireslate. We Hope you find a perfect job for your career.";
+		   String message = "Welcome "+user.getUserFname()+" to Hireslate. We Hope you find a perfect job for your career.";
 		   msg.setContent(message, "text/html");
 		   msg.setSentDate(new java.util.Date());
 		   Transport.send(msg);

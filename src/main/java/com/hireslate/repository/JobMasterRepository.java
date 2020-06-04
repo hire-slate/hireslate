@@ -186,4 +186,10 @@ public class JobMasterRepository {
 		long totalJobs = (long)row.get("COUNT(Job_Id)");
 		return totalJobs;
 	}
+	
+	public String getJobTitle(int jobId) {
+		String sql = "select Job_Title from job_master where Job_Id="+jobId;
+		Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+		return (String)row.get("Job_Title");
+	}
 }
