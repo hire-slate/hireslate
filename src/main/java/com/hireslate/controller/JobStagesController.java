@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.JobStagesEntity;
+import com.hireslate.service.JobMasterService;
 import com.hireslate.service.JobStagesService;
 
 @Controller
@@ -20,6 +23,8 @@ public class JobStagesController{
 	
 	@Autowired
 	JobStagesService jobStagesService;
+	@Autowired
+	JobMasterService jobMasterService;
 
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
@@ -30,7 +35,10 @@ public class JobStagesController{
 	@RequestMapping(value="/create/form/{id}",method=RequestMethod.GET)
 	public String showCreateJobStepForm(Model model,@PathVariable("id")int id) {
 		model.addAttribute("jobId",id);
+		JobMasterEntity jobMasterEntity = new JobMasterEntity();
 		List<JobStagesEntity> jobStages = jobStagesService.viewJobStages(id);
+		jobMasterEntity = jobMasterService.viewJobMasterById(id);
+		model.addAttribute("jobName", jobMasterEntity.getJobTitle());
 		model.addAttribute("jobStages",jobStages);
 		return "admin/job-stages/create.jsp";
 	}
@@ -41,6 +49,10 @@ public class JobStagesController{
 		String msg = "";
 		JobStagesEntity jobStagesEntity = new JobStagesEntity();
 		
+		JobMasterEntity jobMasterEntity = new JobMasterEntity();
+		jobMasterEntity = jobMasterService.viewJobMasterById(id);
+		model.addAttribute("jobName", jobMasterEntity.getJobTitle());
+	
 		if(submit.equals("save")) {
 			String jobStageDate = (String)jobStageDateRange;
 			String[] jobStageDates = jobStageDate.split(" - ");
@@ -57,7 +69,15 @@ public class JobStagesController{
 			msg = "admin/job-stages/create.jsp";
 		}
 		else {
-			
+			String jobStageDate = (String)jobStageDateRange;
+			String[] jobStageDates = jobStageDate.split(" - ");
+			Date jobStageOpening	= Date.valueOf(jobStageDates[0]);
+			Date jobStageClosing	= Date.valueOf(jobStageDates[1]);
+			jobStagesEntity.setJobId(id);
+			jobStagesEntity.setStageName(jobStageName);
+			jobStagesEntity.setStageStartDate(jobStageOpening);
+			jobStagesEntity.setStageEndDate(jobStageClosing);
+			jobStagesService.insertJobStages(jobStagesEntity);
 			msg = "redirect:/admin/dashboard"; 
 		}
 		return msg;

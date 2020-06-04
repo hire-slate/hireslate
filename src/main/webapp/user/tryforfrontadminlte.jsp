@@ -9,7 +9,7 @@
 					<div class="input-group input-group-sm"
 						style="width: 500px; margin: auto; margin-bottom: 10px">
 						<input type="text" name="input" class="form-control pull-right"
-							placeholder="Search" value="" onkeyup="callJobs()">
+							placeholder="Search" value=" " onkeyup="callJobs()">
 					</div>
 				</div>
 			</form>
@@ -19,7 +19,7 @@
 	<div class="searchresult" id="search"></div>
 	<form id="oneCompany" method="Post" action="/user/job-apply" onsubmit="showMessage()">
 		
-		<input type="hidden" name="userId" value="<%=session.getAttribute("userId") %>"/>
+		<input type="hidden" id="userId" name="userId" value="<%=session.getAttribute("userId") %>"/>
 		<input type="hidden" name="jobId" id="jobId"/>
 		<div class="row" style="margin: auto">
 				
@@ -62,13 +62,13 @@
 
 		callJobs();
 		function callJobs() {
-			var skill = document.form.input.value;
-			console.log(skill);
+			var skill  = document.form.input.value;
+			var userId = $("#userId").attr("value");
 
 			$.ajax({
 				type : "POST",
 				url : "/admin/job-master/search",
-				data : skill,
+				data : JSON.stringify({"skill" : skill,"userId" : userId}),
 				contentType : "application/json;charset=utf-8",
 				dataType : "json",
 				success : function(result) {

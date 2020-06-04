@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,12 +41,16 @@ public class JobMasterController {
 
 	@Autowired
 	JobMasterService jobMasterService;
+	
 	@Autowired
 	JobTypeMasterService jobTypeMasterService;
+	
 	@Autowired 
 	SkillMasterService skillMasterService;
+	
 	@Autowired
 	JobSkillMappingService jobSkillMappingService;
+	
 	@Autowired
 	JobCandidateMappingService jobCandidateMappingService;
 	
@@ -73,24 +78,23 @@ public class JobMasterController {
 			@RequestParam("jobTypeId")int jobTypeId,
 			@RequestParam("jobSkills")int[] jobSkills,HttpServletRequest request){
 		
-		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
-		Date jobClosingDate = Date.valueOf(jobClosingDateString);
-		HttpSession session = request.getSession();
-		JobMasterEntity job = new JobMasterEntity();
-		job.setJobBenefits(jobBenefits);
-		job.setJobDescription(jobDescription);
-		job.setJobSalary(jobSalary);
-		job.setJobTitle(jobTitle);
-		job.setJobTypeId(jobTypeId);
-		job.setJobVacancy(jobVacancy);
-		job.setJobClosingDate(jobClosingDate);
-		job.setJobOpeningDate(jobOpeningDate);
-		job.setJobCompanyId((int)session.getAttribute("companyId"));
-		int jobId = jobMasterService.insertJobMasterAndGetID(job);
-		jobSkillMappingService.insertJobSkillMapping(jobId, jobSkills);
-	
-		
-		return "redirect:/admin/job-steps/create/form/"+jobId;
+			Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
+			Date jobClosingDate = Date.valueOf(jobClosingDateString);
+			HttpSession session = request.getSession();
+			JobMasterEntity job = new JobMasterEntity();
+			job.setJobBenefits(jobBenefits);
+			job.setJobDescription(jobDescription);
+			job.setJobSalary(jobSalary);
+			job.setJobTitle(jobTitle);
+			job.setJobTypeId(jobTypeId);
+			job.setJobVacancy(jobVacancy);
+			job.setJobClosingDate(jobClosingDate);
+			job.setJobOpeningDate(jobOpeningDate);
+			job.setJobCompanyId((int)session.getAttribute("companyId"));
+			int jobId = jobMasterService.insertJobMasterAndGetID(job);
+			jobSkillMappingService.insertJobSkillMapping(jobId, jobSkills);
+			
+			return "redirect:/admin/job-steps/create/form/"+jobId;
 	}
 	
 	@RequestMapping(value="/edit/{id}",method=RequestMethod.GET)
@@ -137,21 +141,20 @@ public class JobMasterController {
 	
 	
 	@RequestMapping(value="/search" ,method=RequestMethod.POST ,produces={"application/json"})
-	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
+	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String data) {
 		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
-		System.out.print(input);
-		/*
-		String[] skillParameter = input.split("\"");
+		
+		String[] input = data.split("\"");
 		String skill;
-		try {
-		    skill = skillParameter[1];
+		if(input[3].equals(" ")) {
+			skill = "";
 		}
-		catch(ArrayIndexOutOfBoundsException e) {
-			skill="";
+		else {
+			skill = input[3];
 		}
-		*/
-		System.out.println("skill: "+input);
-		List<String> jobs = jobMasterService.searchJobBySkill(input);
+		String userId = input[7];
+	
+		List<String> jobs = jobMasterService.searchJobBySkill(skill);
 		return new Gson().toJson(jobs);
 	}
 	
@@ -160,6 +163,7 @@ public class JobMasterController {
 		
 		//List<List> jobs = job.MasterService.searchJobByCompany(input);
 		List<Map<String,Object>> jobs = jobMasterService.searchJobByCompany(input);
+		
 //		JsonArray jobResult = new JsonArray();
 //		JsonArray jobsResult = new JsonArray();
 //		for(List<String> job : jobs) {
