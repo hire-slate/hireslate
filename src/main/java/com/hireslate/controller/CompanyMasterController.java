@@ -119,6 +119,8 @@ public class CompanyMasterController {
 		String msg;
 		msg = companyMasterService.doCompanyLogin(username,password,request);
 		//System.out.println(msg);
+		
+		request.getSession().setAttribute("logoUrl", "https://hireslate.s3.ap-south-1.amazonaws.com/company/"+(int)request.getSession().getAttribute("companyId")+"/logo.png");
 		return msg;
 	}
 	
@@ -169,7 +171,7 @@ public class CompanyMasterController {
 	@RequestMapping(value="/update-logo",method=RequestMethod.POST)
 	public String updatePhoto(HttpServletRequest request,@RequestParam("logo") MultipartFile file) {
 		
-		String companyId = (String) request.getSession().getAttribute("companyId");
+		String companyId = ""+(int)request.getSession().getAttribute("companyId");
 		AWSCredentials credentials = new BasicAWSCredentials(accessToken,secretKey);
 		
 		AmazonS3 s3client = AmazonS3ClientBuilder
@@ -191,7 +193,7 @@ public class CompanyMasterController {
 	@RequestMapping(value="/update-pancard",method=RequestMethod.POST)
 	public String updatePancard(HttpServletRequest request,@RequestParam("pancard") MultipartFile file) {
 		
-		String companyId = (String) request.getSession().getAttribute("companyId");
+		String companyId = ""+(int)request.getSession().getAttribute("companyId");
 		AWSCredentials credentials = new BasicAWSCredentials(accessToken,secretKey);
 		
 		AmazonS3 s3client = AmazonS3ClientBuilder

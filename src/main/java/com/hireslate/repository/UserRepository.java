@@ -52,6 +52,7 @@ public class UserRepository {
 			user.setUserId((int)row.get("User_Id"));
 			user.setUserFname((String)row.get("User_Fname"));
 			user.setUserLname((String)row.get("User_Lname"));
+			
 		}
 		return user;
 	}

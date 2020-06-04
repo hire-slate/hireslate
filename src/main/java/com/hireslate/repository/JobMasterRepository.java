@@ -131,7 +131,7 @@ public class JobMasterRepository {
     	//		+ "company_master cm where jsm.Skill_Id = s.Skill_Id AND jsm.Job_Id = jm.Job_Id AND jm.Company_Id = "
     	//		+ "cm.Company_Id AND s.Skill_Id IN (SELECT s.Skill_Id FROM skill_master WHERE s.Skill_Name like '"+skill+"%')";
     	
-    	String sql = "SELECT DISTINCT job_master.Job_Id, job_master.Job_Title, company_master.Company_Name, company_master.Company_City, job_type_master.Job_Type_Name " + 
+    	String sql = "SELECT DISTINCT job_master.Job_Id, job_master.Job_Title, company_master.Company_Name,company_master.Company_Id, company_master.Company_City, job_type_master.Job_Type_Name " + 
     				 "from job_master, skill_master, job_skill_mapping, company_master,job_type_master " + 
     				 "WHERE job_master.Job_Id = job_skill_mapping.Job_Id and job_skill_mapping.Skill_Id = skill_master.Skill_Id "+
     				 "and job_master.Company_Id = company_master.Company_Id and job_master.Job_Type_Id = job_type_master.Job_Type_Id "+
@@ -146,6 +146,7 @@ public class JobMasterRepository {
     		jobs.add((String)row.get("Company_Name"));
     		jobs.add((String)row.get("Company_City"));
     		jobs.add((String)row.get("Job_Type_Name"));
+    		jobs.add(""+(int)row.get("Company_Id"));
        	}
     	return jobs;
     }
