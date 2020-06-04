@@ -8,7 +8,7 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true"></span></button>
-                <h4 class="modal-title">Job Apply successfully</h4>
+                <h4 class="modal-title">Job Apply Status</h4>
               </div>
               <div class="modal-body">
                 <p id="data"></p>
@@ -32,9 +32,10 @@
 			</form>
 		</div>
 	</div>
+	<div class="dataResponse" style="display: none" >${MsgForJobApply }</div>
 
 	<div class="searchresult" id="search"></div>
-	<form id="oneCompany" method="Post" action="/user/job-apply">
+	<form id="oneCompany" method="Post" action="/user/job-apply" onsubmit="showMessage()">
 		
 		<input type="hidden" id="userId" name="userId" value="<%=session.getAttribute("userId") %>"/>
 		<input type="hidden" name="jobId" id="jobId"/>
@@ -74,7 +75,10 @@
 		$("#oneCompany").hide(); 
 
 		function showMessage(){
-				alert("hi");
+			var msg = $("#dataResponse").html();
+			$("#modal-info").find("#data").html(msg);
+			$("#modal-info").css("display","flex");
+				
 		}
 
 		function hideModelPopup(){

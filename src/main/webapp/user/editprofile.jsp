@@ -51,9 +51,11 @@
 								<input type="password" class="form-control" name="cPassword" required="required">
 							</div>
 						</div>
+						<div class="col-md-4">
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Update</button>
 							<button type="button" class="btn btn-danger">Cancel</button>
+						</div>
 						</div>
 					</div>
 				</form>

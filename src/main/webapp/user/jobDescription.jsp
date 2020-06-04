@@ -24,7 +24,9 @@
 	            		 			</ul>
 	            		 		</div>
  								<div class="col-md-3">
-									<button class="btn btn-success" style="margin-top: 15px; margin-left:10px; float: right">Apply For Job</button>
+ 									<input type="hidden" id="userId" name="userId" value="<%=session.getAttribute("userId") %>"/>
+									<input type="hidden" name="jobId" id="jobId"/>
+									<button class="btn btn-success" type="submit" style="margin-top: 15px; margin-left:10px; float: right">Apply For Job</button>
 								</div>
             		 		</div>
 						</div>            		 

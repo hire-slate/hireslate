@@ -23,9 +23,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hireslate.model.CandidateMasterEntity;
+import com.hireslate.model.CourseMasterEntity;
+import com.hireslate.model.StreamMasterEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CandidateMasterService;
+import com.hireslate.service.CourseMasterService;
+import com.hireslate.service.StreamMasterService;
 import com.hireslate.service.UserService;
+
+import antlr.collections.List;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -46,6 +53,11 @@ public class CandidateMasterController {
 	UserService userService;
 	@Autowired
 	CandidateMasterService candidateMasterService;
+	@Autowired 
+	CourseMasterService courseMasterService;
+	@Autowired
+	StreamMasterService streamMasterService;
+	
 	@Value("${aws.accessToken}")
 	private String accessToken;
 	@Value("${aws.secretKey}")
@@ -56,7 +68,12 @@ public class CandidateMasterController {
 	private String awsUrl;
 	
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
-	public String showCandidateRegisterForm() {
+	public String showCandidateRegisterForm(Model model) {
+		
+		java.util.List<CourseMasterEntity> courses = courseMasterService.viewCourseMaster(); 
+		java.util.List<StreamMasterEntity> streams = streamMasterService.viewStreamMaster();
+		model.addAttribute("courses", courses);
+		model.addAttribute("streams", streams);
 		return "user/candidateregister.jsp";
 	}
 	

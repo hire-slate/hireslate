@@ -1,7 +1,7 @@
 <div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-		        <form class="form-register" action="/user/company/register/new" method="post" enctype="multipart/form-data">
+		        <form class="form-register" action="/user/company/register/new" method="post" id="companyForm" enctype="multipart/form-data">
 		        	<div id="form-total">
 		        		<!-- SECTION 1 -->
 			            <h2>
@@ -118,13 +118,7 @@
 										</fieldset>
 									</div>
 								</div>
-									<div class="form-row">
-									<div class="form-holder form-holder-2">
-										<fieldset>
-											<input type="submit" name="companySubmit" id="cpassword" class="form-control" value="register" required>
-										</fieldset>
-									</div>
-								</div>
+									
 							
 							</div>
 			            </section>
@@ -150,8 +144,13 @@
 		labels : {
 			previous : 'Back Step',
 			next : '<i class="zmdi zmdi-arrow-right"></i>',
+			finish : '<i class="zmdi zmdi-check"></i>',
 			current : ''
 		},
+
+		onFinished : function(event, currentIndex){
+			$("#companyForm").submit();	
+		}
 	});
 </script>
 	

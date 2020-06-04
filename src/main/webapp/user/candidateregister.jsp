@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
@@ -180,8 +185,13 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>Course</legend>
-										<input type="text" class="form-control" id="course"
-											name="candidateCourse" placeholder="Course Name" required>
+											<select name="candidateCourse" id="gender">
+												<option value="0">select course</option>
+												<c:forEach items="${courses}" var="variable">
+													<option value="${variable.courseId}">${variable.courseName}</option>
+												</c:forEach>
+											</select>
+										
 									</fieldset>
 								</div>
 							</div>
@@ -189,8 +199,12 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>Stream</legend>
-										<input type="text" class="form-control" id="stream"
-											name="candidateStream" placeholder="stream Name" required>
+										<select name="candidateStream" id="stream">
+											<option value="0">select Stream</option>
+											<c:forEach items="${streams}" var="variable">
+													<option value="${variable.streamId}">${variable.streamName}</option>
+											</c:forEach>
+										</select>
 									</fieldset>
 								</div>
 							</div>
@@ -214,7 +228,7 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>LinkedIn</legend>
-										<input type="text" class="form-control" id="linkedin"
+										<input type="url" class="form-control" id="linkedin"
 											name="candidatelinkedIn" placeholder="LinkedIn">
 									</fieldset>
 								</div>
@@ -223,7 +237,7 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>Github</legend>
-										<input type="text" class="form-control" id="github"
+										<input type="url" class="form-control" id="github"
 											name="candidateGithub" placeholder="Github">
 									</fieldset>
 								</div>

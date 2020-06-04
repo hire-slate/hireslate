@@ -210,7 +210,7 @@
 							<!-- Menu Footer-->
 							<li class="user-footer">
 								<div class="pull-left">
-									<a href="#" class="btn btn-default btn-flat">Profile</a>
+									<a href="/user/company/edit-companyprofile" class="btn btn-default btn-flat">Edit Profile</a>
 								</div>
 								<div class="pull-right">
 									<a href="/user/company/logout" class="btn btn-default btn-flat">Sign out</a>

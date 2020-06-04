@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -241,13 +242,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/job-apply", method = RequestMethod.POST)
-	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId, HttpServletRequest request) 
+	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId, HttpServletRequest request,HttpServletResponse response ) 
 			throws AddressException, MessagingException, IOException{
+		HttpSession s = request.getSession();
 		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
 		jobCandidateMappingEntity.setJobId(jobId);
 		jobCandidateMappingEntity.setUserId(userId);
 		try {
 			jcms.insert(jobCandidateMappingEntity);
+			s.setAttribute("MsgForJobApply", "You applied for this job successfully");
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
@@ -272,7 +275,7 @@ public class UserController {
 			   Transport.send(msg);
 		}
 		catch(DuplicateKeyException e) {
-			model.addAttribute("errorMsgForJobApply", "You Already applied for this job");
+			s.setAttribute("MsgForJobApply", "You Already applied for this job");
 		}
 		
 		return "redirect:/user/tryfrontend";
