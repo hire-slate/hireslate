@@ -144,15 +144,14 @@ public class JobMasterController {
 	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String data) {
 		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		
-		String[] input = data.split("\"");
 		String skill;
-		if(input[3].equals(" ")) {
+		if(data.equalsIgnoreCase("skill")) {
 			skill = "";
 		}
 		else {
-			skill = input[3];
+			skill = data;
 		}
-		String userId = input[7];
+		
 	
 		List<String> jobs = jobMasterService.searchJobBySkill(skill);
 		return new Gson().toJson(jobs);

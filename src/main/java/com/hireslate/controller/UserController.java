@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -233,7 +234,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/jobDescription/{id}",method = RequestMethod.GET)
 	public String jobDescription(Model model,@PathVariable("id")int jobId) {
-		
 		Map<String, Object> jobDescription = jobMasterService.viewJobDescription(jobId);
 		model.addAttribute("jobEntity", jobDescription);
 		return "user/jobDescription.jsp";
@@ -245,30 +245,35 @@ public class UserController {
 		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
 		jobCandidateMappingEntity.setJobId(jobId);
 		jobCandidateMappingEntity.setUserId(userId);
-		jcms.insert(jobCandidateMappingEntity);
-	
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-		   
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-		protected PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication("hireslate@gmail.com", "hesoyamtrojan@123");
-		      }
-		   });
-		   Message msg = new MimeMessage(session);
-		   msg.setFrom(new InternetAddress("hireslate@gmail.com", false));
-		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userService.getUserEmail(userId)));
-		   System.out.println(userService.getUserEmail(userId));
-		   msg.setSubject("Hireslate: Applied for "+jobMasterService.getJobTitle(jobId));
-		   String line1 = "You have applied for "+jobMasterService.getJobTitle(jobId)+"<br/>";
-		   String line2 = "Interview Steps are as follows :<br/>";
-		   String line3 = jss.getInterviewSteps(jobId);
-		   msg.setContent(line1+line2+line3, "text/html");
-		   msg.setSentDate(new java.util.Date());
-		   Transport.send(msg);
+		try {
+			jcms.insert(jobCandidateMappingEntity);
+			Properties props = new Properties();
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", "587");
+			   
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+			return new PasswordAuthentication("hireslate@gmail.com", "hesoyamtrojan@123");
+			      }
+			   });
+			   Message msg = new MimeMessage(session);
+			   msg.setFrom(new InternetAddress("hireslate@gmail.com", false));
+			   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userService.getUserEmail(userId)));
+			   System.out.println(userService.getUserEmail(userId));
+			   msg.setSubject("Hireslate: Applied for "+jobMasterService.getJobTitle(jobId));
+			   String line1 = "You have applied for "+jobMasterService.getJobTitle(jobId)+"<br/>";
+			   String line2 = "Interview Steps are as follows :<br/>";
+			   String line3 = jss.getInterviewSteps(jobId);
+			   msg.setContent(line1+line2+line3, "text/html");
+			   msg.setSentDate(new java.util.Date());
+			   Transport.send(msg);
+		}
+		catch(DuplicateKeyException e) {
+			model.addAttribute("errorMsgForJobApply", "You Already applied for this job");
+		}
+		
 		return "redirect:/user/tryfrontend";
 	}
 }

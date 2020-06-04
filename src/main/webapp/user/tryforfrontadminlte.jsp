@@ -2,6 +2,23 @@
 	pageEncoding="ISO-8859-1"%>
 
 <section class="content">
+	<div class="modal modal-info" id="modal-info" style="display: none; padding-right: 17px;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"></span></button>
+                <h4 class="modal-title">Job Apply successfully</h4>
+              </div>
+              <div class="modal-body">
+                <p id="data"></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" onclick="hideModelPopup()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
 	<div class="mycustomclass" style="margin: auto">
 		<div class="row">
 			<form name="form">
@@ -9,7 +26,7 @@
 					<div class="input-group input-group-sm"
 						style="width: 500px; margin: auto; margin-bottom: 10px">
 						<input type="text" name="input" class="form-control pull-right"
-							placeholder="Search" value=" " onkeyup="callJobs()">
+							placeholder="Search" value="" onkeyup="callJobs()">
 					</div>
 				</div>
 			</form>
@@ -45,30 +62,37 @@
 		           		</div>
 						<div class="col-md-3">
 							<button class="btn btn-success" type="submit"  style="margin-top: 15px; margin-left:10px; float: right">Apply</button>
-							<a id="link"><button class="btn btn-submit" style="margin-top: 15px;  float: right"><i class="fa fa-eye"></i></button></a>
+							<a id="link"><i class="fa fa-eye" style="margin-top: 20px;  float: right"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+		
 	<script>
 		$("#oneCompany").hide(); 
 
 		function showMessage(){
 				alert("hi");
 		}
-		
 
+		function hideModelPopup(){
+				$("#modal-info").css("display","none");
+		}
+		
 		callJobs();
+		
 		function callJobs() {
 			var skill  = document.form.input.value;
-			var userId = $("#userId").attr("value");
-
+			if(skill == ""){
+				skill = "skill";
+			}
+			
 			$.ajax({
 				type : "POST",
 				url : "/admin/job-master/search",
-				data : JSON.stringify({"skill" : skill,"userId" : userId}),
+				data : skill,
 				contentType : "application/json;charset=utf-8",
 				dataType : "json",
 				success : function(result) {
