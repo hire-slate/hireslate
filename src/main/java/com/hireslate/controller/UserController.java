@@ -32,8 +32,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.CandidateMasterEntity;
+import com.hireslate.model.JobCandidateMappingEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CandidateMasterService;
+import com.hireslate.service.JobCandidateMappingService;
 import com.hireslate.service.JobMasterService;
 import com.hireslate.service.UserService;
 
@@ -47,6 +49,9 @@ public class UserController {
 	JobMasterService jobMasterService;
 	@Autowired
 	CandidateMasterService cms;
+	@Autowired
+	JobCandidateMappingService jcms;
+	
 	
 	@Value("${aws.accessToken}")
 	private String accessToken;
@@ -214,5 +219,14 @@ public class UserController {
 		Map<String, Object> jobDescription = jobMasterService.viewJobDescription(jobId);
 		model.addAttribute("jobEntity", jobDescription);
 		return "user/jobDescription.jsp";
+	}
+	
+	@RequestMapping(value = "/job-apply", method = RequestMethod.POST)
+	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId ) {
+		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
+		jobCandidateMappingEntity.setJobId(jobId);
+		jobCandidateMappingEntity.setUserId(userId);
+		jcms.insert(jobCandidateMappingEntity);
+		return "redirect:/user/tryfrontend";
 	}
 }

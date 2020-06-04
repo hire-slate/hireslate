@@ -23,9 +23,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hireslate.model.JobCandidateMappingEntity;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.JobTypeMasterEntity;
 import com.hireslate.model.SkillMasterEntity;
+import com.hireslate.service.JobCandidateMappingService;
 import com.hireslate.service.JobMasterService;
 import com.hireslate.service.JobSkillMappingService;
 import com.hireslate.service.JobTypeMasterService;
@@ -44,6 +46,8 @@ public class JobMasterController {
 	SkillMasterService skillMasterService;
 	@Autowired
 	JobSkillMappingService jobSkillMappingService;
+	@Autowired
+	JobCandidateMappingService jobCandidateMappingService;
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String showJobMaster(Model model) {
@@ -135,6 +139,8 @@ public class JobMasterController {
 	@RequestMapping(value="/search" ,method=RequestMethod.POST ,produces={"application/json"})
 	public @ResponseBody String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
 		//public  String searchJobs(Model model,HttpServletRequest request,HttpServletResponse response, @RequestBody String input) {
+		System.out.print(input);
+		/*
 		String[] skillParameter = input.split("\"");
 		String skill;
 		try {
@@ -143,7 +149,9 @@ public class JobMasterController {
 		catch(ArrayIndexOutOfBoundsException e) {
 			skill="";
 		}
-		List<String> jobs = jobMasterService.searchJobBySkill(skill);
+		*/
+		System.out.println("skill: "+input);
+		List<String> jobs = jobMasterService.searchJobBySkill(input);
 		return new Gson().toJson(jobs);
 	}
 	
@@ -172,4 +180,13 @@ public class JobMasterController {
 		
 		return json;
 	}
+	
+	public void mapJobCandidate(int userId, int jobId) {
+		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
+		jobCandidateMappingEntity.setJobId(jobId);
+		jobCandidateMappingEntity.setUserId(userId);
+		System.out.println(jobCandidateMappingEntity.getJobId());
+		jobCandidateMappingService.insert(jobCandidateMappingEntity);
+	}
+	
 }

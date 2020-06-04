@@ -1,7 +1,4 @@
 
-
-
-
 <div class="hero-wrap js-fullheight">
 	<div class="overlay"></div>
 	<div class="container-fluid px-0">

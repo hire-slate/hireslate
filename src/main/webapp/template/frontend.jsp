@@ -162,8 +162,6 @@
 					<span class="focus-input100-2"></span>
 				</div>
 				<div>
-					<small class="txt1" style="color: red">Invalid Login Id or
-						Password</small>
 				</div>
 				<div class="container-login100-form-btn m-t-20">
 					<input class="login100-form-btn" name="loginBtn" type="submit"
