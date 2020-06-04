@@ -244,13 +244,16 @@ public class UserController {
 	@RequestMapping(value = "/job-apply", method = RequestMethod.POST)
 	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId, HttpServletRequest request,HttpServletResponse response ) 
 			throws AddressException, MessagingException, IOException{
-		HttpSession s = request.getSession();
 		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
+		JobMasterEntity jm = new JobMasterEntity();
 		jobCandidateMappingEntity.setJobId(jobId);
 		jobCandidateMappingEntity.setUserId(userId);
+		jm = jobMasterService.viewJobMasterById(jobId);
+		
 		try {
 			jcms.insert(jobCandidateMappingEntity);
-			s.setAttribute("MsgForJobApply", "You applied for this job successfully");
+			model.addAttribute("MsgForJobApply", "You applied for this job successfully");
+			model.addAttribute("job", jm);
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
@@ -275,9 +278,11 @@ public class UserController {
 			   Transport.send(msg);
 		}
 		catch(DuplicateKeyException e) {
-			s.setAttribute("MsgForJobApply", "You Already applied for this job");
+			model.addAttribute("MsgForJobApply", "You Already applied for this job");
+			model.addAttribute("job", jm);
+			
 		}
 		
-		return "redirect:/user/tryfrontend";
+		return "user/jobApplyResponse.jsp";
 	}
 }
