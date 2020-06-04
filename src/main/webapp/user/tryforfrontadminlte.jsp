@@ -47,7 +47,7 @@
 					<div class="row" style="position: relative; padding: 10px;">
 						 	
 			        	<div class="col-md-2">
-			        		<img src="" id="companyLogo" style="height: 70px;"/>
+			        		<img src="${pageContext.request.contextPath}/resources/dist/img/Logo-Design1.jpg" style="height: 70px;"/>
 						</div>
 						
 						 
@@ -113,9 +113,7 @@
 						x.find("#cityName").append(result[i]);
 						i++;
 						x.find("#jobTypeName").append(result[i]);
-						i++;
-						x.find("#").append(result[i]);
-						$(".searchresult").attr("src","https://hireslate.s3.ap-south-1.amazonaws.com/company/"+result[i]+"/logo.png");
+						$(".searchresult").append(x);
 					}
 					$(".oneCompany").show();
 				},
