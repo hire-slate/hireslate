@@ -1,9 +1,20 @@
 package com.hireslate.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,14 +40,17 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hireslate.model.JobMasterEntity;
 import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.JobCandidateMappingEntity;
 import com.hireslate.model.UserEntity;
+import com.hireslate.repository.JobStagesRepository;
 import com.hireslate.service.CandidateMasterService;
 import com.hireslate.service.JobCandidateMappingService;
 import com.hireslate.service.JobMasterService;
+import com.hireslate.service.JobStagesService;
 import com.hireslate.service.UserService;
 
 @Controller
@@ -63,6 +77,9 @@ public class UserController {
 	private String awsUrl;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private JobStagesService jss;
 	
 	@RequestMapping(value = "/index" , method = RequestMethod.GET)
 	public String showIndex(HttpServletRequest request) {
@@ -116,9 +133,8 @@ public class UserController {
 			byte[] bytes = file.getBytes();
 			String path = file.getOriginalFilename();
 	        //Path path = java.nio.file.Paths.get(file.getOriginalFilename());
-			s3client.putObject(
-					new PutObjectRequest(bucket, userId+"/photo.png", new File(file.getOriginalFilename()))
-							.withCannedAcl(CannedAccessControlList.PublicRead));
+			InputStream is= file.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, userId+"/photo.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));	
 		}catch(Exception e){}
 		
 		return "redirect:/user/index";
@@ -184,9 +200,8 @@ public class UserController {
 			byte[] bytes = file.getBytes();
 			String path = file.getOriginalFilename();
 	        //Path path = java.nio.file.Paths.get(file.getOriginalFilename());
-			s3client.putObject(
-					new PutObjectRequest(bucket, userId+"/resume.pdf", new File(file.getOriginalFilename()))
-							.withCannedAcl(CannedAccessControlList.PublicRead));
+			InputStream is= file.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, userId+"/photo.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
 		}catch(Exception e){}
 		
 		return "redirect:/user/index";
@@ -225,11 +240,35 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/job-apply", method = RequestMethod.POST)
-	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId ) {
+	public String userAppliedJob(Model model, @RequestParam("userId")int userId, @RequestParam("jobId")int jobId, HttpServletRequest request) 
+			throws AddressException, MessagingException, IOException{
 		JobCandidateMappingEntity jobCandidateMappingEntity = new JobCandidateMappingEntity();
 		jobCandidateMappingEntity.setJobId(jobId);
 		jobCandidateMappingEntity.setUserId(userId);
 		jcms.insert(jobCandidateMappingEntity);
+	
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		   
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		protected PasswordAuthentication getPasswordAuthentication() {
+		return new PasswordAuthentication("hireslate@gmail.com", "hesoyamtrojan@123");
+		      }
+		   });
+		   Message msg = new MimeMessage(session);
+		   msg.setFrom(new InternetAddress("hireslate@gmail.com", false));
+		   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userService.getUserEmail(userId)));
+		   System.out.println(userService.getUserEmail(userId));
+		   msg.setSubject("Hireslate: Applied for "+jobMasterService.getJobTitle(jobId));
+		   String line1 = "You have applied for "+jobMasterService.getJobTitle(jobId)+"<br/>";
+		   String line2 = "Interview Steps are as follows :<br/>";
+		   String line3 = jss.getInterviewSteps(jobId);
+		   msg.setContent(line1+line2+line3, "text/html");
+		   msg.setSentDate(new java.util.Date());
+		   Transport.send(msg);
 		return "redirect:/user/tryfrontend";
 	}
 }

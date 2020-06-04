@@ -1,7 +1,7 @@
 <div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-		        <form class="form-register" action="/user/company/register/new" method="post">
+		        <form class="form-register" action="/user/company/register/new" method="post" enctype="multipart/form-data">
 		        	<div id="form-total">
 		        		<!-- SECTION 1 -->
 			            <h2>
