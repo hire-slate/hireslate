@@ -2,23 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <section class="content">
-	<div class="modal modal-info" id="modal-info" style="display: none; padding-right: 17px;">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true"></span></button>
-                <h4 class="modal-title">Job Apply Status</h4>
-              </div>
-              <div class="modal-body">
-                <p id="data"></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" onclick="hideModelPopup()">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
+	
 	<div class="mycustomclass" style="margin: auto">
 		<div class="row">
 			<form name="form">
@@ -73,11 +57,6 @@
 	<script>
 		$("#oneCompany").hide(); 
 
-	
-		function hideModelPopup(){
-				$("#modal-info").css("display","none");
-		}
-		
 		callJobs();
 		
 		function callJobs() {
