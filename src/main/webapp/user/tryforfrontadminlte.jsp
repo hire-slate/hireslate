@@ -113,6 +113,8 @@
 						x.find("#cityName").append(result[i]);
 						i++;
 						x.find("#jobTypeName").append(result[i]);
+						i++;
+						x.find("#companyLogo").attr("src","https://hireslate.s3.ap-south-1.amazonaws.com/company/"+result[i]+"/logo.png");
 						$(".searchresult").append(x);
 					}
 					$(".oneCompany").show();
