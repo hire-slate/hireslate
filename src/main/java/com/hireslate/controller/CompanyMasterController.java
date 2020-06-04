@@ -137,10 +137,14 @@ public class CompanyMasterController {
 	public String updateBasic(HttpServletRequest request, @RequestParam("companyName") String companyName,
 			@RequestParam("website") String website,@RequestParam("password") String password,@RequestParam("cpassword") String cpassword) {
 		
+		if(password.equals(cpassword)) {
 		String sql = "update company_master set Company_Name='"+companyName+"',Company_Website='"+website+"', Company_Password='"+cpassword+"'"
 				+ "where Company_Id="+request.getSession().getAttribute("companyId");
 		jdbcTemplate.execute(sql);
 		return "redirect:/user/company/edit-companyprofile";
+		}else {
+		return "redirect:/user/company/edit-companyprofile";
+		}
 	}
 	
 	@RequestMapping(value="/update-company-contact",method=RequestMethod.POST)

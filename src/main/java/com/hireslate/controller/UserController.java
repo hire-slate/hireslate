@@ -148,10 +148,14 @@ public class UserController {
 	public String updateBasic(HttpServletRequest request,HttpServletResponse response, @RequestParam String firstName,@RequestParam String middleName
 			,@RequestParam String lastName,@RequestParam String userName,@RequestParam String password,@RequestParam String cPassword) {
 		
+		if(password.equals(cPassword)) {
 		String sql = "update user set User_Fname='"+firstName+"',User_Mname='"+middleName+"',User_Lname='"+lastName+"',User_UserName='"+userName+"',User_Password='"+cPassword+"' where User_Id="+request.getSession().getAttribute("userId");
 		jdbcTemplate.execute(sql);
 		
 		return "redirect:/user/editprofile";
+		}else {
+			return "redirect:/user/editprofile";
+		}
 	}
 	
 	@RequestMapping(value="/uploadresume", method=RequestMethod.POST)
