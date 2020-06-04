@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <section class="content-header">
-	<h1>User Profile</h1>
+	<h1>Company Profile</h1>
 </section>
+
 <section class="content">
 
 	<div class="row">
@@ -11,42 +12,30 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Basic Details</h3>
 				</div>
-				<form role="form" action="" method="post">
+				<form role="form" action="/user/company/update-company-basic" method="post">
 					<div class="box-body">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
-								<input type="hidden" name="userId" value=""> 
-								<label for="firstName">First Name</label> <input type="text" class="form-control" name="firstName" value="">
+								<label for="companyName">Company Name</label> 
+								<input type="text" class="form-control" name="companyName" value="${companyName}">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label for="middleName">Middle Name</label> <input type="text"
-									class="form-control" id="middleName" value="">
+								<label for="website">Website</label> 
+								<input type="text" class="form-control" name="website" value="${cwebsite}">
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="lastName">Last Name</label> <input type="text"
-									class="form-control" id="lastName" value="">
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="username">Username</label> 
-								<input type="text" class="form-control" id="username" value="">
-							</div>
-						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label for="password">Password</label> 
-								<input type="password" class="form-control" id="password" value="">
+								<input type="password" class="form-control" name="password" value="${cpassword}" required="required">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label for="cpassword">Confirm Password</label> 
-								<input type="password" class="form-control" id="cpassword" value="">
+								<label for="username">Confirm Password</label> 
+								<input type="password" class="form-control" name="cpassword" value="${cpassword}" required="required">
 							</div>
 						</div>
 						<div class="form-group">
@@ -64,48 +53,36 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Contact Details</h3>
 				</div>
-				<form role="form" action="" method="post">
+				<form role="form" action="/user/company/update-company-contact" method="post">
 					<div class="box-body">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="email">Email Address</label> 
-								<input type="email" class="form-control" id="email" value="">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="mobile">Mobile Number</label> 
-								<input type="number" class="form-control" id="mobile" value="">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
 								<label for="addressLine">Address Line</label> 
-								<input type="text" class="form-control" id="addressLine" value="">
+								<input type="text" class="form-control" name="addressLine" value="${caddressLine}">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="addressLandmark">Address Landmark</label> 
-								<input type="text" class="form-control" id="addressLandmark" value="">
+								<input type="text" class="form-control" name="addressLandmark" value="${caddressLandmark}">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="city">City</label> 
-								<input type="text" class="form-control" name="city" value="">
+								<label for="city">City</label>
+								<input type="text" class="form-control" name="city" value="${ccity}">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="State">State</label> 
-								<input type="text" class="form-control" id="state" value="">
+								<label for="pincode">Pincode</label>
+								<input type="number" class="form-control" name="pincode" value="${cpincode}">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="city">Pincode</label> 
-								<input type="number" class="form-control" id="pincode" value="">
+								<label for="pincode">Contact</label>
+								<input type="text" class="form-control" name="contact" value="${ccontact}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -121,33 +98,22 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Update Educational Details</h3>
+					<h3 class="box-title">Update Company Documents</h3>
 				</div>
-				<form role="form" action="" method="post">
+				<form role="form" action="/user/company/update-company-documents" method="post">
+				
 					<div class="box-body">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="institute">Institute</label> 
-								<input type="text" class="form-control" id="institute" value="">
+								<label for="pancard">Pancard</label> 
+								<input type="text" class="form-control" name="pancard" value="${cpancard}">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="university">University</label> 
-								<input type="text" class="form-control" id="university" value="">
+								<label for="gst">GSTIN</label> 
+								<input type="text" class="form-control" name="gst" value="${gst}">
 							</div>
-						</div>
-						<div class="col-md-6">
-								<div class="form-group">
-									<label for="syear">Start Year</label> 
-									<input type="number" class="form-control" id="syear" value="">
-								</div>
-						</div>
-						<div class="col-md-6">
-								<div class="form-group">
-									<label for="eyear">End Year</label> 
-									<input type="number" class="form-control" id="eyear" value="">
-								</div>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Update</button>
@@ -162,14 +128,14 @@
 		<div class="col-md-6">			
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Update resume</h3>
+					<h3 class="box-title">Update Logo</h3>
 				</div>
-				<form role="form" action="" method="post" enctype="multipart/form-data">
+				<form role="form" action="/user/company/update-company-logo" method="post" enctype="multipart/form-data">
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="resume">Upload Resume</label>
-								<input type="file" id="resume" />
+								<label for="logo">Upload Logo</label>
+								<input type="file" name="resume" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -182,15 +148,14 @@
 		</div>
 		<div class="col-md-6">
 			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Update Profile Photo</h3>
+					<h3 class="box-title">Update Pancard</h3>
 				</div>
-				<form role="form" action="" method="post" enctype="multipart/form-data">
+				<form role="form" action="/user/company/update-company-pancard" method="post" enctype="multipart/form-data">
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label for="photo">Upload Photo</label>
-								<input type="file" id="photo"/>
+								<label for="pancard">Upload Pancard</label>
+								<input type="file" name="pancard"/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -201,6 +166,4 @@
 				</form>
 			</div>
 		</div>
-	</div>
-		
 </section>

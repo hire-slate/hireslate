@@ -135,8 +135,7 @@ public class JobMasterRepository {
     				 "from job_master, skill_master, job_skill_mapping, company_master,job_type_master " + 
     				 "WHERE job_master.Job_Id = job_skill_mapping.Job_Id and job_skill_mapping.Skill_Id = skill_master.Skill_Id "+
     				 "and job_master.Company_Id = company_master.Company_Id and job_master.Job_Type_Id = job_type_master.Job_Type_Id "+
-    				 "and skill_master.Skill_Name LIKE '%"+skill+"%'";
-    				//+ "AND job_master.Job_Closing_date > CURRENT_DATE()";
+    				 "and skill_master.Skill_Name LIKE '%"+skill+"%'" + "AND job_master.Job_Closing_date > CURRENT_DATE()";
     	
     	
     	List<String> jobs = new ArrayList<String>();
@@ -171,7 +170,7 @@ public class JobMasterRepository {
 //		System.out.println(jobs.size());
 //		return jobs;
 //		
-//	}	
+//	}
 	
     public List<Map<String,Object>> jobSearchByCompany(String companyId){
     	

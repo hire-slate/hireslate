@@ -86,4 +86,23 @@ public class CompanyMasterRepository {
 		int companyId = (int)row.get("Company_Id");
 		return companyId;
    }
+   
+   public CompanyMasterEntity getCompany(int companyId) {
+	   String sql = "select * from company_master where Company_Id="+companyId;
+	   Map<String,Object> row = jdbcTemplate.queryForMap(sql);
+	   CompanyMasterEntity cme = new CompanyMasterEntity();
+	   
+	   cme.setCompanyName((String)row.get("Company_Name"));
+	   cme.setCompanyWebsite((String)row.get("Company_Website"));
+	   cme.setCompanyUsername((String)row.get("Company_Username"));
+	   cme.setCompanyPassword((String)row.get("Company_Password"));
+	   cme.setCompanyAddressLine((String)row.get("Company_AddressLine"));
+	   cme.setCompanyLandmark((String)row.get("Company_Landmark"));
+	   cme.setCompanyCity((String)row.get("Company_City"));
+	   cme.setCompanyPincode((int)row.get("Company_Pincode"));
+	   cme.setCompanyGstin((String)row.get("Company_Gsitn"));
+	   cme.setCompanyPancard((String)row.get("Company_Pancard"));
+	   cme.setCompanyContact((String)row.get("Company_Contact"));
+	   return cme;
+   }
 }

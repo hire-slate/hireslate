@@ -36,7 +36,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="username">Username</label> 
-								<input type="text" class="form-control" name="userName" value="${userName}" required="required">
+								<input type="text" class="form-control" name="userName" value="${username}" required="required">
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -190,7 +190,6 @@
 					<h3 class="box-title">Update Profile Photo</h3>
 				</div>
 				<form role="form" action="user/uploadphoto" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="userId" value="">
 					<div class="box-body">
 						<div class="col-md-4">
 							<div class="form-group">
@@ -206,5 +205,4 @@
 				</form>
 			</div>
 		</div>
-	</div>
 </section>
