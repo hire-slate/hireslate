@@ -17,8 +17,8 @@
 	            		 			<p>${jobEntity["Company_Name"]}</p>
 	            		 			<ul style="list-style-type: none; padding: unset;">
 							 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="companyName">${jobEntity["Job_Type_Name"]}</li>
-		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName">${jobEntity["Job_Vacancy"] }</li>
-		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName">${jobEntity["Job_Salary"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><p>Vacancy: </p>${jobEntity["Job_Vacancy"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><p>Salary: </p>${jobEntity["Job_Salary"] }</li>
 		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="cityName"><i class="fa fa-fw fa-map-marker"></i> ${jobEntity["Company_City"] }</li>
 		            		 			<li class="spacer" style="clear: both"></li>
 	            		 			</ul>
