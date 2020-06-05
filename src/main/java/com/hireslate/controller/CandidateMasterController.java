@@ -12,6 +12,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,12 +86,13 @@ public class CandidateMasterController {
 			@RequestParam("userState") String state,@RequestParam("userBDate") String bdate,@RequestParam("userPincode") int pincode,@RequestParam("candidateInstitute") String institute,
 			@RequestParam("candidateUniversity") String university,@RequestParam("candidateCourse") int courseId,@RequestParam("candidateStream") int streamId,
 			@RequestParam("candidateStartYear") String startYear,@RequestParam("candidateEndYear") String endYear,@RequestParam("candidatelinkedIn") String linkedIn,
-			@RequestParam("candidateGithub") String github, @RequestParam("photo") MultipartFile photo, @RequestParam("resume") MultipartFile resume) {
+			@RequestParam("candidateGithub") String github, @RequestParam("photo") MultipartFile photo, @RequestParam("resume") MultipartFile resume,
+			HttpServletRequest request) {
 	
 		
 		UserEntity user = new UserEntity();
 		CandidateMasterEntity candidate = new CandidateMasterEntity();
-		
+		HttpSession s = request.getSession();
 		Date userBirthDate = Date.valueOf(bdate);
 		
 		user.setUserFname(fname);
@@ -173,6 +176,10 @@ public class CandidateMasterController {
 		   Transport.send(msg);
 		}catch(Exception e){
 		}
-		return "redirect:/user/index";
+		
+		s.setAttribute("userId", userId);
+		s.setAttribute("userfname", user.getUserFname());
+		s.setAttribute("userlname", user.getUserLname());
+		return "redirect:/user/tryfrontend";
 	}
 }
