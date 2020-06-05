@@ -17,16 +17,18 @@
 	            		 			<p>${jobEntity["Company_Name"]}</p>
 	            		 			<ul style="list-style-type: none; padding: unset;">
 							 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="companyName">${jobEntity["Job_Type_Name"]}</li>
-		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><p>Vacancy: </p>${jobEntity["Job_Vacancy"] }</li>
-		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><p>Salary: </p>${jobEntity["Job_Salary"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><strong>Vacancy: </strong>${jobEntity["Job_Vacancy"] }</li>
+		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="jobTypeName"><strong>Salary: </strong>${jobEntity["Job_Salary"] }</li>
 		            		 			<li style="float: left; margin-left: 0px; margin-right: 20px" id="cityName"><i class="fa fa-fw fa-map-marker"></i> ${jobEntity["Company_City"] }</li>
 		            		 			<li class="spacer" style="clear: both"></li>
 	            		 			</ul>
 	            		 		</div>
  								<div class="col-md-3">
+ 								<form action="/user/job-apply" method="post">
  									<input type="hidden" id="userId" name="userId" value="<%=session.getAttribute("userId") %>"/>
-									<input type="hidden" name="jobId" id="jobId"/>
+									<input type="hidden" name="jobId" id="jobId" value='${jobEntity["Job_Id"] }'/>
 									<button class="btn btn-success" type="submit" style="margin-top: 15px; margin-left:10px; float: right">Apply For Job</button>
+								</form>
 								</div>
             		 		</div>
 						</div>            		 
