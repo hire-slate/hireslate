@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="page-content">
 	<div class="form-v1-content">
@@ -93,7 +94,7 @@
 							</div>
 							<div class="form-row">
 								<div class="form-holder form-holder-2">
-									<select name="userGender" id="gender">
+									<select name="userGender" id="gender" required>
 										<option value="0" selected>Male</option>
 										<option value="1">Female</option>
 										<option value="2">other</option>
@@ -185,7 +186,7 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>Course</legend>
-											<select name="candidateCourse" id="gender">
+											<select name="candidateCourse" id="gender" required>
 												<option value="0">select course</option>
 												<c:forEach items="${courses}" var="variable">
 													<option value="${variable.courseId}">${variable.courseName}</option>
@@ -199,7 +200,7 @@
 								<div class="form-holder form-holder-2">
 									<fieldset>
 										<legend>Stream</legend>
-										<select name="candidateStream" id="stream">
+										<select name="candidateStream" id="stream" required>
 											<option value="0">select Stream</option>
 											<c:forEach items="${streams}" var="variable">
 													<option value="${variable.streamId}">${variable.streamName}</option>
@@ -273,6 +274,11 @@
 										<input type="file" class="form-control" name="resume" required>
 										<p>Upload PDF only</p>
 									</fieldset>
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="g-recaptcha col-sm-5" name="recaptcha" data-sitekey="6LeqHwEVAAAAAHqdURfybvwQ2_Q6hkjvsuOy9BRE">
 								</div>
 							</div>
 						</div>

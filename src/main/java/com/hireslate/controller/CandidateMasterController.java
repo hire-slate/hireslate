@@ -17,15 +17,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hireslate.model.CandidateMasterEntity;
 import com.hireslate.model.CourseMasterEntity;
+import com.hireslate.model.RecaptchaResponse;
 import com.hireslate.model.StreamMasterEntity;
 import com.hireslate.model.UserEntity;
 import com.hireslate.service.CandidateMasterService;
@@ -69,6 +72,9 @@ public class CandidateMasterController {
 	@Value("${aws.url}")
 	private String awsUrl;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@RequestMapping(value = "/register", method=RequestMethod.GET)
 	public String showCandidateRegisterForm(Model model) {
 		
@@ -87,7 +93,7 @@ public class CandidateMasterController {
 			@RequestParam("candidateUniversity") String university,@RequestParam("candidateCourse") int courseId,@RequestParam("candidateStream") int streamId,
 			@RequestParam("candidateStartYear") String startYear,@RequestParam("candidateEndYear") String endYear,@RequestParam("candidatelinkedIn") String linkedIn,
 			@RequestParam("candidateGithub") String github, @RequestParam("photo") MultipartFile photo, @RequestParam("resume") MultipartFile resume,
-			HttpServletRequest request) {
+			HttpServletRequest request, @RequestParam(name="g-recaptcha-response") String captchaResponse ){
 	
 		
 		UserEntity user = new UserEntity();
@@ -111,6 +117,14 @@ public class CandidateMasterController {
 		user.setUserRole(1);
 		user.setUserUserName(email);
 	
+		String url = "https://www.google.com/recaptcha/api/siteverify";
+		 String params = "?secret=6LeqHwEVAAAAAHCMktjYLxgmH-Sj35bwLjeaRaez&response="+captchaResponse;
+		 
+		 RecaptchaResponse recaptchaResponse = restTemplate.exchange(url+params,HttpMethod.POST,null, RecaptchaResponse.class).getBody();
+		 if(recaptchaResponse.isSuccess()) {
+			 
+		 
+		
 		int userId = userService.insertUserForCandidate(user);
 		candidate.setUserId(userId);
 		candidate.setCandidateInstitute(institute);
@@ -176,10 +190,14 @@ public class CandidateMasterController {
 		   Transport.send(msg);
 		}catch(Exception e){
 		}
-		
 		s.setAttribute("userId", userId);
 		s.setAttribute("userfname", user.getUserFname());
 		s.setAttribute("userlname", user.getUserLname());
+		
+		
 		return "redirect:/user/tryfrontend";
+		 }else {
+			 return "redirect:/user/register";
+		 }
 	}
 }
