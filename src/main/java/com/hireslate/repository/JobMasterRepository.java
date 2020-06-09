@@ -22,9 +22,9 @@ public class JobMasterRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 		
-	public List<JobMasterEntity> view(){
+	public List<JobMasterEntity> view(int companyId){
 		
-		String sql = "select * from job_master";
+		String sql = "select * from job_master where job_master.Company_Id = "+ companyId;
 		List<JobMasterEntity> jobs = new ArrayList<JobMasterEntity>();
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {

@@ -1,6 +1,7 @@
 package com.hireslate.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -55,8 +56,12 @@ public class JobMasterController {
 	JobCandidateMappingService jobCandidateMappingService;
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String showJobMaster(Model model) {
-		List<JobMasterEntity> jobMaster = jobMasterService.viewJobMaster();
+	public String showJobMaster(Model model, HttpServletRequest request) {
+		List<JobMasterEntity> jobMaster = new ArrayList<JobMasterEntity>();
+		if(null != request.getSession().getAttribute("companyId")) {
+			int companyId = (int)request.getSession().getAttribute("companyId");
+			jobMaster = jobMasterService.viewJobMaster(companyId);
+		}
 		model.addAttribute("jobMaster",jobMaster);
 		return "admin/job-master/view.jsp";
 	}
@@ -71,7 +76,7 @@ public class JobMasterController {
 	}
 	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
-	public String addJob(@RequestParam("jobTitle")String jobTitle,@RequestParam("jobSalary")float jobSalary,
+	public String addJob(@RequestParam("jobTitle")String jobTitle,@RequestParam("jobSalary")String jobSalary,
 			@RequestParam("jobDescription")String jobDescription,@RequestParam("jobBenefits")String jobBenefits,
 			@RequestParam("jobVacancy")int jobVacancy,@RequestParam("jobOpeningDate")String jobOpeningDateString,
 			@RequestParam("jobClosingDate")String jobClosingDateString,
@@ -81,10 +86,18 @@ public class JobMasterController {
 			Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
 			Date jobClosingDate = Date.valueOf(jobClosingDateString);
 			HttpSession session = request.getSession();
+			float salary = 0;
+			
+			try {
+				salary = Float.parseFloat(jobSalary);
+			}
+			catch(NumberFormatException e) {
+				
+			}
 			JobMasterEntity job = new JobMasterEntity();
 			job.setJobBenefits(jobBenefits);
 			job.setJobDescription(jobDescription);
-			job.setJobSalary(jobSalary);
+			job.setJobSalary(salary);
 			job.setJobTitle(jobTitle);
 			job.setJobTypeId(jobTypeId);
 			job.setJobVacancy(jobVacancy);
@@ -112,17 +125,24 @@ public class JobMasterController {
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String updateJob(Model model,@RequestParam("jobId")int jobId,@RequestParam("jobTitle")String jobTitle,
-			@RequestParam("jobSalary")float jobSalary,@RequestParam("jobDescription")String jobDescription,
+			@RequestParam("jobSalary")String jobSalary,@RequestParam("jobDescription")String jobDescription,
 			@RequestParam("jobBenefits")String jobBenefits,@RequestParam("jobVacancy")int jobVacancy,
 			@RequestParam("jobOpeningDate")String jobOpeningDateString,@RequestParam("jobClosingDate")String jobClosingDateString,
 			@RequestParam("jobTypeId")int jobTypeId) {
 		
 		Date jobOpeningDate = Date.valueOf(jobOpeningDateString);
 		Date jobClosingDate = Date.valueOf(jobClosingDateString);
+		float salary = 0;
+		try {
+			salary = Float.parseFloat(jobSalary);
+		}
+		catch(NumberFormatException e) {
+			
+		}
 		JobMasterEntity job = new JobMasterEntity();
 		job.setJobBenefits(jobBenefits);
 		job.setJobDescription(jobDescription);
-		job.setJobSalary(jobSalary);
+		job.setJobSalary(salary);
 		job.setJobTitle(jobTitle);
 		job.setJobTypeId(jobTypeId);
 		job.setJobVacancy(jobVacancy);
