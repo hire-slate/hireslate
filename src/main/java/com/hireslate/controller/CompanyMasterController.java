@@ -16,12 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -34,6 +36,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hireslate.model.CompanyMasterEntity;
+import com.hireslate.model.RecaptchaResponse;
 import com.hireslate.service.CompanyMasterService;
 
 @Controller
@@ -43,6 +46,8 @@ public class CompanyMasterController {
 	
 	@Autowired
 	CompanyMasterService companyMasterService;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@Value("${aws.accessToken}")
 	private String accessToken;
@@ -66,9 +71,16 @@ public class CompanyMasterController {
 									@RequestParam("companyUsername") String companyUsername, @RequestParam("companyPassword") String companyPassword,
 									@RequestParam("companyCPassword") String companyCPassword,@RequestParam("companyContact") String companyContact, @RequestParam("companyPancard") String companyPancard,
 									@RequestParam("companyAddress") String companyAddress,@RequestParam("companyLandmark") String companyLandmark,@RequestParam("companyCity") String companyCity,
-									@RequestParam("companyPincode") String companyPincode, @RequestParam("companyState") String companyState,@RequestParam("companyGST") String companyGST,HttpServletRequest request) {
+									@RequestParam("companyPincode") String companyPincode, @RequestParam("companyState") String companyState,@RequestParam("companyGST") String companyGST,HttpServletRequest request,
+									 @RequestParam(name="g-recaptcha-response") String captchaResponse ) {
 
 		String msg;
+		String url = "https://www.google.com/recaptcha/api/siteverify";
+		 String params = "?secret=6LeqHwEVAAAAAHCMktjYLxgmH-Sj35bwLjeaRaez&response="+captchaResponse;
+		 
+		 RecaptchaResponse recaptchaResponse = restTemplate.exchange(url+params,HttpMethod.POST,null, RecaptchaResponse.class).getBody();
+		 if(recaptchaResponse.isSuccess()) {
+			 
 		if(companyPassword.equals(companyCPassword)) {
 		CompanyMasterEntity company = new CompanyMasterEntity();
 		company.setCompanyName(companyName);
@@ -106,6 +118,9 @@ public class CompanyMasterController {
 		PutObjectRequest putObjectRequest = new PutObjectRequest( bucket, folderName, emptyContent,metadata);
 		s3client.putObject(putObjectRequest);
 		return msg;
+		 }else {
+			 return "redirect:/user/company/register";
+		 }
 	}
 	
 
@@ -117,6 +132,7 @@ public class CompanyMasterController {
 	@RequestMapping(value = "/dologin")
 	public String doLogin(@RequestParam("companyUsername") String username,@RequestParam("companyPassword") String password,HttpServletRequest request) {
 		String msg;
+		
 		msg = companyMasterService.doCompanyLogin(username,password,request);
 		//System.out.println(msg);
 		
