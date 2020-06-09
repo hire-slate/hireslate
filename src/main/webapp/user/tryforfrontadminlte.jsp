@@ -90,7 +90,9 @@
 						i++;
 						x.find("#jobTypeName").append(result[i]);
 						i++;
-						x.find("#companyLogo").attr("src","https://hireslate.s3.ap-south-1.amazonaws.com/company/"+result[i]+"/logo.png");
+						var link = "https://hireslate.s3.ap-south-1.amazonaws.com/company/"+result[i]+"/logo.png";
+						console.log(link);
+						x.find("#companyLogo").attr("src",link);
 						$(".searchresult").append(x);
 					}
 					$(".oneCompany").show();
@@ -102,7 +104,4 @@
 			document.getElementById("search").innerHTML = "";
 		}
 	</script>
-
 </section>
-
-

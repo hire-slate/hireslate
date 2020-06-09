@@ -1,4 +1,6 @@
 <div class="page-content">
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 		<div class="form-v1-content">
 			<div class="wizard-form">
 		        <form class="form-register" action="/user/company/register/new" method="post" id="companyForm" enctype="multipart/form-data">
@@ -42,7 +44,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Username</legend>
-											<input type="text" name="companyUsername" id="cpassword" class="form-control" placeholder="Company Contact" required>
+											<input type="text" name="companyUsername" id="cpassword" class="form-control" placeholder="Username" required>
 										</fieldset>
 									</div>
 								</div>
@@ -50,7 +52,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Password</legend>
-											<input type="text" name="companyPassword" id="cpassword" class="form-control" placeholder="Company Contact" required>
+											<input type="password" name="companyPassword" id="cpassword" class="form-control" placeholder="Password" required>
 										</fieldset>
 									</div>
 								</div>
@@ -58,7 +60,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Confirm Password</legend>
-											<input type="text" name="companyCPassword" id="cpassword" class="form-control" placeholder="Company Contact" required>
+											<input type="password" name="companyCPassword" id="cpassword" class="form-control" placeholder="Confirm Password" required>
 										</fieldset>
 									</div>
 								</div>
@@ -117,9 +119,11 @@
 											<input type="text" name="companyPancard" id="cpassword" class="form-control" placeholder="Company Pancard" required>
 										</fieldset>
 									</div>
+								</div>	
+							<div class="form-row">
+								<div class="g-recaptcha col-sm-5" name="recaptcha" data-sitekey="6LeqHwEVAAAAAHqdURfybvwQ2_Q6hkjvsuOy9BRE">
 								</div>
-									
-							
+							</div>
 							</div>
 			            </section>
 				     </div>
