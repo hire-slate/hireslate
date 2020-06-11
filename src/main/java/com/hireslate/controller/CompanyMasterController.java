@@ -35,6 +35,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.google.common.io.Files;
 import com.hireslate.model.CompanyMasterEntity;
 import com.hireslate.model.RecaptchaResponse;
 import com.hireslate.service.CompanyMasterService;
@@ -72,7 +73,7 @@ public class CompanyMasterController {
 									@RequestParam("companyCPassword") String companyCPassword,@RequestParam("companyContact") String companyContact, @RequestParam("companyPancard") String companyPancard,
 									@RequestParam("companyAddress") String companyAddress,@RequestParam("companyLandmark") String companyLandmark,@RequestParam("companyCity") String companyCity,
 									@RequestParam("companyPincode") String companyPincode, @RequestParam("companyState") String companyState,@RequestParam("companyGST") String companyGST,HttpServletRequest request,
-									 @RequestParam(name="g-recaptcha-response") String captchaResponse ) {
+									 @RequestParam(name="g-recaptcha-response") String captchaResponse,@RequestParam("logo") MultipartFile logo ) {
 
 		String msg;
 		String url = "https://www.google.com/recaptcha/api/siteverify";
@@ -117,8 +118,20 @@ public class CompanyMasterController {
 		InputStream emptyContent = new ByteArrayInputStream(new byte[0]);
 		PutObjectRequest putObjectRequest = new PutObjectRequest( bucket, folderName, emptyContent,metadata);
 		s3client.putObject(putObjectRequest);
+		
+		String logoExtension = Files.getFileExtension(logo.getOriginalFilename());
+		try {
+		if(logoExtension.equals("PNG")|| logoExtension.equals("png")) {
+			InputStream is= logo.getInputStream();
+			s3client.putObject(new PutObjectRequest(bucket, folderName+"logo.png",is,new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+		}
+		}catch(Exception e) {
+		 }
+		
 		return msg;
-		 }else {
+		 }
+		
+		else {
 			 return "redirect:/user/company/register";
 		 }
 	}
@@ -242,7 +255,7 @@ public class CompanyMasterController {
 		request.getSession().setAttribute("ccity",cme.getCompanyCity());
 		request.getSession().setAttribute("cpincode",cme.getCompanyPincode());
 		request.getSession().setAttribute("ccontact",cme.getCompanyContact());
-		request.getSession().setAttribute("pancard",cme.getCompanyPancard());
+		request.getSession().setAttribute("cpancard",cme.getCompanyPancard());
 		request.getSession().setAttribute("gst",cme.getCompanyGstin());
 		return "admin/companyedit.jsp";
 	}

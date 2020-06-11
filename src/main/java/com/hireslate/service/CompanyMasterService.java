@@ -22,7 +22,7 @@ public class CompanyMasterService {
 		String msg;
 		if(companyName != null) {
 			request.getSession().setAttribute("companyName", companyName);
-			msg = "redirect:/admin/dashboard";
+			msg = "redirect:/user/company/login";
 		}
 		else {
 			msg = "redirect:/user/company/register";

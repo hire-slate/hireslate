@@ -108,7 +108,7 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>GST No.</legend>
-											<input type="text" class="form-control" id="state" name="companyGST" placeholder="GST No" required>
+											<input type="text" class="form-control" id="gst" name="companyGST" placeholder="GST No" required>
 										</fieldset>
 									</div>
 								</div>
@@ -116,10 +116,19 @@
 									<div class="form-holder form-holder-2">
 										<fieldset>
 											<legend>Pancard</legend>
-											<input type="text" name="companyPancard" id="cpassword" class="form-control" placeholder="Company Pancard" required>
+											<input type="text" name="companyPancard" id="pancard" class="form-control" placeholder="Company Pancard" required>
 										</fieldset>
 									</div>
 								</div>	
+								<div class="form-row">
+								<div class="form-holder form-holder-2">
+									<fieldset>
+										<legend>Company Logo</legend>
+										<input type="file" class="form-control" name="logo" required>
+										<p>Upload PNG only</p>
+									</fieldset>
+								</div>
+							</div>
 							<div class="form-row">
 								<div class="g-recaptcha col-sm-5" name="recaptcha" data-sitekey="6LeqHwEVAAAAAHqdURfybvwQ2_Q6hkjvsuOy9BRE">
 								</div>
