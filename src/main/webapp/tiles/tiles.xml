@@ -165,4 +165,8 @@
 		<put-attribute name="content" value= "/admin/companyedit.jsp"/>
 	</definition>
 	
+	<definition name="admin/applicantlist.jsp" extends="mytemplate">
+		<put-attribute name="content" value= "/admin/applicantlist.jsp"/>
+	</definition>
+	
 </tiles-definitions>

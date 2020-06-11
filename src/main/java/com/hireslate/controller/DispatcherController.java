@@ -21,6 +21,7 @@ import com.hireslate.model.SkillMasterEntity;
 import com.hireslate.model.StreamMasterEntity;
 import com.hireslate.repository.CourseMasterRepository;
 import com.hireslate.repository.StreamMasterRepository;
+import com.hireslate.service.JobCandidateMappingService;
 import com.hireslate.service.JobSkillMappingService;
 
 @Controller
@@ -30,6 +31,8 @@ public class DispatcherController {
 	public JobMasterController jobMasterController;
 	@Autowired
 	public JobSkillMappingService jobSkillMappingService;
+	@Autowired
+	JobCandidateMappingService jobCandidateMappingService;  
 	
 	/*
 	 * @RequestMapping(value = "user/index" , method = RequestMethod.GET) public
@@ -62,7 +65,12 @@ public class DispatcherController {
 		return "user/tryforfrontadminlte.jsp";
 	}
 	
-	
+	@RequestMapping(value = "admin/applicantsfor/{id}", method = RequestMethod.GET)
+	public String showApplicant(Model model,@PathVariable("id")int id) {
+		List<Map<String, Object>> candidates = jobCandidateMappingService.viewAppliedApplicantd(id);
+		model.addAttribute("candidates", candidates);
+		return "admin/applicantlist.jsp";
+	}
 	//skill-master table CRUD
 	
 //	@RequestMapping(value = "admin/skill-master", method = RequestMethod.GET)

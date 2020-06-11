@@ -7,8 +7,9 @@
 	<div class="box box-default collapsed-box">
 		<div class="box-header with-border">
 			<h2 class="box-title"></h2>
-
+			
 			<div class="box-tools pull-right" style="padding: 10px">
+				<a href="#" id="link" style="padding-left: 10px">View Applicants</a>
 				<button type="button" class="btn btn-box-tool" data-toggle="collapse" data-parent=".collapsed-box">
 					<i class="fa fa-plus"></i>
 				</button>
@@ -43,6 +44,11 @@
 				</div>
 				<div class="col-md-9 jobVacancy"></div>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					
+				</div>
+			</div>
 		</div>
 		</div>
 		<!-- /.box-body -->
@@ -69,7 +75,8 @@ $(document).ready(function(){
 							var x = $(".hid").clone();
 							x.removeClass("hid");
 							x.css("display","flex");
-							x.find("h2.box-title").css("padding","10px")
+							x.find("h2.box-title").css("padding","10px");
+							x.find("#link").attr("href","/admin/applicantsfor/"+arr[y]["Job_Id"]);
 							x.find("h2.box-title").append(arr[y]["Job_Title"]);
 							x.find(".jobType").append(arr[y]["Job_Type_Name"]);
 							var date = new Date(arr[y]["Job_Closing_date"]);
