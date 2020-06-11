@@ -4,7 +4,6 @@
 
  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-
 <div class="page-content">
 	<div class="form-v1-content">
 		<div class="wizard-form">
@@ -125,7 +124,8 @@
 								<div class="form-holder">
 									<fieldset>
 										<legend>City</legend>
-										<input type="text" class="form-control" onclick="autocompleteLocation()" id="city" name="userCity" placeholder="City" required>
+										<input type="text" class="form-control" id="city"
+											name="userCity" placeholder="City" required>
 									</fieldset>
 								</div>
 								<div class="form-holder">
@@ -288,15 +288,22 @@
 		</div>
 	</div>
 </div>
-
 <script src="${pageContext.request.contextPath}/resources/frontend/cregister/js/jquery-2.1.4.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+
 <script type="text/javascript">
+
+	$("#form-total").validate({
+		rules : {
+			userFName : "required",
+			}
+	});
+	
 	$("#form-total").steps({
 		headerTag : "h2",
 		bodyTag : "section",
 		transitionEffect : "fade",
-		enableAllSteps : true,
 		stepsOrientation : "vertical",
 		autoFocus : true,
 		transitionEffectSpeed : 500,
@@ -307,15 +314,11 @@
 			finish : '<i class="zmdi zmdi-check"></i>',
 			current : ''
 		},
-
+		onStepChanging : function(event, currentIndex, newIndex){
+			$("#form-total").validate();
+			},
 		onFinished : function(event, currentIndex){
 			$("#userForm").submit();	
 		}
-	});
-</script>
- <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcQ2gvwi1H092hKpl8tYQusQBDRiiSWvM&libraries=places&callback=autocompleteLocation"></script>
-<script>
-	function autocompleteLocation(){
-	var autocomplete = new google.maps.places.Autocomplete(document.getElementById('city')); 
-		}
+	})
 </script>

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +48,13 @@
         <input type="password" class="form-control" placeholder="Password" name="companyPassword" required="required">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <% if(!(null == session.getAttribute("companyLoginMsg")) && session.getAttribute("companyLoginMsg").equals((String)"Failed")){ %>
+	
+      <div id="loginMsg" >
+    		<small style="color: Red">Invalid Login Id OR Password</small>
+	  </div>
+      <% } %>
+     
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
@@ -63,7 +73,7 @@
     </form>
 
     <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <a href="/user/company/register" class="text-center">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->

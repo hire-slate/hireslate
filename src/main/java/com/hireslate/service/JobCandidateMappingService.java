@@ -1,5 +1,8 @@
 package com.hireslate.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,10 @@ public class JobCandidateMappingService {
 	JobCandidateMappingRepository jobCandidateMappingRepository;
 	
 	public void insert(JobCandidateMappingEntity jobCandidateMappingEntity) {
-	
 		jobCandidateMappingRepository.insert(jobCandidateMappingEntity);
+	}
+	
+	public List<Map<String, Object>> viewAppliedApplicantd(int jobId) {
+		return jobCandidateMappingRepository.viewCandidatesForJob(jobId);
 	}
 }

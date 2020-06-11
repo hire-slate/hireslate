@@ -147,9 +147,6 @@ public class CompanyMasterController {
 		String msg;
 		
 		msg = companyMasterService.doCompanyLogin(username,password,request);
-		//System.out.println(msg);
-		
-		request.getSession().setAttribute("logoUrl", "https://hireslate.s3.ap-south-1.amazonaws.com/company/"+(int)request.getSession().getAttribute("companyId")+"/logo.png");
 		return msg;
 	}
 	

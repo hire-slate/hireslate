@@ -22,9 +22,9 @@ public class JobMasterRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 		
-	public List<JobMasterEntity> view(){
+	public List<JobMasterEntity> view(int companyId){
 		
-		String sql = "select * from job_master";
+		String sql = "select * from job_master where job_master.Company_Id = "+ companyId;
 		List<JobMasterEntity> jobs = new ArrayList<JobMasterEntity>();
 		List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql);
 		for(Map<String,Object> row : rows) {
@@ -175,7 +175,7 @@ public class JobMasterRepository {
 	
     public List<Map<String,Object>> jobSearchByCompany(String companyId){
     	
-    	String sql = "SELECT job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId+" And job_master.Job_Closing_date >= CURRENT_DATE()";
+    	String sql = "SELECT job_master.Job_Id ,job_master.Job_Title, job_type_master.Job_Type_Name , job_master.Job_Vacancy,job_master.Job_Closing_date from job_master INNER join job_type_master ON job_master.Job_Type_Id = job_type_master.Job_Type_Id WHERE job_master.Company_Id = "+companyId+" And job_master.Job_Closing_date >= CURRENT_DATE()";
 		List<Map<String,Object>> jobs = jdbcTemplate.queryForList(sql);
 		return jobs;
     	

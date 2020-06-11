@@ -15,8 +15,8 @@ public class JobMasterService {
 	@Autowired
 	JobMasterRepository jobMasterRepository;
 	
-	public List<JobMasterEntity> viewJobMaster(){
-		return jobMasterRepository.view();
+	public List<JobMasterEntity> viewJobMaster(int companyId){
+		return jobMasterRepository.view(companyId);
 	}
 	
 	public void insertJobMaster(JobMasterEntity job) {

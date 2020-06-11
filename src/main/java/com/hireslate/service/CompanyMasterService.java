@@ -38,16 +38,20 @@ public class CompanyMasterService {
 	public String doCompanyLogin(String username, String password, HttpServletRequest request) {
 		
 		String msg;
-		CompanyMasterEntity company = companyMasterRepository.getCompanyId(username, password);
-			if(company != null) {
-				request.getSession().setAttribute("companyId", company.getCompanyId());
-				request.getSession().setAttribute("companyName", company.getCompanyName());
-				msg = "redirect:/admin/dashboard";
-			}
-			else {
-				msg = "redirect:/user/company/login";
-			}
+		try {
+			CompanyMasterEntity company = companyMasterRepository.getCompanyId(username, password);
+			request.getSession().setAttribute("companyId", company.getCompanyId());
+			request.getSession().setAttribute("companyName", company.getCompanyName());
+			request.getSession().setAttribute("companyLoginMsg", "Success");
+			request.getSession().setAttribute("logoUrl", "https://hireslate.s3.ap-south-1.amazonaws.com/company/"+(int)request.getSession().getAttribute("companyId")+"/logo.png");
+			msg = "redirect:/admin/dashboard";
+		}
+		catch(NullPointerException e) {
+			request.getSession().setAttribute("companyLoginMsg", "Failed");
+			msg = "redirect:/user/company/login";
 		
+		}
+	
 		return msg;
 	}
 	
