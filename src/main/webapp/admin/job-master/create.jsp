@@ -34,12 +34,13 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="skillName">Job Type</label> 
-									<select class="form-control select2" name="jobTypeId" style="width: 100%;" required="required">
+									<select class="form-control select2" id="jobType" name="jobTypeId" style="width: 100%;" required="required">
 											<option value="0">Select Job Type</option>
 										<c:forEach items="${jobType}" var="variable">
 											<option value="${variable.jobTypeId}">${variable.jobTypeName}</option>
 										</c:forEach>
 									</select>
+									<div id="errorjobTypeMsg" style="display: none"><small style="color: red">select valid job type</small></div>
 								</div>
 							</div>
 		 					<div class="col-md-3">
@@ -105,12 +106,13 @@
 											<option value="${variable.skillId}">${variable.skillName}</option>
 										</c:forEach>
 									</select>
+									<div id="errorjobSkillsMsg" style="display: none"><small style="color: red">Select Job Skills</small></div>
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label for="skillName">Vacancy</label>
-									<input type="text" class="form-control" name="jobVacancy" placeholder="Enter Vacancy">
+									<input type="text" class="form-control" name="jobVacancy" placeholder="Enter Vacancy" required="required">
 								</div>
 							</div>
 						</div>
@@ -130,10 +132,32 @@
 	});
 
 	function validationCheck(){
+
+		var result = true;
+		if($("#jobType").val() == 0){
+			$("#errorjobTypeMsg").css("display","flex");
+			result = false;
+		}
+		else{
+			$("#errorjobTypeMsg").css("display","none");
+		}
+		
 		if($("#openingDate").val() > $("#closingDate").val()){
 			$("#errorMsg").css("display","flex");			
-			return false;
+			result = false;
 		}
+		else{
+			$("#errorMsg").css("display","none");			
+		}
+		if($("#jobSkills").val().length == 0){
+			$("#errorjobSkillsMsg").css("display","flex");			
+			result = false;
+		}
+		else{
+			$("#errorjobSkillsMsg").css("display","none");			
+		}
+		
+		return result;
 	}
 </script>
 

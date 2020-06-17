@@ -11,6 +11,9 @@
 </section>
 
 <section class="content">
+<div id="jobOpenDate" style="display: none">${jobOpeningDate}</div>
+<div id="jobCloseDate" style="display: none">${jobClosingDate}</div>
+
 	<div class="row">
 		<div class="col-md-8">
 			<div class="box box-primary">
@@ -98,7 +101,10 @@
 $("#reservation").daterangepicker({
 	locale : {
 		format : 'YYYY-MM-DD'
-	}
+	},
+	minDate : $("#jobOpenDate").html(),
+	maxDate : $("#jobCloseDate").html(),
 });
+
 
 </script>

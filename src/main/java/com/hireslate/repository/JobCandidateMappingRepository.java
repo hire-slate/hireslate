@@ -27,7 +27,7 @@ public class JobCandidateMappingRepository {
 	}
 	
 	public List<Map<String,Object>> viewCandidatesForJob(int jobId){
-		String sql = "SELECT user.User_Fname, user.User_Lname, user.User_City, user.User_State ,candidate_master.Candidate_Institute, candidate_master.Candidate_University, "
+		String sql = "SELECT user.User_Id ,user.User_Fname, user.User_Lname, user.User_City, user.User_State ,candidate_master.Candidate_Institute, candidate_master.Candidate_University, "
 				+ "candidate_master.Candidate_LinkedIn, candidate_master.Candidate_Github, candidate_master.Candidate_Course_EndYear, "
 				+ "course_master.Course_Name, stream_master.Stream_Name " 
 				+ "FROM user, job_candidate_mapping, candidate_master, course_master, stream_master WHERE " 

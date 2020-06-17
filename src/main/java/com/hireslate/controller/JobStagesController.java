@@ -40,6 +40,8 @@ public class JobStagesController{
 		jobMasterEntity = jobMasterService.viewJobMasterById(id);
 		model.addAttribute("jobName", jobMasterEntity.getJobTitle());
 		model.addAttribute("jobStages",jobStages);
+		model.addAttribute("jobOpeningDate",jobMasterEntity.getJobOpeningDate());
+		model.addAttribute("jobClosingDate",jobMasterEntity.getJobClosingDate());
 		return "admin/job-stages/create.jsp";
 	}
 	
@@ -52,7 +54,8 @@ public class JobStagesController{
 		JobMasterEntity jobMasterEntity = new JobMasterEntity();
 		jobMasterEntity = jobMasterService.viewJobMasterById(id);
 		model.addAttribute("jobName", jobMasterEntity.getJobTitle());
-	
+		model.addAttribute("jobOpeningDate",jobMasterEntity.getJobOpeningDate());
+		model.addAttribute("jobClosingDate",jobMasterEntity.getJobClosingDate());
 		if(submit.equals("save")) {
 			String jobStageDate = (String)jobStageDateRange;
 			String[] jobStageDates = jobStageDate.split(" - ");
