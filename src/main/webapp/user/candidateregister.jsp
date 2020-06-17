@@ -489,6 +489,7 @@
 		else{
 			$("#errorResume").css("display","none");
 		}
+		return result;
 	}
 	
 	$("#form-total").steps({

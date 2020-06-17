@@ -5,9 +5,10 @@
 <section class="content">
  	<div class="row">
 		<c:forEach items="${candidates}" var="variable">
- 		<div class="col-md-3">
+ 		
+      <div class="col-md-3">
    			<div class="box box-primary">
-	        <!-- /.box-header -->
+   	        <!-- /.box-header -->
 	        <img class="profile-user-img img-responsive img-circle" src="https://hireslate.s3.ap-south-1.amazonaws.com/${variable.User_Id}/photo.png" alt="user profile image">
 
               <h3 class="profile-username text-center">${variable.User_Fname} ${variable.User_Lname }</h3>

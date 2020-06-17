@@ -27,14 +27,15 @@ public class JobCandidateMappingRepository {
 	}
 	
 	public List<Map<String,Object>> viewCandidatesForJob(int jobId){
-		String sql = "SELECT user.User_Id ,user.User_Fname, user.User_Lname, user.User_City, user.User_State ,candidate_master.Candidate_Institute, candidate_master.Candidate_University, "
+		String sql = "SELECT user.User_Id , job_master.Job_Title ,user.User_Fname, user.User_Lname, user.User_City, user.User_State ,candidate_master.Candidate_Institute, candidate_master.Candidate_University, "
 				+ "candidate_master.Candidate_LinkedIn, candidate_master.Candidate_Github, candidate_master.Candidate_Course_EndYear, "
 				+ "course_master.Course_Name, stream_master.Stream_Name " 
-				+ "FROM user, job_candidate_mapping, candidate_master, course_master, stream_master WHERE " 
+				+ "FROM user,job_master, job_candidate_mapping, candidate_master, course_master, stream_master WHERE " 
 				+ "candidate_master.Course_Id = course_master.Course_Id AND "
 				+ "candidate_master.Stream_Id = stream_master.Stream_Id AND " 
 				+ "user.User_Id = job_candidate_mapping.User_Id AND " 
 				+ "candidate_master.User_Id = job_candidate_mapping.User_Id "
+				+ "AND job_master.Job_Id = job_candidate_mapping.Job_Id "
 				+ "AND job_candidate_mapping.Job_Id = "+jobId;
 		List<Map<String, Object>> candidates = new ArrayList<Map<String, Object>>();
 		candidates = jdbcTemplate.queryForList(sql); 
