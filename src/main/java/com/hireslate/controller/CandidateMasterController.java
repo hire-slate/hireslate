@@ -123,8 +123,6 @@ public class CandidateMasterController {
 		 RecaptchaResponse recaptchaResponse = restTemplate.exchange(url+params,HttpMethod.POST,null, RecaptchaResponse.class).getBody();
 		 if(recaptchaResponse.isSuccess()) {
 			 
-		 
-		
 		int userId = userService.insertUserForCandidate(user);
 		candidate.setUserId(userId);
 		candidate.setCandidateInstitute(institute);
